@@ -4,7 +4,8 @@ using PlayFab;
 using PlayFab.ClientModels;
 using Steamworks;
 using UnityEngine;
-
+using System.Net;
+using Newtonsoft.Json.Linq;
 public class PlayFabLogin : MonoBehaviour
 {
     public static PlayFabLogin Instance;
@@ -61,22 +62,7 @@ public class PlayFabLogin : MonoBehaviour
         PlayfabId =  result.PlayFabId;
 
         UpdatePlayerName();
-        UpdateHighScoreCloud();
-    }
-
-    void UpdateHighScoreCloud()
-    {
-        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "sendLeaderBoard",
-            FunctionParameter = new { nameLevel = "Test", timerValue = 12 },
-            GeneratePlayStreamEvent = true,
-        }, OnCloudResult, OnError);
-    }
-
-    void OnCloudResult(ExecuteCloudScriptResult result)
-    {
-        Debug.Log(result.FunctionResult);
+        UpdateProfilePicture();
     }
 
     /// <summary>
@@ -90,6 +76,27 @@ public class PlayFabLogin : MonoBehaviour
         }, result =>
         {
             Debug.Log("The player's display name is now: " + result.DisplayName);
+        }, error => Debug.LogError(error.GenerateErrorReport()));
+    }
+
+    void UpdateProfilePicture()
+    {
+        //Recupere Le lien JSON via l'API de Steam
+        var _apiKey = "8DC8E3A4CC23EF187598E72A1A800DBC";
+        var _steamUserID = SteamUser.GetSteamID();
+        string url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + _apiKey + "&steamids=" + _steamUserID;
+
+        //Telecharge puis convertie le fichier en JSON et recherche le lien de l'image
+        var ObjectPlayer = JObject.Parse(new WebClient().DownloadString(url));
+        url = ObjectPlayer["response"]["players"][0]["avatarfull"].ToString();
+
+        //Update Image via Playfab
+        PlayFabClientAPI.UpdateAvatarUrl(new UpdateAvatarUrlRequest
+        {
+            ImageUrl = url
+        }, result =>
+        {
+
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
