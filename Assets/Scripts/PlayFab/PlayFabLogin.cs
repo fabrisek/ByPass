@@ -75,7 +75,7 @@ public class PlayFabLogin : MonoBehaviour
             DisplayName = SteamFriends.GetPersonaName()
         }, result =>
         {
-            Debug.Log("The player's display name is now: " + result.DisplayName);
+
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 

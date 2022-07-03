@@ -250,6 +250,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 784575601}
+  - component: {fileID: 784575603}
+  - component: {fileID: 784575602}
   m_Layer: 0
   m_Name: MANAGER
   m_TagString: Untagged
@@ -272,6 +274,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &784575602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784575600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2649d226f74525643874ec111bd6f01f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Data>k__BackingField:
+    <WorldData>k__BackingField:
+    - <WorldName>k__BackingField: sdvzvzrgzrhr
+      <HaveUnlockWorld>k__BackingField: 0
+      <MapData>k__BackingField:
+      - <SceneData>k__BackingField: {fileID: 0}
+        <HighScore>k__BackingField: 1.43
+        <HaveUnlockLevel>k__BackingField: 0
+--- !u!114 &784575603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784575600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 063ad33791e71a1418590dc5cf11c91c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1157804696
 GameObject:
   m_ObjectHideFlags: 0
