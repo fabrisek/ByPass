@@ -23,7 +23,6 @@ public class HudMainMenu : MonoBehaviour
     [SerializeField] UIContainer _levelSelectionPanel;
     [SerializeField] UIContainer _worldSelectionPanel;
 
-    [SerializeField] GameObject panelSelector;
     [SerializeField] Transform parentSelector;
     [SerializeField] GameObject CardWorldPrefab;
     [SerializeField] TextMeshProUGUI worldName;
@@ -57,7 +56,7 @@ public class HudMainMenu : MonoBehaviour
         int starUnlock = 0;
 
 
-        foreach (var item in panelSelector.GetComponentsInChildren<CardWorld>())
+        foreach (var item in parentSelector.GetComponentsInChildren<CardWorld>())
         {
             Destroy(item.gameObject);
         }
