@@ -41,6 +41,7 @@ public class AdioManager : MonoBehaviour
     {
         indexMusic = -1;
         etatmusic = EtatMusic.noMusic;
+        EventManager.PlaySound += PlaySound;
     }
 
     public void PlaySound(TypeOfSound typeDeSon, int indexSound, Vector3 position, float volume = 1)
