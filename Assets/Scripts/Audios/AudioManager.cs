@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AdioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     [SerializeField] AudioClip[] soundEffects, music;
     [SerializeField] AudioSource audioSourceSoundEffect, audioSourceSfx3D;
