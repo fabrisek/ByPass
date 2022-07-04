@@ -33,29 +33,22 @@ public class PlayFabHighScore : MonoBehaviour
         prefabScoreTitle = prefabScoreTiles;
         scoreboardParent = parent;
     }
-    public void SendLeaderBord(float score, string nameMap)
+    void UpdateHighScoreCloud()
     {
-        score *= 1000;
-        var request = new UpdatePlayerStatisticsRequest
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
         {
-            Statistics = new List<StatisticUpdate>
-            {
-                new StatisticUpdate
-                {
-                    StatisticName = nameMap,
-                    Value = (int)-score
-                }
-            }
-        };
-        PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderboardUpdate, OnError);
+            FunctionName = "sendLeaderBoard",
+            FunctionParameter = new { nameLevel = "Test", timerValue = 12 },
+            GeneratePlayStreamEvent = true,
+        }, OnCloudResult, OnError);
     }
 
-    void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
+    void OnCloudResult(ExecuteCloudScriptResult result)
     {
-        Debug.Log("LeaderBorad Send");
+        Debug.Log(result.FunctionResult);
     }
 
-    public void GetLeaderBord(string mapName)
+    public void GetTopLeaderBord(string mapName)
     {
         var request = new GetLeaderboardRequest
         {
@@ -63,7 +56,7 @@ public class PlayFabHighScore : MonoBehaviour
             StartPosition = 0,
             MaxResultsCount = 50
         };
-        PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
+        PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardTopGet, OnError);
     }
 
     public void GetLeaderBoardAroundPlayer(string mapName)
@@ -76,23 +69,6 @@ public class PlayFabHighScore : MonoBehaviour
         PlayFabClientAPI.GetLeaderboardAroundPlayer(request, OnLeaderboardAroundPlayerGet, OnError);
     }
 
-    public void GetPosPlayer(string mapName)
-    {   
-        var request = new GetLeaderboardAroundPlayerRequest
-        {
-            StatisticName = mapName,
-            MaxResultsCount = 1
-        };
-        PlayFabClientAPI.GetLeaderboardAroundPlayer(request, OnPosPlayerGet, OnError);
-    }
-
-    void OnPosPlayerGet(GetLeaderboardAroundPlayerResult result)
-    {
-        foreach (var item in result.Leaderboard)
-        {            
-                //HudControllerInGame.Instance.ChangePosPlayer(item.Position);          
-        }
-    }
     void OnLeaderboardAroundPlayerGet(GetLeaderboardAroundPlayerResult result)
     {
         /*foreach (Transform item in scoreboardParent)
@@ -118,7 +94,7 @@ public class PlayFabHighScore : MonoBehaviour
     }
 
 
-    void OnLeaderboardGet(GetLeaderboardResult result)
+    void OnLeaderboardTopGet(GetLeaderboardResult result)
     {
        /* foreach (Transform item in scoreboardParent)
         {
