@@ -54,6 +54,8 @@ public class AudioMixerManager : MonoBehaviour
             return  -80;
         }
     }
+    // A voir avec les different etat du jeu
+   // public void ChangeSnapShoot ()
 
     public enum ChoseCanal
     {
