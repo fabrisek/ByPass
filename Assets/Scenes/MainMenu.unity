@@ -26238,6 +26238,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 41428771}
   canvasGroup: {fileID: 41428772}
+  allTips:
+  - 'Tips : Vous pouvez utilisez le ralentie pour ameliorer la distance du grappin'
+  - 'Tips : Lacher le grappin vous redonne un double saut'
+  - 'Tips : Plus vous allez vite, plus vous allez vite'
+  _textTips: {fileID: 2114325230}
+  ImageBackGround: {fileID: 1506481815}
+  _nameLevel: {fileID: 1609007063}
 --- !u!1 &1828309375
 GameObject:
   m_ObjectHideFlags: 0
@@ -28379,7 +28386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 212.683, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1832080412
@@ -28620,7 +28627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 212.683, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1964602099

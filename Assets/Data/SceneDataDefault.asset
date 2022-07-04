@@ -22,3 +22,5 @@ MonoBehaviour:
   - 0
   <SpriteCard>k__BackingField: {fileID: 21300000, guid: 184eb730477ee2a4397a82a267dc7d3e,
     type: 3}
+  <BackGroundLoad>k__BackingField: {fileID: 21300000, guid: 277bb38fb52e2d4489fc1754f410eae4,
+    type: 3}

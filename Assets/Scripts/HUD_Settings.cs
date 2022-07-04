@@ -40,8 +40,7 @@ public class HUD_Settings : MonoBehaviour
         /*if (HudControllerInGame.Instance != null)
             HudControllerInGame.Instance.StateMenu = ActualMenu.InSettings;*/
 
-        if (HudMainMenu.Instance != null)
-            HudMainMenu.Instance.State = StateMainMenu.InPanelSettings;
+
     }
 
 

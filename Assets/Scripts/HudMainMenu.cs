@@ -6,28 +6,24 @@ using UnityEngine.EventSystems;
 using TMPro;
 using Doozy.Runtime.UIManager.Containers;
 using Doozy.Runtime.UIManager.Components;
-public enum StateMainMenu
-{
-    Menu,
-    Settings,
-    InPanelSettings,
-    InGame,
-    InPanelGame
-}
+
 public class HudMainMenu : MonoBehaviour
 {
     public static HudMainMenu Instance;
 
+    [Header("PANEL")]
     [SerializeField] UIContainer _mainMenu;
     [SerializeField] UIContainer _settings;
     [SerializeField] UIContainer _levelSelectionPanel;
     [SerializeField] UIContainer _worldSelectionPanel;
 
+    [Header("LEVEL SELECTOR")]
     [SerializeField] Transform parentSelector;
     [SerializeField] GameObject CardWorldPrefab;
     [SerializeField] TextMeshProUGUI worldName;
     [SerializeField] TextMeshProUGUI starText;
 
+    [Header("OTHERS")]
     [SerializeField] EventSystem eventSystem;
 
     public StateMainMenu State { get; set; }
@@ -36,20 +32,9 @@ public class HudMainMenu : MonoBehaviour
     {
         Instance = this;
     }
-    public void OpenMainMenu()
-    {
-        State = StateMainMenu.Menu;
-        _mainMenu.Show();
-    }
-
-    public void ClickPlay()
-    {
-        State = StateMainMenu.InGame;
-    }
 
     public void OpenPanelSelectionLevel(int worldIndex)
     {
-        State = StateMainMenu.InPanelGame;
         worldName.text = DataManager.Instance.Data.WorldData[worldIndex].WorldName;
 
         int totalStar = 0;
@@ -75,53 +60,38 @@ public class HudMainMenu : MonoBehaviour
                     starUnlock++;
                 }
             }
-            
+
             if (i == 0)
             {
                 eventSystem.SetSelectedGameObject(cardObj.GetComponent<UIButton>().gameObject);
             }
 
-            cardObj.GetComponent<CardWorld>().ChangeInformation(mapData.SceneData.SpriteCard, mapData.HighScore, mapData.SceneData.MapName, (i + 1).ToString(), starLevel, mapData.SceneData.IndexScene, mapData.HaveUnlockLevel);
+            cardObj.GetComponent<CardWorld>().ChangeInformation(mapData.SceneData, mapData.HighScore, totalStar, mapData.HaveUnlockLevel);
         }
 
         starText.text = "STAR : " + starUnlock.ToString() + " / " + totalStar.ToString();
     }
 
-    public void ClosePanelSettings()
-    {
-        HUD_Settings.Instance.CloseSettings();
-        State = StateMainMenu.Settings;
-    }
 
     public void Back()
     {
-            switch (State)
-            {
-                case StateMainMenu.InPanelGame:
-                    _levelSelectionPanel.Hide();
-                    _worldSelectionPanel.Show();
-                    State = StateMainMenu.InGame;
-                    break;
-                case StateMainMenu.InGame:
-                    _worldSelectionPanel.Hide();
-                    OpenMainMenu();
-                    break;
-                case StateMainMenu.Settings:
-                    CloseSettings();
-                    break;
-                case StateMainMenu.InPanelSettings:
-                    ClosePanelSettings();
-                    break;            
-        }
-    }
+        switch (State)
+        {
 
-    public void CloseSettings()
-    { 
-        _settings.Hide();
+        }
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
+}
+
+public enum StateMainMenu
+{
+    MainMenu,
+    WorldSelector,
+    MenuSettings,
+    LevelSelector,
+    Settings
 }
