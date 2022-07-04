@@ -14,6 +14,11 @@ public static class EventManager
         PlaySound.Invoke(typeSound, indexSound, position, volume);
     }
 
+    public static void ChangeVolumeMixerEvent(AudioMixerManager.ChoseCanal trypePiste, float volume)
+    {
+        ChangeVolumeMixer.Invoke(trypePiste, volume);
+    }
+
     public static void LauchTimerEvent(bool setTimer)
     {
         LauchTimer.Invoke(setTimer);
