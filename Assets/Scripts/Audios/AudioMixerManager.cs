@@ -29,6 +29,7 @@ public class AudioMixerManager : MonoBehaviour
 
     public void ChangeVolume (ChoseCanal canal, float value)
     {
+        Debug.Log("Salut tu viens de me changer le volume frere");
         switch(canal)
         {
             case ChoseCanal.main:
