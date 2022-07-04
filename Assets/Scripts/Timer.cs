@@ -22,22 +22,23 @@ public class Timer : MonoBehaviour
 
     public void LaunchTimer(bool setTimer)
     {
+        
         _timerIsLaunch = setTimer;
     }
 
   
 
-    //private void Update()
-    /*{
+    private void Update()
+    {
         if (_timerIsLaunch)
         {
             _timer += Time.unscaledDeltaTime;
-            if (_hud != null)
+           /* if (_hud != null)
             {
                 _hud.ChangeTimerHud(_timer);
-            }
+            }*/
         }
-    }*/
+    }
 
 
 
