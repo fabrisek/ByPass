@@ -2,179 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using TMPro;
-
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance;
+    public GameObject loadingScreen;
+    public CanvasGroup canvasGroup;
 
-    [SerializeField] GameObject _loadingScreenPanel;
-    [SerializeField] Slider _loadingSlider;
-    [SerializeField] TextMeshProUGUI _textSlider;
-    [SerializeField] float tempsLoading;
-
-    [SerializeField] string[] tips;
-    [SerializeField] Slider slider;
-    [SerializeField] TextMeshProUGUI textTips;
-    [SerializeField] TextMeshProUGUI sliderPercentText;
-    [SerializeField] TextMeshProUGUI NameLevel;
-    [SerializeField] GameObject Canavas;
-
-    bool canLoad;
-    bool loading;
-    float timeLeft;
-    //bool corouteStart;
     private void Awake()
     {
         if (Instance != null && Instance != this)
-        {
             Destroy(gameObject);    // Suppression d'une instance précédente (sécurité...sécurité...)
-        }
+
         else
         {
             Instance = this;
-        }
-        canLoad = true;
-        loading = false;
-    }
-
-    private void Start()
-    {
-        timeLeft = tempsLoading;
-    }
-
-    private void Update()
-    {
-        if (!canLoad)
-        {
-            timeLeft -= Time.unscaledDeltaTime;
-            if (timeLeft < 0)
-            {
-                canLoad = true;
-                timeLeft = tempsLoading;
-
-            }
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
-
-
-    public void LoadLevel(int sceneIndex)
+    public void StartLoadScene(int index)
     {
-        //if (Data_Manager.Instance != null)
-          //  Data_Manager.AlreadyInGame = true;
-
-        //if (HUD_MainMenu.Instance != null)
-          //  HUD_MainMenu.Instance.CloseCanavs();
-        //AudioManager.instance.StopMusic();
-        //Debug.Log("yo");
-
-
-     //   AudioManager.instance.PlayMusic(3);
-
-            ShowLoadingCanvas(sceneIndex);
-            if (canLoad)
-            {
-                canLoad = false;
-                /*StopCoroutine(WaitCoroutine(tempsLoading));
-                StartCoroutine(WaitCoroutine(tempsLoading));*/
-            }
-            if (!loading)
-            {
-                StopCoroutine(LoadAsyncTst(sceneIndex));
-                StartCoroutine(LoadAsyncTst(sceneIndex));
-            }     
+        StartCoroutine(StartLoad(index));
     }
-
-
-
-    IEnumerator LoadAsynchronously(int sceneIndex)
+    IEnumerator StartLoad(int index)
     {
-       
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-       
-        yield return new WaitForSeconds(0.01f);
-        
-
-    }
-    IEnumerator LoadAsyncTst(int sceneIndex)
-    {
-        loading = true;
-        //AfficherCanvas
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-        
-        operation.allowSceneActivation = false;
-
-       // Debug.Log("Senece a Load" + sceneIndex);
-
-       // StartCoroutine(WaitCoroutine(tempsLoading));
+        loadingScreen.SetActive(true);
+        yield return StartCoroutine(FadeLoadingScreen(1, 1));
+        AsyncOperation operation = SceneManager.LoadSceneAsync(index);
         while (!operation.isDone)
         {
-            //Mettre tips et progresse
-            slider.value +=Time.unscaledDeltaTime;
-            sliderPercentText.text = ((int)(slider.normalizedValue * 100)).ToString() + " %";
-            if (operation.progress >= 0.9f)
-            {
-               // Debug.Log("Operation a plus de 0.9");
-                if (slider.normalizedValue * 100 >= 100)
-                {
-                   // Debug.Log("je peut me load");
-                    /*if (TransitionScript.Instance != null)
-                    {
-                        
-                        TransitionScript.Instance.Fade(1f);
-                    }*/
-                    operation.allowSceneActivation = true;
-                    //AudioManager.instance.StopMusic();
-
-                }
-
-
-            }
             yield return null;
         }
-
-
-
+        yield return StartCoroutine(FadeLoadingScreen(0, 1));
+        loadingScreen.SetActive(false);
     }
-
-    IEnumerator WaitCoroutine (float time)
+    IEnumerator FadeLoadingScreen(float targetValue, float duration)
     {
-        canLoad = false;
-     //   Debug.Log("je start le temps"+ time);
-       // Debug.Log("je start le temps");
-        yield return new WaitForSeconds(time);
-     //   Debug.Log("je finie tempss");
-        canLoad = true;
-    }
-
-    void ShowLoadingCanvas (int sceneIndex)
-    {
-        //if (HUD_MainMenu.Instance != null)
-          //  HUD_MainMenu.Instance.CloseCanavs();
-        Canavas.SetActive(true);
-        slider.value = 0;
-        slider.maxValue = tempsLoading;
-        int rand = Random.Range(0, tips.Length);
-        textTips.text = "TIPS : " + tips[rand];
-        /*if (Data_Manager.Instance != null)
+        float startValue = canvasGroup.alpha;
+        float time = 0;
+        while (time < duration)
         {
-            DATA data = Data_Manager.Instance.GetData();
-            for (int i = 0; i < data._worldData.Count; i++)
-            {
-                for (int j = 0; j < data._worldData[i]._mapData.Count; j++)
-                {
-                    if (data._worldData[i]._mapData[j].GetSceneData().IndexScene == sceneIndex)
-                    {
-                      //  Debug.Log("Je passe voir les data");
-                        //background.sprite = data._worldData[i]._mapData[j].GetSceneData().BackGroundLoad;
-                        NameLevel.text = data._worldData[i]._mapData[j].GetSceneData().MapName;
-                        return;
-                    }
-                }
-            }
-        }*/
-        
+            canvasGroup.alpha = Mathf.Lerp(startValue, targetValue, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        canvasGroup.alpha = targetValue;
     }
 }

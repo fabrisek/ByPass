@@ -43,7 +43,7 @@ public class CardWorld : MonoBehaviour
     {
         if (unlock)
         {
-            //LevelLoader.Instance.LoadLevel(index);
+            LevelLoader.Instance.StartLoadScene(index);
         }
         else
         {
