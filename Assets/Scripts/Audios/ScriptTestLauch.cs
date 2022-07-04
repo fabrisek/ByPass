@@ -7,7 +7,7 @@ public class ScriptTestLauch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.LauchTimer(true);
+        
     }
 
     // Update is called once per frame

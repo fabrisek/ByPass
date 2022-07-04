@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance;
-    public GameObject loadingScreen;
-    public CanvasGroup canvasGroup;
+    [SerializeField] GameObject loadingScreen;
+    [SerializeField] CanvasGroup canvasGroup;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class LevelLoader : MonoBehaviour
     IEnumerator StartLoad(int index)
     {
         loadingScreen.SetActive(true);
-        yield return StartCoroutine(FadeLoadingScreen(1, 1));
+        yield return StartCoroutine(FadeLoadingScreen(1, 3));
         AsyncOperation operation = SceneManager.LoadSceneAsync(index);
         while (!operation.isDone)
         {
