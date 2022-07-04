@@ -77,7 +77,23 @@ public class HudMainMenu : MonoBehaviour
     {
         switch (State)
         {
+            case StateMainMenu.WorldSelector:
+                _worldSelectionPanel.Hide();
+                _mainMenu.Show();
+                break;
 
+            case StateMainMenu.LevelSelector:
+                _levelSelectionPanel.Hide();
+                _worldSelectionPanel.Show();
+                break;
+
+            case StateMainMenu.MenuSettings:
+
+                break;
+
+            case StateMainMenu.Settings:
+
+                break;
         }
     }
 
