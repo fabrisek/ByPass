@@ -11,19 +11,21 @@ public class Timer : MonoBehaviour
     [SerializeField] float _timer;
     [SerializeField] bool _timerIsLaunch;
     public float GetTimer() { return _timer; }
-   // public bool TimerIsLaunch() { return _timerIsLaunch; }
+    public bool TimerIsLaunch() { return _timerIsLaunch; }
 
     private void Awake()
     {
         Instance = this;
+        EventManager.LauchTimer += LaunchTimer;
+
     }
 
     public void LaunchTimer(bool setTimer)
-    {        
+    {
         _timerIsLaunch = setTimer;
     }
 
-   
+  
 
     //private void Update()
     /*{

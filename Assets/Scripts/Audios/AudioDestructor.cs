@@ -10,6 +10,7 @@ public class AudioDestructor : MonoBehaviour
     {
         if(AudioDestructor.Instance == null)
         {
+            DontDestroyOnLoad(gameObject);
             Instance = this;
         }
         else
