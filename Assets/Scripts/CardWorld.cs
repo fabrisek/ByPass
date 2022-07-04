@@ -36,7 +36,7 @@ public class CardWorld : MonoBehaviour
         {
             
             image.sprite = levelImage;
-            timer.text = Timer.FormatTime(timerSave);
+            timer.text = "heyo";//Timer.FormatTime(timerSave);
             
             
             starPlayer.text = star.ToString() + " / 5";
@@ -45,7 +45,7 @@ public class CardWorld : MonoBehaviour
 
     public void ClickButton()
     {
-        if (unlock)
+        /*if (unlock)
         {
             LevelLoader.Instance.LoadLevel(index);
         }
@@ -54,6 +54,6 @@ public class CardWorld : MonoBehaviour
             AudioManager.instance.playSoundEffect(5, 1);
             //Debug.Log("je suis bloquer");
             Debug.Log("Ajouter anim bloquer");
-        }
+        }*/
     }
 }

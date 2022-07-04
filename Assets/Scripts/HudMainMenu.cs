@@ -17,23 +17,19 @@ public enum StateMainMenu
 public class HudMainMenu : MonoBehaviour
 {
     public static HudMainMenu Instance;
-    [SerializeField] GameObject canvasMenu;
+
     [SerializeField] UIContainer _mainMenu;
     [SerializeField] UIContainer _settings;
-    [SerializeField] GameObject _settingsPanel;
     [SerializeField] UIContainer _levelSelectionPanel;
     [SerializeField] UIContainer _worldSelectionPanel;
-    [SerializeField] EventSystem eventSystem;
-    
-    [SerializeField] GameObject firstButtonMenu;
-    [SerializeField] GameObject firstButtonSettings;
-    [SerializeField] GameObject firstButtonInGame;
 
     [SerializeField] GameObject panelSelector;
     [SerializeField] Transform parentSelector;
     [SerializeField] GameObject CardWorldPrefab;
     [SerializeField] TextMeshProUGUI worldName;
     [SerializeField] TextMeshProUGUI starText;
+
+    [SerializeField] EventSystem eventSystem;
 
     public StateMainMenu State { get; set; }
 
