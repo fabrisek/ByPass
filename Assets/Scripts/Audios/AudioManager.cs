@@ -44,6 +44,16 @@ public class AudioManager : MonoBehaviour
         EventManager.PlaySound += PlaySound;
     }
 
+    float GetVolumeAlea (float volumeMax)
+    {
+        float volumeMin = volumeMax - 0.1f;
+        if(volumeMin < 0.1f)
+        {
+            volumeMin = 0.1f;
+        }
+        return  Random.Range(volumeMin, volumeMax);
+    }
+
     public void PlaySound(TypeOfSound typeDeSon, int indexSound, Vector3 position, float volume = 1)
     {
         switch(typeDeSon)
@@ -69,13 +79,13 @@ public class AudioManager : MonoBehaviour
 
     void PlaySoundEffect(int indexSound, float volumeScale)
     { 
-        audioSourceSoundEffect.PlayOneShot(soundEffects[indexSound], volumeScale);
+        audioSourceSoundEffect.PlayOneShot(soundEffects[indexSound], GetVolumeAlea( volumeScale));
     }
 
     void PlaySoundEffect3D(int index, Vector3 position, float volumeScale)
     {
         audioSourceSfx3D.gameObject.transform.position = position;
-        audioSourceSfx3D.PlayOneShot(soundEffects[index], volumeScale);
+        audioSourceSfx3D.PlayOneShot(soundEffects[index], GetVolumeAlea(volumeScale));
     }
 
     void ChoseFunctionForMusic (int index, float volumeScal)
