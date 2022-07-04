@@ -6,6 +6,11 @@ using UnityEngine.Audio;
 public class AudioMixerManager : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
+
+    private void Awake()
+    {
+        InitAudioMixerManager();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +21,10 @@ public class AudioMixerManager : MonoBehaviour
     void Update()
     {
         
+    }
+    void InitAudioMixerManager ()
+    {
+        EventManager.ChangeVolumeMixer += ChangeVolume;
     }
 
     public void ChangeVolume (ChoseCanal canal, float value)
