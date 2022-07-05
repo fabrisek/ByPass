@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class CompetenceRalentie : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class CompetenceRalentie : MonoBehaviour
     private void DesactiveSkill()
     {
         Time.timeScale = 1f;
-        glitch.enabled = false;
+        //glitch.enabled = false;
         //AudioManager.instance.ChangePitch(1f);
         //AudioManager.instance.playSoundEffect(3, 1f);
         competenceIsActive = false;
@@ -47,7 +48,7 @@ public class CompetenceRalentie : MonoBehaviour
         competenceIsActive = true;
         Time.timeScale = 0.6f;
         //AudioManager.instance.ChangePitch(.98f);
-        glitch.enabled = true;
+        //glitch.enabled = true;
         //AudioManager.instance.playSoundEffect(2, 1f);
     }
 

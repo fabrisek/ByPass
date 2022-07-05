@@ -502,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeMax: 3
   _timeRestant: 3
-  glitch: {fileID: 2254293280012606449}
+  glitch: {fileID: 0}
   competenceIsActive: 0
 --- !u!1 &2126040677204331424
 GameObject:
@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 2126040677643017659}
   - component: {fileID: 2126040677643017656}
   - component: {fileID: 2126040677643017663}
-  - component: {fileID: 2254293280012606449}
+  - component: {fileID: 657933773404619419}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -910,7 +910,7 @@ MonoBehaviour:
   orientation: {fileID: 2126040677670088511}
   camHolder: {fileID: 2126040676146228281}
   IsGamePad: 0
---- !u!114 &2254293280012606449
+--- !u!114 &657933773404619419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -922,11 +922,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e166fd786c0ed46a549a6209c64b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displacementMap: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-  Shader: {fileID: 4800000, guid: 9b526b1b556ba7543a478fce79c0f2a5, type: 3}
-  intensity: 0.808
-  flipIntensity: 0.829
-  colorIntensity: 0.786
+  displacementMap: {fileID: 2800000, guid: 8ed4ae8a77f485a44a11e0f488b986fe, type: 3}
+  Shader: {fileID: 4800000, guid: 50e398f05f7e5754cbdeb9d53637d37a, type: 3}
+  intensity: 0.611
+  flipIntensity: 0.555
+  colorIntensity: 0.594
 --- !u!1 &2126040677670088504
 GameObject:
   m_ObjectHideFlags: 0
