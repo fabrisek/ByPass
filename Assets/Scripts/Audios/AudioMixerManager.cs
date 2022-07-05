@@ -50,10 +50,9 @@ public class AudioMixerManager : MonoBehaviour
                 break;
             case ChoseCanal.sfx:
                 audioMixer.SetFloat("VolumeSfx", FindVolume(value));
+                audioMixer.SetFloat("VolumeSfx3D", FindVolume(value));
                 break;
-            case ChoseCanal.sfx3D:
-                    audioMixer.SetFloat("VolumeSfx3D", FindVolume(value));
-                break;
+           
             default:
                 Debug.Log("je connais pas ce canal mon pote");
                 break;
@@ -82,7 +81,7 @@ public class AudioMixerManager : MonoBehaviour
         main,
         music,
         sfx,
-        sfx3D,
+       
     }
 
    

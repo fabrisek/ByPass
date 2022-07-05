@@ -54,9 +54,9 @@ public class GameManager : MonoBehaviour
         AudioMixerManager.instance.ChangeVolume(trypePiste, volume);
     }
 
-    public void LauchTimer(bool setTimer)
+    public void LoadLevel (SceneObject obj)
     {
-        Timer.instance.LaunchTimer(setTimer);
+        LevelLoader.Instance.StartLoadScene(obj);
     }
 
     public static void LauchCinematic(bool active)
@@ -64,9 +64,24 @@ public class GameManager : MonoBehaviour
         Cinematic.instance.PlayCinematic(active);
     }
 
-    public void LoadLevel (SceneObject obj)
+    public void StartCountDown()
     {
-        LevelLoader.Instance.StartLoadScene(obj);
+
+    }
+
+    public void ChangeActionMap()
+    {
+
+    }
+
+    public void ShowCanvas()
+    {
+
+    }
+
+    public void LauchTimer(bool setTimer)
+    {
+        Timer.instance.LaunchTimer(setTimer);
     }
 
 

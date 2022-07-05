@@ -191,18 +191,21 @@ public class HUD_Settings : MonoBehaviour
     {
 
             Settings.ChangeVolumeGeneral(value);
+        GameManager.instance.ChangeVolumeMixer(AudioMixerManager.ChoseCanal.main, value);
     }
     //Slider Volume Music
     public void ChangeAudioMusic(float value)
     {
 
             Settings.ChangeVolumeMusic(value);
+        GameManager.instance.ChangeVolumeMixer(AudioMixerManager.ChoseCanal.music, value);
     }
 
     public void ChangeAudioSFX(float value)
     {
 
             Settings.ChangeVolumeSFX(value);
+        GameManager.instance.ChangeVolumeMixer(AudioMixerManager.ChoseCanal.sfx, value);
     }
     #endregion
 
