@@ -30,7 +30,14 @@ public class HudMainMenu : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);    // Suppression d'une instance précédente (sécurité...sécurité...)
+
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     public void OpenPanelSelectionLevel(int worldIndex)

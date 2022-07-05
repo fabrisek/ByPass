@@ -112,22 +112,7 @@ public class PlayerController : MonoBehaviour
     {
         Instance = this;
         stateGroundOld = true;
-        input = new Input();
-
-        
-    }
-
-    private void OnEnable()
-    {
-        input.Enable();
-        input.InGame.Jump.performed += context => GetPlayerJump();
-        input.InGame.Jump.canceled += context => PlayerJumpDown(false);
-    }
-    private void OnDisable()
-    {
-        input.Disable();
-        input.InGame.Jump.performed += context => GetPlayerJump();
-        input.InGame.Jump.canceled += context => PlayerJumpDown(false);
+        input = InputManager.Input;        
     }
 
     private void Start()

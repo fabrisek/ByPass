@@ -22,7 +22,7 @@ public class PlayerCam : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        input = new Input();
+        input = InputManager.Input;
     }
     private void OnEnable()
     {
@@ -52,13 +52,13 @@ public class PlayerCam : MonoBehaviour
 
         if (IsGamePad == false)
         {
-            lookX = looking.x * sensibilityMouse * Time.unscaledDeltaTime;
-            lookY = looking.y * sensibilityMouse * Time.unscaledDeltaTime;
+            lookX = looking.x * Settings.SensibilityMouse * Time.unscaledDeltaTime;
+            lookY = looking.y * Settings.SensibilityMouse * Time.unscaledDeltaTime;
         }
         else
         {
-            lookX = looking.x * sensibilityGamePad * Time.unscaledDeltaTime;
-            lookY = looking.y * sensibilityGamePad * Time.unscaledDeltaTime;
+            lookX = looking.x * Settings.SensibilityGamePad * Time.unscaledDeltaTime;
+            lookY = looking.y * Settings.SensibilityGamePad * Time.unscaledDeltaTime;
         }
 
 

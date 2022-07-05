@@ -65,20 +65,9 @@ public class WallRunController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        input = new Input();
+        input = InputManager.Input;
 
 
-    }
-
-    private void OnEnable()
-    {
-        input.Enable();
-        input.InGame.Jump.performed += context => WallJump();
-    }
-    private void OnDisable()
-    {
-        input.Disable();
-        input.InGame.Jump.performed += context => WallJump();
     }
 
 

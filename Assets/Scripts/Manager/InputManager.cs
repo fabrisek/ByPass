@@ -12,7 +12,7 @@ public enum ControlDeviceType
 public class InputManager : MonoBehaviour
 {
     
-    public static Input _input;
+    public static Input Input { private set; get; }
     public static InputManager Instance;
 
     [SerializeField] PlayerInput playerInput;
@@ -32,29 +32,32 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        _input = new Input();
+        Input = new Input();
         Instance = this;
         SensibilityMouseX = PlayerPrefs.GetFloat("SensibilityMouseX", 100f); 
         SensibilityMouseY = PlayerPrefs.GetFloat("SensibilityMouseY", 100f); 
         SensibilityGamePadX = PlayerPrefs.GetFloat("SensibilityGamePadX", 100f); 
         SensibilityGamePadY = PlayerPrefs.GetFloat("SensibilityGamePadY", 100f);
 
-        /*if (PlayerMovementAdvanced.Instance != null)
+        if (PlayerController.Instance != null)
         {
-            _input.InGame.SlowTime.performed += context => PlayerMovementAdvanced.Instance.ActiveSlowTime(true);
-            _input.InGame.SlowTime.canceled += context => PlayerMovementAdvanced.Instance.ActiveSlowTime(false);
-            _input.InGame.Pause.performed += context => PlayerMovementAdvanced.Instance.Pause();
-            _input.InGame.Jump.started += context => PlayerMovementAdvanced.Instance.GetPlayerJump();
-            _input.InGame.Jump.canceled += context => PlayerMovementAdvanced.Instance.PlayerJumpDown(true);
+            Input.InGame.SlowTime.performed += context => CompetenceRalentie.Instance.ActiveSlowTime(true);
+            Input.InGame.SlowTime.canceled += context => CompetenceRalentie.Instance.ActiveSlowTime(false);
+            //_input.InGame.Pause.performed += context => PlayerController.Instance.Pause();
+            Input.InGame.Jump.started += context => PlayerController.Instance.GetPlayerJump();
+            Input.InGame.Jump.canceled += context => PlayerController.Instance.PlayerJumpDown(true);
         }
 
-        if (WallRunningAdvanced.Instance != null)
-            _input.InGame.Jump.started += context => WallRunningAdvanced.Instance.WallJump();
+        if (WallRunController.Instance != null)
+            Input.InGame.Jump.started += context => WallRunController.Instance.WallJump();
+
         if (GrapplingGun.Instance != null)
         {
-            _input.InGame.Grappling.performed += context => GrapplingGun.Instance.StartGrapple();
-            _input.InGame.Grappling.canceled += context => GrapplingGun.Instance.StopGrapple();
+            Input.InGame.Grappling.performed += context => GrapplingGun.Instance.StartGrapple();
+            Input.InGame.Grappling.canceled += context => GrapplingGun.Instance.StopGrapple();
         }
+
+        /*
         if (LevelManager.Instance != null)
         {
             _input.InGame.RestartAndBack.performed += context => LevelManager.Instance.RestartLevel();
@@ -64,13 +67,9 @@ public class InputManager : MonoBehaviour
         if (HUD_MainMenu.Instance != null)
             _input.InGame.RestartAndBack.performed += context => HUD_MainMenu.Instance.Back();*/
     }
-    private void Start()
-    {
-
-    }
     public void OnEnable()
     {
-        _input.Enable();
+        Input.Enable();
         for (int i = 0; i < allBinding.Count; i++)
         {
             string _actionName = allBinding[i].action.name;
@@ -109,12 +108,12 @@ public class InputManager : MonoBehaviour
 
         public Vector2 GetPlayerMovement()
     {
-        return _input.InGame.Move.ReadValue<Vector2>();
+        return Input.InGame.Move.ReadValue<Vector2>();
     }
 
     public Vector2 GetPlayerLook()
     {
-        return _input.InGame.Look.ReadValue<Vector2>();
+        return Input.InGame.Look.ReadValue<Vector2>();
     }
 
     private void OnControlsChanged(UnityEngine.InputSystem.PlayerInput obj)
@@ -167,7 +166,7 @@ public class InputManager : MonoBehaviour
 
     public static void StartRebind(string actionName, int bindingIndex, TextMeshProUGUI statusText, bool excludeMouse)
     {
-        InputAction action = _input.asset.FindAction(actionName);
+        InputAction action = Input.asset.FindAction(actionName);
         if (action == null || action.bindings.Count <= bindingIndex)
         {
             Debug.Log("Couln't find action or binding");
@@ -231,12 +230,12 @@ public class InputManager : MonoBehaviour
 
     public static string GetBindingName( string actionName, int bindingIndex)
     {
-        if (_input == null)
+        if (Input == null)
         {
-            _input = new Input();
+            Input = new Input();
         }
 
-        InputAction action = _input.asset.FindAction(actionName);
+        InputAction action = Input.asset.FindAction(actionName);
         return action.GetBindingDisplayString(bindingIndex);
     }
 
@@ -250,10 +249,10 @@ public class InputManager : MonoBehaviour
 
     public static void LoadBindingOverride(string actionName)
     {
-        if (_input == null)
-            _input = new Input();
+        if (Input == null)
+            Input = new Input();
 
-        InputAction action = _input.asset.FindAction(actionName);
+        InputAction action = Input.asset.FindAction(actionName);
 
         for (int i = 0; i < action.bindings.Count; i++)
         {
@@ -266,7 +265,7 @@ public class InputManager : MonoBehaviour
 
     public static void ResetBinding(string actionName, int bindingIndex)
     {
-        InputAction action = _input.asset.FindAction(actionName);
+        InputAction action = Input.asset.FindAction(actionName);
 
         if (action == null || action.bindings.Count <= bindingIndex)
         {
