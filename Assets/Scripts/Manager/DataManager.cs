@@ -85,8 +85,6 @@ public class DataManager : MonoBehaviour
         string data = JsonUtility.ToJson(Data);
         string filepath = Application.persistentDataPath + "/Save.json";
         File.WriteAllText(filepath, EncryptDecrypt(data));
-
-        Debug.Log(EncryptDecrypt(data));
     }
 
     //Charge tous les record dans toutes les maps et les charges dans les Datas;
@@ -98,7 +96,6 @@ public class DataManager : MonoBehaviour
         {
             string fileContents = File.ReadAllText(worldsFolder);
             DATA data = JsonUtility.FromJson<DATA>(EncryptDecrypt(fileContents));
-            Debug.Log(EncryptDecrypt(fileContents));
             for (int i = 0; i < Data.WorldData.Count; i++)
             {
                 if (data.WorldData[i] != null)

@@ -4,7 +4,24 @@ using UnityEngine;
 
 public class CountDown : MonoBehaviour
 {
+    public static CountDown instance;
     [SerializeField] float timeOfCountDown;
+    [SerializeField] string[] writeinCountDown;
+
+    int count;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            InitCountDoawn();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -16,5 +33,30 @@ public class CountDown : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void InitCountDoawn()
+    {
+        count = 0;
+    }
+
+    public void StartCountDown ()
+    {
+
+    }
+
+    IEnumerator CoroutineCountDown ()
+    {
+        yield return new WaitForSeconds(timeOfCountDown / writeinCountDown.Length);
+        Debug.Log(writeinCountDown[count]);
+        count++;
+        if(count < writeinCountDown.Length)
+        {
+            StartCoroutine(CoroutineCountDown());
+        }
+        else
+        {
+            Debug.Log("CountDownEstFinie");
+        }
     }
 }
