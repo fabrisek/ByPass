@@ -119,14 +119,14 @@ public class InputManager : MonoBehaviour
 
     private void OnControlsChanged(UnityEngine.InputSystem.PlayerInput obj)
     {
-        /*if (obj.currentControlScheme == "Gamepad")
+        if (obj.currentControlScheme == "Gamepad")
         {
             if (currentControlDevice != ControlDeviceType.Gamepad)
             {
-                Data_Manager.LastDevice = ControlDeviceType.Gamepad;
+                //Data_Manager.LastDevice = ControlDeviceType.Gamepad;
                 // Send Event
                 // EventHandler.ExecuteEvent("DeviceChanged", currentControlDevice);
-                PlayerCam.Instance.IsGamePad = true;
+                //PlayerCam.Instance.IsGamePad = true;
                 Cursor.visible = false;
             }
         }
@@ -134,8 +134,8 @@ public class InputManager : MonoBehaviour
         {
             if (currentControlDevice != ControlDeviceType.KeyboardAndMouse)
             {
-                Data_Manager.LastDevice = ControlDeviceType.KeyboardAndMouse;
-                PlayerCam.Instance.IsGamePad = false;
+                //Data_Manager.LastDevice = ControlDeviceType.KeyboardAndMouse;
+                //PlayerCam.Instance.IsGamePad = false;
 
                 if (Time.timeScale == 0)
                 {
@@ -145,7 +145,7 @@ public class InputManager : MonoBehaviour
                 // Send Event
                 // EventHandler.ExecuteEvent("DeviceChanged", currentControlDevice);
             }
-        }*/
+        }
     }
 
 
@@ -189,6 +189,7 @@ public class InputManager : MonoBehaviour
 
     private static void DoRebind(InputAction actionToRebind, int bindingIndex, TextMeshProUGUI statusText, bool allCompositeParts, bool excludeMouse)
     {
+        Debug.Log("Binging");
         if (actionToRebind == null || bindingIndex < 0)
             return;
 
