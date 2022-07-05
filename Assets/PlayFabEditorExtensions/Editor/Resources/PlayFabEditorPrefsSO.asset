@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
-  DevAccountEmail: hexaltstudio@gmail.com
-  DevAccountToken: hkhoe7a18gmpmcui8ygmwjwe5c6jhyznq535o47u9yua1t7cwnhz4c83tbifhxiy4ofykh4yjazf88goipuz7ntg6nxsecfj7da876k8pmirzagznx81nrenqjo7bk3uti3s1j6n86i8j6gwsjro9177bm77ujtwn5ccaijtnw78w3xknzm6c6phwyeo8gkxohmqyw76
-  SelectedStudio: HexaltStudio
-  SdkPath: Assets/Plugins/PlayFabSDK
+  DevAccountEmail: 
+  DevAccountToken: 
+  SelectedStudio: 
+  SdkPath: 
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 1
+  curMainMenuIdx: 0
   curSubMenuIdx: 0
