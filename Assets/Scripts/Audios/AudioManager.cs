@@ -147,18 +147,20 @@ public class AudioManager : MonoBehaviour
 
     int CheckIndexFree ()
     {
+        int i = 0;
         switch (indexMusic)
         {
             case 1:
-                return 0;
+                i = 0;
                 break;
             case 0:
-                return 1;
+                i = 1;
                 break;
             default:
-                return -1;
+                i = -1;
                 break;
         }
+        return i;
     }
     void TransitionMusic(float volumeToGo)
     {
