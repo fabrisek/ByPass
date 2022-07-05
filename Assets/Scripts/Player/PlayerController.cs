@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isJumping;
     bool readyToJump;
     bool canDoubleJump;
-    bool hasDoubleJumped;
 
     public bool CanDoubleJump()
     {
@@ -429,7 +428,6 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
             _maxJumpTime = resetMaxJumpTime;
 
-            hasDoubleJumped = true;
             // reset y velocity
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             //JumpForce

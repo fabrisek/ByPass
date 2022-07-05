@@ -1853,7 +1853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapplingGun: {fileID: 2035326726}
-  quality: 500
+  quality: 100
   damper: 14
   strength: 800
   velocity: 15
