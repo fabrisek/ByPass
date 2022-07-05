@@ -7,6 +7,7 @@ public class Cinematic : MonoBehaviour
 {
     public static Cinematic instance;
     [SerializeField] GameObject cutSceneToPlay;
+    [SerializeField] GameObject cameras;
     private void Awake()
     {
         if (instance == null)
@@ -22,6 +23,7 @@ public class Cinematic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         PlayCinematic(true);
      
     }
@@ -34,6 +36,8 @@ public class Cinematic : MonoBehaviour
 
     public void PlayCinematic (bool active)
     {
+        cameras.SetActive(active);
+       
         cutSceneToPlay.SetActive(active);
     }
 
