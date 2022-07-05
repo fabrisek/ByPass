@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Cinematic : MonoBehaviour
 {
     public static Cinematic instance;
     [SerializeField] GameObject cutSceneToPlay;
+    [SerializeField] GameObject cameras;
     private void Awake()
     {
         if (instance == null)
@@ -22,16 +24,22 @@ public class Cinematic : MonoBehaviour
     void Start()
     {
         
+        PlayCinematic(true);
+     
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     public void PlayCinematic (bool active)
     {
+        cameras.SetActive(active);
+       
         cutSceneToPlay.SetActive(active);
     }
+
+    
 }
