@@ -210,7 +210,7 @@ public class HUD_Settings : MonoBehaviour
     [Header("KEYBOARD SETTINGS")]
     [SerializeField] Slider _sliderSensibilityMouse;
 
-    private void OpenControlPanel()
+    public void OpenControlPanel()
     {
         ChangeStateMenu();
         InitializeKeybordPanel();
