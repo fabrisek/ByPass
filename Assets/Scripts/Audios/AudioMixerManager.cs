@@ -5,11 +5,21 @@ using UnityEngine.Audio;
 
 public class AudioMixerManager : MonoBehaviour
 {
+    public static AudioMixerManager instance;
     [SerializeField] AudioMixer audioMixer;
 
     private void Awake()
     {
-        InitAudioMixerManager();
+        if (instance == null)
+        {
+            instance = this;
+            InitAudioMixerManager();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+      
     }
     // Start is called before the first frame update
     void Start()
@@ -24,7 +34,7 @@ public class AudioMixerManager : MonoBehaviour
     }
     void InitAudioMixerManager ()
     {
-        EventManager.ChangeVolumeMixer += ChangeVolume;
+       
     }
 
     public void ChangeVolume (ChoseCanal canal, float value)

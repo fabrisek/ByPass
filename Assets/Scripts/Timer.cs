@@ -5,7 +5,7 @@ using System;
 
 public class Timer : MonoBehaviour
 {
-    public static Timer Instance;
+    public static Timer instance;
 
     //[SerializeField] HudControllerInGame _hud;
     [SerializeField] float _timer;
@@ -15,8 +15,14 @@ public class Timer : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        EventManager.LauchTimer += LaunchTimer;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
     }
 

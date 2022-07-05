@@ -5,6 +5,8 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance;
+
     [SerializeField] AudioClip[] soundEffects, music;
     [SerializeField] AudioSource audioSourceSoundEffect, audioSourceSfx3D;
    
@@ -15,7 +17,16 @@ public class AudioManager : MonoBehaviour
     EtatMusic etatmusic;
     private void Awake()
     {
-        InitAudioManager();
+        if (instance == null)
+        {
+            instance = this;
+            InitAudioManager();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -41,7 +52,6 @@ public class AudioManager : MonoBehaviour
     {
         indexMusic = -1;
         etatmusic = EtatMusic.noMusic;
-        EventManager.PlaySound += PlaySound;
     }
 
     float GetVolumeAlea (float volumeMax)
