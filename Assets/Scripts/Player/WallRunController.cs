@@ -174,8 +174,6 @@ public class WallRunController : MonoBehaviour
 
     private void StartWallRun()
     {
-        Debug.Log("wallRunStart");
-        //Rumbler.instance.RumblePulse(0.5f, 1.5f, 0.1f, 1f);
         playerController.wallrunning = true;
         wallRunTimer = maxWallRunTime;
 
@@ -233,7 +231,6 @@ public class WallRunController : MonoBehaviour
         {
             if (playerController.wallrunning)
             {
-                Debug.Log("wallRunJump");
                 playerController.PlayerJumpDown(false);
                 playerController.SetCanDoubleJump(false);
                 // enter exiting wall state
