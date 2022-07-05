@@ -16,6 +16,8 @@ public class HudMainMenu : MonoBehaviour
     [SerializeField] UIContainer _settings;
     [SerializeField] UIContainer _levelSelectionPanel;
     [SerializeField] UIContainer _worldSelectionPanel;
+    [SerializeField] UIContainer _pausePanel;
+    [SerializeField] UIContainer _InGamePanel;
 
     [Header("LEVEL SELECTOR")]
     [SerializeField] Transform parentSelector;
@@ -45,6 +47,26 @@ public class HudMainMenu : MonoBehaviour
         _settings.Hide();
         _levelSelectionPanel.Hide();
         _worldSelectionPanel.Hide();
+        _pausePanel.Hide();
+        _InGamePanel.Hide();
+    }
+
+    public void OpenPausePanel()
+    {
+        CloseAllPanel();
+        _pausePanel.Show();
+    }
+
+    public void OpenGamePanel()
+    {
+        CloseAllPanel();
+        _InGamePanel.Show();
+    }
+
+    public void OpenMainMenuPanel()
+    {
+        CloseAllPanel();
+        _mainMenu.Show();
     }
     public void OpenPanelSelectionLevel(int worldIndex)
     {

@@ -42,7 +42,7 @@ public class CardWorld : MonoBehaviour
     {
         if (unlock)
         {
-            GameManager.instance.LoadLevel(objRef);
+            GameManager.Instance.LoadLevel(objRef);
         }
         else
         {
