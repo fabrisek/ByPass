@@ -20422,7 +20422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0.000061035156}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 30, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &320517574
@@ -21915,7 +21915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0.000061035156}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 30, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &402472569
@@ -33166,7 +33166,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 630283722}
   allBinding:
+  - {fileID: 6480175436215463019, guid: be39f8c3759fafe4eb8a6c3c35716bbe, type: 3}
+  - {fileID: -2803345815151768618, guid: be39f8c3759fafe4eb8a6c3c35716bbe, type: 3}
   - {fileID: -327859143626033560, guid: be39f8c3759fafe4eb8a6c3c35716bbe, type: 3}
+  - {fileID: 388291879798219404, guid: be39f8c3759fafe4eb8a6c3c35716bbe, type: 3}
+  - {fileID: -6109863254476549324, guid: be39f8c3759fafe4eb8a6c3c35716bbe, type: 3}
 --- !u!4 &630283721
 Transform:
   m_ObjectHideFlags: 0
@@ -62642,7 +62646,7 @@ MonoBehaviour:
   _levelSelectionPanel: {fileID: 875966934}
   _worldSelectionPanel: {fileID: 661651992}
   parentSelector: {fileID: 1154160805}
-  CardWorldPrefab: {fileID: 9076182544829934845, guid: df2ca17f59a7c6a4fbbcd53103a78e81,
+  CardWorldPrefab: {fileID: 8240622982679906376, guid: 36134287fbd18f147b6b2411c75b7b28,
     type: 3}
   worldName: {fileID: 709947325}
   starText: {fileID: 1561972444}
@@ -107560,7 +107564,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0.000061035156}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 30, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1970082764
