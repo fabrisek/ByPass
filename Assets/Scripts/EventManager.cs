@@ -8,6 +8,8 @@ public static class EventManager
     public static event Action<AudioManager.TypeOfSound,int,Vector3,float> PlaySound;
     public static event Action<AudioMixerManager.ChoseCanal, float> ChangeVolumeMixer;
     public static event Action<bool> LauchTimer;
+    public static event Action<bool> LauchCinematic;
+    public static event Action<bool> ChangeActionMap;
 
     public static void PlaySoundEvent(AudioManager.TypeOfSound typeSound, int indexSound, Vector3 position, float volume = 1)
     {
@@ -23,4 +25,11 @@ public static class EventManager
     {
         LauchTimer.Invoke(setTimer);
     }
+
+    public static void LauchCinematicEvent(bool active)
+    {
+        LauchCinematic.Invoke(active);
+    }
+
+    
 }
