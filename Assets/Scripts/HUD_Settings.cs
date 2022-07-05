@@ -55,7 +55,6 @@ public class HUD_Settings : MonoBehaviour
     [SerializeField] UIToggle _toggleShowFps;
     [SerializeField] UIToggle _toggleCameraShake;
     [SerializeField] UIToggle _toggleCameraClamp;
-    [SerializeField] GameObject _firstBoutonPanelGraphics;
 
     private int countRes;
 
@@ -164,19 +163,16 @@ public class HUD_Settings : MonoBehaviour
     #endregion
 
     #region MENU OPTIONS
-    [Header("MENU SETTINGS")]
-    [SerializeField] GameObject _panelButton;
-    [SerializeField] GameObject _firstButtonOptionMenu;
+
+
     #endregion
 
     #region AUDIO PANEL
 
     [Header("AUDIO SETTINGS")]
-    [SerializeField] GameObject _panelAudio;
     [SerializeField] Slider _sliderVolumeSoundEffect;
     [SerializeField] Slider _sliderVolumeMusic;
     [SerializeField] Slider _sliderVolumeGeneral;
-    [SerializeField] GameObject _firstBoutonPanelAudio;
     public void OpenPanelAudio()
     {
         ChangeStateMenu();
@@ -212,7 +208,6 @@ public class HUD_Settings : MonoBehaviour
 
     #region KEYBOARD SETTINGS PANEL
     [Header("KEYBOARD SETTINGS")]
-    [SerializeField] GameObject _panelControl;
     [SerializeField] Slider _sliderSensibilityMouse;
 
     private void OpenControlPanel()
@@ -247,7 +242,7 @@ public class HUD_Settings : MonoBehaviour
     {
             Settings.ChangeUseRumbler(_toggleRumbler.isOn);
     }
-
+    
     public void ChangeValueSensibilityGamePad()
     {
             Settings.ChangeValueSensibilityGamePad(_sliderSensibilityGamePad.value);

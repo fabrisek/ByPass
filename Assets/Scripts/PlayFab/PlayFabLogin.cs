@@ -12,7 +12,8 @@ public class PlayFabLogin : MonoBehaviour
     [field: SerializeField] public string EntityId { get; private set; }
     [field: SerializeField] public string EntityType { get; private set; }
     [field: SerializeField] public string PlayfabId { get; private set; }
-
+    
+    const string _apiKey = "8DC8E3A4CC23EF187598E72A1A800DBC";
 
     private void Awake()
     {
@@ -82,7 +83,6 @@ public class PlayFabLogin : MonoBehaviour
     void UpdateProfilePicture()
     {
         //Recupere Le lien JSON via l'API de Steam
-        var _apiKey = "8DC8E3A4CC23EF187598E72A1A800DBC";
         var _steamUserID = SteamUser.GetSteamID();
         string url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + _apiKey + "&steamids=" + _steamUserID;
 
