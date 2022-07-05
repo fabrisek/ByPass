@@ -15,6 +15,6 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, cameraPosition.position, LerpSpeed * Time.deltaTime);
+        transform.position = cameraPosition.position;
     }
 }
