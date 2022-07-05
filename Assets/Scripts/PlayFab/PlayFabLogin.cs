@@ -5,7 +5,7 @@ using PlayFab.ClientModels;
 using Steamworks;
 using UnityEngine;
 using System.Net;
-using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json.Linq;
 public class PlayFabLogin : MonoBehaviour
 {
     public static PlayFabLogin Instance;
@@ -82,7 +82,8 @@ public class PlayFabLogin : MonoBehaviour
 
     void UpdateProfilePicture()
     {
-        //Recupere Le lien JSON via l'API de Steam
+        
+        /*//Recupere Le lien JSON via l'API de Steam
         var _steamUserID = SteamUser.GetSteamID();
         string url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + _apiKey + "&steamids=" + _steamUserID;
 
@@ -97,7 +98,7 @@ public class PlayFabLogin : MonoBehaviour
         }, result =>
         {
 
-        }, error => Debug.LogError(error.GenerateErrorReport()));
+        }, error => Debug.LogError(error.GenerateErrorReport()));*/
     }
 
     void OnError(PlayFabError error)

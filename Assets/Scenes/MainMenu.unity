@@ -6223,6 +6223,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 613849817}
+          m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+            DoozyRuntime
+          m_MethodName: InstantHide
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   OnVisibleCallback:
     Enabled: 0
     EventName: OnVisibleCallback
@@ -6313,8 +6326,8 @@ MonoBehaviour:
   DefaultVolumeSFX: 0.485
   DefaultSensibilityMouse: 0
   _defaultSensibilityGamePad: 0
-  _defaultUseRumbler: 0
-  _defaultUseCameraShake: 0
+  _defaultUseRumbler: 1
+  _defaultUseCameraShake: 1
   _defaultUseCameraClamp: 0
   _defaultShowFps: 0
   _defaultUseVsync: 0
@@ -17974,7 +17987,39 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   Behaviours:
-    Behaviours: []
+    Behaviours:
+    - Enabled: 1
+      EventName: PointerClick
+      Runners: []
+      Event:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 58153348}
+            m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
+            m_MethodName: SetRumbler
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      BehaviourName: 4
+      Receiver:
+        ConnectionMode: 1
+        SignalProviderId:
+          Type: 0
+          Category: Pointer
+          Name: Click
+        ProviderReference: {fileID: 0}
+        StreamId:
+          Category: None
+          Name: None
+          Custom: 0
+      Cooldown: 0
+      Selectable: {fileID: 294578310}
     SignalSource: {fileID: 294578308}
     Selectable: {fileID: 294578310}
   Id:
@@ -18059,19 +18104,7 @@ MonoBehaviour:
           m_CallState: 2
   OnValueChangedCallback:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 58153348}
-        m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
-        m_MethodName: SetRumbler
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   ToggleGroup: {fileID: 0}
 --- !u!114 &294578311
 MonoBehaviour:
@@ -24730,6 +24763,19 @@ MonoBehaviour:
               m_BoolArgument: 0
             m_CallState: 2
           - m_Target: {fileID: 1997773114}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 613849817}
             m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
               DoozyRuntime
             m_MethodName: Hide
@@ -40033,10 +40079,61 @@ MonoBehaviour:
       Event:
         m_PersistentCalls:
           m_Calls:
+          - m_Target: {fileID: 241854140}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 1264771284}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
           - m_Target: {fileID: 1997773114}
             m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
               DoozyRuntime
             m_MethodName: Show
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 613849817}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 58153348}
+            m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
+            m_MethodName: OpenGamePadPanel
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
@@ -49271,7 +49368,39 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   Behaviours:
-    Behaviours: []
+    Behaviours:
+    - Enabled: 1
+      EventName: PointerClick
+      Runners: []
+      Event:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 58153348}
+            m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
+            m_MethodName: SetCameraClamp
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      BehaviourName: 4
+      Receiver:
+        ConnectionMode: 1
+        SignalProviderId:
+          Type: 0
+          Category: Pointer
+          Name: Click
+        ProviderReference: {fileID: 0}
+        StreamId:
+          Category: None
+          Name: None
+          Custom: 0
+      Cooldown: 0
+      Selectable: {fileID: 971038816}
     SignalSource: {fileID: 971038814}
     Selectable: {fileID: 971038816}
   Id:
@@ -49356,19 +49485,7 @@ MonoBehaviour:
           m_CallState: 2
   OnValueChangedCallback:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 58153348}
-        m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
-        m_MethodName: SetCameraClamp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   ToggleGroup: {fileID: 0}
 --- !u!114 &971038817
 MonoBehaviour:
@@ -57423,7 +57540,39 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   Behaviours:
-    Behaviours: []
+    Behaviours:
+    - Enabled: 1
+      EventName: PointerClick
+      Runners: []
+      Event:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 58153348}
+            m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
+            m_MethodName: SetVSync
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      BehaviourName: 4
+      Receiver:
+        ConnectionMode: 1
+        SignalProviderId:
+          Type: 0
+          Category: Pointer
+          Name: Click
+        ProviderReference: {fileID: 0}
+        StreamId:
+          Category: None
+          Name: None
+          Custom: 0
+      Cooldown: 0
+      Selectable: {fileID: 1118567059}
     SignalSource: {fileID: 1118567057}
     Selectable: {fileID: 1118567059}
   Id:
@@ -57508,19 +57657,7 @@ MonoBehaviour:
           m_CallState: 2
   OnValueChangedCallback:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 58153348}
-        m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
-        m_MethodName: SetVSync
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   ToggleGroup: {fileID: 0}
 --- !u!114 &1118567060
 MonoBehaviour:
@@ -60838,10 +60975,61 @@ MonoBehaviour:
       Event:
         m_PersistentCalls:
           m_Calls:
+          - m_Target: {fileID: 241854140}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 1264771284}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 1997773114}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
           - m_Target: {fileID: 613849817}
             m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
               DoozyRuntime
             m_MethodName: Show
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 58153348}
+            m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
+            m_MethodName: OpenGraphicsPanel
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
@@ -103670,7 +103858,39 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   Behaviours:
-    Behaviours: []
+    Behaviours:
+    - Enabled: 1
+      EventName: PointerClick
+      Runners: []
+      Event:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 58153348}
+            m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
+            m_MethodName: SetCameraShake
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      BehaviourName: 4
+      Receiver:
+        ConnectionMode: 1
+        SignalProviderId:
+          Type: 0
+          Category: Pointer
+          Name: Click
+        ProviderReference: {fileID: 0}
+        StreamId:
+          Category: None
+          Name: None
+          Custom: 0
+      Cooldown: 0
+      Selectable: {fileID: 1838672687}
     SignalSource: {fileID: 1838672685}
     Selectable: {fileID: 1838672687}
   Id:
@@ -103755,19 +103975,7 @@ MonoBehaviour:
           m_CallState: 2
   OnValueChangedCallback:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 58153348}
-        m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
-        m_MethodName: SetCameraShake
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   ToggleGroup: {fileID: 0}
 --- !u!114 &1838672688
 MonoBehaviour:
@@ -104856,10 +105064,61 @@ MonoBehaviour:
       Event:
         m_PersistentCalls:
           m_Calls:
+          - m_Target: {fileID: 241854140}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
           - m_Target: {fileID: 1264771284}
             m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
               DoozyRuntime
             m_MethodName: Show
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 1997773114}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 613849817}
+            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Containers.UIContainer,
+              DoozyRuntime
+            m_MethodName: Hide
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 58153348}
+            m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
+            m_MethodName: OpenControlPanel
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
@@ -120586,7 +120845,39 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   Behaviours:
-    Behaviours: []
+    Behaviours:
+    - Enabled: 1
+      EventName: PointerClick
+      Runners: []
+      Event:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 58153348}
+            m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
+            m_MethodName: SetShowFps
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      BehaviourName: 4
+      Receiver:
+        ConnectionMode: 1
+        SignalProviderId:
+          Type: 0
+          Category: Pointer
+          Name: Click
+        ProviderReference: {fileID: 0}
+        StreamId:
+          Category: None
+          Name: None
+          Custom: 0
+      Cooldown: 0
+      Selectable: {fileID: 2143754862}
     SignalSource: {fileID: 2143754860}
     Selectable: {fileID: 2143754862}
   Id:
@@ -120671,19 +120962,7 @@ MonoBehaviour:
           m_CallState: 2
   OnValueChangedCallback:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 58153348}
-        m_TargetAssemblyTypeName: HUD_Settings, Assembly-CSharp
-        m_MethodName: SetShowFps
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   ToggleGroup: {fileID: 0}
 --- !u!114 &2143754863
 MonoBehaviour:
