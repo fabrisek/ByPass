@@ -39,7 +39,13 @@ public class HudMainMenu : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
     }
-
+    public void CloseAllPanel()
+    {
+        _mainMenu.Hide();
+        _settings.Hide();
+        _levelSelectionPanel.Hide();
+        _worldSelectionPanel.Hide();
+    }
     public void OpenPanelSelectionLevel(int worldIndex)
     {
         worldName.text = DataManager.Instance.Data.WorldData[worldIndex].WorldName;

@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     public void LoadLevel (SceneObject obj)
     {
         LevelLoader.Instance.StartLoadScene(obj);
+        HudMainMenu.Instance.CloseAllPanel();
     }
 
     public static void LauchCinematic(bool active)
