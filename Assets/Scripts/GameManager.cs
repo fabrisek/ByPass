@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void StartCountDown()
     {
-
+        CountDown.instance.StartCountDown();
     }
 
     public void ChangeActionMap()
@@ -77,6 +77,12 @@ public class GameManager : MonoBehaviour
     public void ShowCanvas()
     {
 
+    }
+
+    public void StartLevel ()
+    {
+        ChangeActionMap();
+        LevelManager.instance.StartLevel();
     }
 
     public void LauchTimer(bool setTimer)
