@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
     StateGame stateOfGame;
 
     public StateGame StateOfGame
@@ -17,26 +18,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if(Instance == null)
         {
-            instance = this;
+            Instance = this;
             InitGameManager();
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void InitGameManager ()
@@ -58,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         LevelLoader.Instance.StartLoadScene(obj);
         HudMainMenu.Instance.CloseAllPanel();
+        stateOfGame = StateGame.inGame;
     }
 
     public static void LauchCinematic(bool active)
@@ -75,9 +66,43 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ShowCanvas()
+    public void Back()
     {
 
+    }
+
+    public void MainMenu()
+    {
+        HudMainMenu.Instance.OpenMainMenuPanel();
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+        stateOfGame = StateGame.inMainMenu;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void Pause()
+    {
+        if (stateOfGame == StateGame.inGame)
+        {
+            Time.timeScale = 0;
+            stateOfGame = StateGame.inPause;
+            HudMainMenu.Instance.OpenPausePanel();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            PlayerCam.Instance.enabled = false;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            stateOfGame = StateGame.inGame;
+            HudMainMenu.Instance.OpenGamePanel();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            PlayerCam.Instance.enabled = true;
+            InputManager.Instance.enabled = false;
+            InputManager.Instance.enabled = true;
+        }
     }
 
     public void StartLevel ()
@@ -90,7 +115,4 @@ public class GameManager : MonoBehaviour
     {
         Timer.instance.LaunchTimer(setTimer);
     }
-
-
-
 }

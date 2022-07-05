@@ -188,8 +188,8 @@ public class PlayerController : MonoBehaviour
     //Input////////////////////////////////////////////////////////////////
     private void MyInput()
     {
-        horizontalInput = input.InGame.Move.ReadValue<Vector2>().x;
-        verticalInput = input.InGame.Move.ReadValue<Vector2>().y;
+        horizontalInput = InputManager.Instance.GetPlayerMovement().x;
+        verticalInput = InputManager.Instance.GetPlayerMovement().y;
     }
 
     //STATEMACHINE////////////////////////////////////////////////////////////

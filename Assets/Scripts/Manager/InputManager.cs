@@ -39,23 +39,7 @@ public class InputManager : MonoBehaviour
         SensibilityGamePadX = PlayerPrefs.GetFloat("SensibilityGamePadX", 100f); 
         SensibilityGamePadY = PlayerPrefs.GetFloat("SensibilityGamePadY", 100f);
 
-        if (PlayerController.Instance != null)
-        {
-            Input.InGame.SlowTime.performed += context => CompetenceRalentie.Instance.ActiveSlowTime(true);
-            Input.InGame.SlowTime.canceled += context => CompetenceRalentie.Instance.ActiveSlowTime(false);
-            //_input.InGame.Pause.performed += context => PlayerController.Instance.Pause();
-            Input.InGame.Jump.started += context => PlayerController.Instance.GetPlayerJump();
-            Input.InGame.Jump.canceled += context => PlayerController.Instance.PlayerJumpDown(true);
-        }
 
-        if (WallRunController.Instance != null)
-            Input.InGame.Jump.started += context => WallRunController.Instance.WallJump();
-
-        if (GrapplingGun.Instance != null)
-        {
-            Input.InGame.Grappling.performed += context => GrapplingGun.Instance.StartGrapple();
-            Input.InGame.Grappling.canceled += context => GrapplingGun.Instance.StopGrapple();
-        }
 
         /*
         if (LevelManager.Instance != null)
@@ -67,6 +51,7 @@ public class InputManager : MonoBehaviour
         if (HUD_MainMenu.Instance != null)
             _input.InGame.RestartAndBack.performed += context => HUD_MainMenu.Instance.Back();*/
     }
+
     public void OnEnable()
     {
         Input.Enable();
@@ -80,28 +65,48 @@ public class InputManager : MonoBehaviour
         }
         if (playerInput != null)
             playerInput.onControlsChanged += OnControlsChanged;
-        
+
+        if (PlayerController.Instance != null)
+        {
+            Input.InGame.SlowTime.performed += context => CompetenceRalentie.Instance.ActiveSlowTime(true);
+            Input.InGame.SlowTime.canceled += context => CompetenceRalentie.Instance.ActiveSlowTime(false);
+            Input.InGame.Pause.performed += context => GameManager.Instance.Pause();
+            Input.InGame.Jump.started += context => PlayerController.Instance.GetPlayerJump();
+            Input.InGame.Jump.canceled += context => PlayerController.Instance.PlayerJumpDown(true);
+        }
+
+        if (WallRunController.Instance != null)
+            Input.InGame.Jump.started += context => WallRunController.Instance.WallJump();
+
+        if (GrapplingGun.Instance != null)
+        {
+            Input.InGame.Grappling.performed += context => GrapplingGun.Instance.StartGrapple();
+            Input.InGame.Grappling.canceled += context => GrapplingGun.Instance.StopGrapple();
+        }
+
     }
     private void OnDisable()
     {
 
-            /*_input.InGame.SlowTime.performed -= context => PlayerMovementAdvanced.Instance.ActiveSlowTime(true);
-            _input.InGame.SlowTime.canceled -= context => PlayerMovementAdvanced.Instance.ActiveSlowTime(false);
-            _input.InGame.Pause.performed -= context => PlayerMovementAdvanced.Instance.Pause();
-            _input.InGame.Jump.started -= context => PlayerMovementAdvanced.Instance.GetPlayerJump();
-            _input.InGame.Jump.canceled -= context => PlayerMovementAdvanced.Instance.PlayerJumpDown(true);
+        if (PlayerController.Instance != null)
+        {
+            Input.InGame.SlowTime.performed -= context => CompetenceRalentie.Instance.ActiveSlowTime(true);
+            Input.InGame.SlowTime.canceled -= context => CompetenceRalentie.Instance.ActiveSlowTime(false);
+            Input.InGame.Pause.performed -= context => GameManager.Instance.Pause();
+            Input.InGame.Jump.started -= context => PlayerController.Instance.GetPlayerJump();
+            Input.InGame.Jump.canceled -= context => PlayerController.Instance.PlayerJumpDown(true);
+        }
 
-            _input.InGame.Jump.started -= context => WallRunningAdvanced.Instance.WallJump();
+        if (WallRunController.Instance != null)
+            Input.InGame.Jump.started -= context => WallRunController.Instance.WallJump();
 
-            _input.InGame.Grappling.performed -= context => GrapplingGun.Instance.StartGrapple();
-            _input.InGame.Grappling.canceled -= context => GrapplingGun.Instance.StopGrapple();
+        if (GrapplingGun.Instance != null)
+        {
+            Input.InGame.Grappling.performed -= context => GrapplingGun.Instance.StartGrapple();
+            Input.InGame.Grappling.canceled -= context => GrapplingGun.Instance.StopGrapple();
+        }
 
-            _input.InGame.RestartAndBack.performed -= context => LevelManager.Instance.RestartLevel();
-            _input.InGame.RestartAndBack.canceled -= context => LevelManager.Instance.RestartLevel();
-
-            _input.InGame.RestartAndBack.performed -= context => HUD_MainMenu.Instance.Back();
-
-            _input.Disable();*/
+        Input.Disable();
 
 
     }
