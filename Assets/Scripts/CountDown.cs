@@ -42,6 +42,9 @@ public class CountDown : MonoBehaviour
 
     public void StartCountDown ()
     {
+        Debug.Log(writeinCountDown[count]);
+        count++;
+        StartCoroutine(CoroutineCountDown());
 
     }
 
