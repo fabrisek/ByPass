@@ -26,7 +26,7 @@ public class FallingEffect : MonoBehaviour
         //goDown
         else if(rb.velocity.y < -0.5f)
         {
-            transform.position = Vector3.Lerp(transform.position,downPosition.position, Time.deltaTime*speed);
+            transform.position = Vector3.Lerp(transform.position,downPosition.position, Time.deltaTime*speed/5);
         }
         //wigglegun
         else
