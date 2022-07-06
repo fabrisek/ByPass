@@ -319,6 +319,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15}
+--- !u!4 &308747927 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2649387753656341893, guid: ed419509ac137c14b87c7759d3d8923d,
+    type: 3}
+  m_PrefabInstance: {fileID: 390118063}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &390118063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -344,7 +350,7 @@ PrefabInstance:
     - target: {fileID: 2126040677204331431, guid: ed419509ac137c14b87c7759d3d8923d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.16
+      value: 2.096
       objectReference: {fileID: 0}
     - target: {fileID: 2126040677204331431, guid: ed419509ac137c14b87c7759d3d8923d,
         type: 3}
@@ -389,8 +395,18 @@ PrefabInstance:
     - target: {fileID: 2126040677643017663, guid: ed419509ac137c14b87c7759d3d8923d,
         type: 3}
       propertyPath: IsGamePad
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3560249283212496687, guid: ed419509ac137c14b87c7759d3d8923d,
+        type: 3}
+      propertyPath: upPosition
+      value: 
+      objectReference: {fileID: 708713035}
+    - target: {fileID: 3560249283212496687, guid: ed419509ac137c14b87c7759d3d8923d,
+        type: 3}
+      propertyPath: downPosition
+      value: 
+      objectReference: {fileID: 308747927}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed419509ac137c14b87c7759d3d8923d, type: 3}
 --- !u!1 &559788166
@@ -675,6 +691,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &708713035 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1867510189572583723, guid: ed419509ac137c14b87c7759d3d8923d,
+    type: 3}
+  m_PrefabInstance: {fileID: 390118063}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &850970007
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,7 +92,7 @@ public class Settings : MonoBehaviour
     #region GamepadSettings
     [Header("GAMEPAD SETTING")]
     [SerializeField]
-    [Range(0, 200f)] float _defaultSensibilityGamePad;
+    [Range(100, 350f)] float _defaultSensibilityGamePad;
     [SerializeField] int _defaultUseRumbler;
     public static float SensibilityGamePad { get; set; }
     public static bool UseRumbler { get; set; }

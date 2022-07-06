@@ -274,21 +274,8 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        //wallrun
-        else if(wallrunning)
-        {
-            //slow down player if no inputs
-            if (moveDirection.magnitude == 0f)
-            {
-                rb.velocity = new Vector3(rb.velocity.x / 1.05f, rb.velocity.y, rb.velocity.z / 1.05f);
-            }
-            else
-            {
-                rb.AddForce(moveDirection * moveSpeed * 12f * airMultiplier, ForceMode.Force);
-            }
-        }
         // in air
-        else
+        else if(!wallrunning)
         {
             //slow down player if no inputs
             if (moveDirection.magnitude == 0f)
@@ -302,7 +289,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //limit velocity
-        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > speedMax)
+        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > speedMax && !wallrunning)
         {
             rb.velocity = (new Vector3(rb.velocity.x, 0, rb.velocity.z).normalized * speedMax) + (Vector3.up * rb.velocity.y);
         }
@@ -329,7 +316,7 @@ public class PlayerController : MonoBehaviour
 
         // limit velocity if needed
 
-        if (flatVel.magnitude > moveSpeed &&!isGrappling)
+        if (flatVel.magnitude > moveSpeed &&!isGrappling &&!wallrunning)
         {
              Vector3 limitedVel = flatVel.normalized * moveSpeed;
              rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);

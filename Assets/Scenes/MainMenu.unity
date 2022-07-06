@@ -6400,8 +6400,8 @@ MonoBehaviour:
   DefaultVolumeGeneral: 0.5
   DefaultVolumeMusic: 0.416
   DefaultVolumeSFX: 0.485
-  DefaultSensibilityMouse: 0
-  _defaultSensibilityGamePad: 0
+  DefaultSensibilityMouse: 34
+  _defaultSensibilityGamePad: 200
   _defaultUseRumbler: 1
   _defaultUseCameraShake: 1
   _defaultUseCameraClamp: 0
@@ -23020,7 +23020,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2060586136}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.86320657
+  m_Size: 0.864
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -24649,7 +24649,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 220710002}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9634002
+  m_Size: 0.96428573
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
