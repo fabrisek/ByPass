@@ -8,7 +8,7 @@ public class WallRunController : MonoBehaviour
     [Header("Wallrunning")]
     public LayerMask whatIsWall;
     public LayerMask whatIsGround;
-    public float wallRunForce;
+    public float wallRunSpeed;
     public float wallJumpUpForce;
     public float wallJumpSideForce;
     public float wallClimbSpeed;
@@ -186,13 +186,8 @@ public class WallRunController : MonoBehaviour
             wallForward = -wallForward;
 
         // forward force
-        rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
+        rb.velocity = wallForward.normalized * wallRunSpeed;
 
-        // upwards/downwards force
-        if (upwardsRunning)
-            rb.velocity = new Vector3(rb.velocity.x, wallClimbSpeed, rb.velocity.z);
-        if (downwardsRunning)
-            rb.velocity = new Vector3(rb.velocity.x, -wallClimbSpeed, rb.velocity.z);
 
         // push to wall force
         if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))

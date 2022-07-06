@@ -84,7 +84,7 @@ public class InputManager : MonoBehaviour
             Input.InGame.SlowTime.canceled += context => CompetenceRalentie.Instance.ActiveSlowTime(false);
             Input.InGame.Pause.performed += context => GameManager.Instance.Pause();
             Input.InGame.Jump.started += context => PlayerController.Instance.GetPlayerJump();
-            Input.InGame.Jump.canceled += context => PlayerController.Instance.PlayerJumpDown(true);
+            Input.InGame.Jump.canceled += context => PlayerController.Instance.PlayerJumpDown(false);
         }
 
         if (WallRunController.Instance != null)
