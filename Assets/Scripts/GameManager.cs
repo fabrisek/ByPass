@@ -100,7 +100,43 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        if (stateOfGame == StateGame.inGame)
+        switch(stateOfGame)
+        {
+            case StateGame.inGame:
+
+                Time.timeScale = 0;
+                stateOfGame = StateGame.inPause;
+                LauchTimer(false);
+                ChangeActionMap(stateOfGame);
+                HudMainMenu.Instance.OpenPausePanel();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                PlayerCam.Instance.enabled = false;
+
+                break;
+            case StateGame.inPause:
+
+                Time.timeScale = 1;
+                stateOfGame = StateGame.inGame;
+                LauchTimer(true);
+                ChangeActionMap(stateOfGame);
+                HudMainMenu.Instance.OpenGamePanel();
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                PlayerCam.Instance.enabled = true;
+                InputManager.Instance.enabled = false;
+                InputManager.Instance.enabled = true;
+                break;
+
+            case StateGame.inCinematic:
+                LauchCinematic(false);
+                break;
+            default:
+                Debug.Log("ce State n est pas pris en compte");
+                break;
+
+        }
+       /* if (stateOfGame == StateGame.inGame)
         {
             Time.timeScale = 0;
             stateOfGame = StateGame.inPause;
@@ -127,7 +163,7 @@ public class GameManager : MonoBehaviour
         else if(stateOfGame == StateGame.inCinematic)
         {
             LauchCinematic(false);
-        }
+        }*/
     }
 
     public void StartLevel ()
