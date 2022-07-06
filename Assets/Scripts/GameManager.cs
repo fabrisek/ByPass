@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0;
                 stateOfGame = StateGame.inPause;
                 LauchTimer(false);
-                ChangeActionMap(stateOfGame);
+               // ChangeActionMap(stateOfGame);
                 HudMainMenu.Instance.OpenPausePanel();
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 stateOfGame = StateGame.inGame;
                 LauchTimer(true);
-                ChangeActionMap(stateOfGame);
+              //  ChangeActionMap(stateOfGame);
                 HudMainMenu.Instance.OpenGamePanel();
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
