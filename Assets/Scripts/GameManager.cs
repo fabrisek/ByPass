@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     StateGame stateOfGame;
 
-    [SerializeField] Input inputActions;
+  //  [SerializeField] Input inputActions;
 
     public StateGame StateOfGame
     {
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     void InitGameManager ()
     {
         stateOfGame = StateGame.inMainMenu;
-        inputActions = new Input();
+      //  inputActions = new Input();
         ChangeActionMap(stateOfGame);
 
 
@@ -190,13 +190,22 @@ public class GameManager : MonoBehaviour
         switch(actionMapActive)
         {
             case StateGame.inGame:
-                inputActions.InGame.Enable();
-                inputActions.InMainMenu.Disable();
+                Debug.Log("je Change l'actionMap en action Map InGame");
+                InputManager.Input.InGame.Enable();
+                InputManager.Input.InMainMenu.Disable();
+                InputManager.Instance.ActiveActioMapInGame(true);
+                Debug.Log(InputManager.Input.InGame.enabled);
+                Debug.Log(InputManager.Input.InMainMenu.enabled);
                 break;
             case StateGame.inMainMenu:
             case StateGame.inPause:
-                inputActions.InGame.Disable();
-                inputActions.InMainMenu.Enable();
+                Debug.Log("je Change l'actionMap en action Map Menu");
+                InputManager.Input.InGame.Disable();
+                InputManager.Input.InMainMenu.Enable();
+               
+                InputManager.Instance.ActiveActioMapInGame(false);
+                Debug.Log(InputManager.Input.InGame.enabled);
+                Debug.Log(InputManager.Input.InMainMenu.enabled);
                 break;
             default:
                 Debug.Log("le state action map en parametre n est pas bon");
