@@ -94,7 +94,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 18
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 18
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 18
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -579,7 +579,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 20
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -643,6 +643,7 @@ GameObject:
   - component: {fileID: 2094691467992858490}
   - component: {fileID: 4918781161514524842}
   - component: {fileID: 4665970663936116309}
+  - component: {fileID: 1308424762467775990}
   m_Layer: 5
   m_Name: CardLevel(Clone)
   m_TagString: Untagged
@@ -726,12 +727,12 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   MultiplayerInfo: {fileID: 0}
   IsOn: 0
-  CurrentUISelectionState: 3
+  CurrentUISelectionState: 0
   DeselectAfterPress: 0
   OnSelectionStateChangedCallback:
     m_PersistentCalls:
       m_Calls: []
-  CurrentStateName: Selected
+  CurrentStateName: Normal
   NormalState:
     StateType: 0
     StateName: Normal
@@ -785,6 +786,70 @@ MonoBehaviour:
   Behaviours:
     Behaviours:
     - Enabled: 1
+      EventName: PointerEnter
+      Runners: []
+      Event:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1308424762467775990}
+            m_TargetAssemblyTypeName: PlaySoundButton, Assembly-CSharp
+            m_MethodName: PlaySoundbutton
+            m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      BehaviourName: 0
+      Receiver:
+        ConnectionMode: 1
+        SignalProviderId:
+          Type: 0
+          Category: Pointer
+          Name: Enter
+        ProviderReference: {fileID: 0}
+        StreamId:
+          Category: None
+          Name: None
+          Custom: 0
+      Cooldown: 0
+      Selectable: {fileID: 8024640668660931259}
+    - Enabled: 1
+      EventName: PointerExit
+      Runners: []
+      Event:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1308424762467775990}
+            m_TargetAssemblyTypeName: PlaySoundButton, Assembly-CSharp
+            m_MethodName: PlaySoundbutton
+            m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 2
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      BehaviourName: 1
+      Receiver:
+        ConnectionMode: 1
+        SignalProviderId:
+          Type: 0
+          Category: Pointer
+          Name: Exit
+        ProviderReference: {fileID: 0}
+        StreamId:
+          Category: None
+          Name: None
+          Custom: 0
+      Cooldown: 0
+      Selectable: {fileID: 8024640668660931259}
+    - Enabled: 1
       EventName: PointerClick
       Runners: []
       Event:
@@ -798,6 +863,18 @@ MonoBehaviour:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 1308424762467775990}
+            m_TargetAssemblyTypeName: PlaySoundButton, Assembly-CSharp
+            m_MethodName: PlaySoundbutton
+            m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 1
               m_FloatArgument: 0
               m_StringArgument: 
               m_BoolArgument: 0
@@ -2759,6 +2836,18 @@ MonoBehaviour:
   ProviderCurrentState: 20
   SignalCooldown: 0
   SignalTimescale: 0
+--- !u!114 &1308424762467775990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240622982679906376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8d96cd1088af64cab0b0a50921a5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8879750161558513768
 GameObject:
   m_ObjectHideFlags: 0
