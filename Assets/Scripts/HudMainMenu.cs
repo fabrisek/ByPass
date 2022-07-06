@@ -139,7 +139,7 @@ public class HudMainMenu : MonoBehaviour
 
     public void PlaySoundbutton (int son)
     {
-        GameManager.Instance.PlaySound(AudioManager.TypeOfSound.sfx3D, Vector3.zero, (SfxSon)son);
+        GameManager.Instance.PlaySound(TypeOfSound.sfx3D, Vector3.zero, (SfxSon)son);
     }
 }
 
