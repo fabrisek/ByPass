@@ -66,13 +66,14 @@ public class GameManager : MonoBehaviour
 
     public void CinematicIsFinish ()
     {
-        stateOfGame = StateGame.inGame;
+       
         StartCountDown();
        
     }
 
     public void StartCountDown()
     {
+        stateOfGame = StateGame.inCountDown;
         CountDown.instance.StartCountDown();
     }
 
@@ -131,6 +132,10 @@ public class GameManager : MonoBehaviour
             case StateGame.inCinematic:
                 LauchCinematic(false);
                 break;
+            case StateGame.inCountDown:
+                Debug.Log("Tu ne peux pas mettrepause ou passer le countDown c est pour ca que j ai cree ce state");
+                break;
+
             default:
                 Debug.Log("ce State n est pas pris en compte");
                 break;

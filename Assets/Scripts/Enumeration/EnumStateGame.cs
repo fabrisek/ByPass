@@ -7,5 +7,6 @@ public enum StateGame
     inGame,
     inPause,
     inCinematic,
+    inCountDown,
 }
 
