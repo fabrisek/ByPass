@@ -64,18 +64,18 @@ public class AudioManager : MonoBehaviour
         return  Random.Range(volumeMin, volumeMax);
     }
 
-    public void PlaySound(TypeOfSound typeDeSon, int indexSound, Vector3 position, float volume = 1)
+    public void PlaySound(TypeOfSound typeDeSon, Vector3 position, float volume = 1, SfxSon sonSfx = SfxSon.onButton, MusicSon sonMusic = MusicSon.musicMainMenu)
     {
         switch(typeDeSon)
         {
             case TypeOfSound.music:
-                ChoseFunctionForMusic(indexSound, volume);
+                ChoseFunctionForMusic(sonMusic, volume);
                 break;
             case TypeOfSound.sfx:
-                PlaySoundEffect(indexSound, volume);
+                PlaySoundEffect(sonSfx, volume);
                 break;
             case TypeOfSound.sfx3D:
-                PlaySoundEffect3D(indexSound, position, volume);
+                PlaySoundEffect3D(sonSfx, position, volume);
                 break;
             case TypeOfSound.stopMusic:
                 etatmusic = EtatMusic.stopMusic;
@@ -87,18 +87,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void PlaySoundEffect(int indexSound, float volumeScale)
+    void PlaySoundEffect(SfxSon indexSound, float volumeScale)
     { 
-        audioSourceSoundEffect.PlayOneShot(soundEffects[indexSound], GetVolumeAlea( volumeScale));
+        audioSourceSoundEffect.PlayOneShot(soundEffects[(int)indexSound], GetVolumeAlea( volumeScale));
     }
 
-    void PlaySoundEffect3D(int index, Vector3 position, float volumeScale)
+    void PlaySoundEffect3D(SfxSon index, Vector3 position, float volumeScale)
     {
         audioSourceSfx3D.gameObject.transform.position = position;
-        audioSourceSfx3D.PlayOneShot(soundEffects[index], GetVolumeAlea(volumeScale));
+        audioSourceSfx3D.PlayOneShot(soundEffects[(int)index], GetVolumeAlea(volumeScale));
     }
 
-    void ChoseFunctionForMusic (int index, float volumeScal)
+    void ChoseFunctionForMusic (MusicSon index, float volumeScal)
     {
         switch(etatmusic)
         {
@@ -133,9 +133,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void SetMusic (int index, float volumeScale)
+    void SetMusic (MusicSon index, float volumeScale)
     {
-        audioSourceMusic[indexMusic].clip = music[index];
+        audioSourceMusic[indexMusic].clip = music[(int)index];
         audioSourceMusic[indexMusic].volume = volumeScale;
     }
 
@@ -206,15 +206,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public enum TypeOfSound
-    {
-        music,
-        sfx,
-        sfx3D,
-        stopMusic,
-    }
-
-    public enum EtatMusic
+     enum EtatMusic
     {
         noMusic,
         musicOn,
@@ -222,5 +214,12 @@ public class AudioManager : MonoBehaviour
         stopMusic,
     }
 
+   
+
+    
+
+   
+
 
 }
+

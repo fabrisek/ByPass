@@ -136,6 +136,11 @@ public class HudMainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void PlaySoundbutton (int son)
+    {
+        GameManager.Instance.PlaySound(AudioManager.TypeOfSound.sfx3D, Vector3.zero, (SfxSon)son);
+    }
 }
 
 public enum StateMainMenu

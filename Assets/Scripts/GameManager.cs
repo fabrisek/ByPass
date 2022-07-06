@@ -40,9 +40,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void PlaySound(AudioManager.TypeOfSound typeSound, int indexSound, Vector3 position, float volume = 1)
+    public void PlaySound(TypeOfSound typeSound, Vector3 position, SfxSon sonSfx = SfxSon.onButton, float volume = 1, MusicSon sonMusic = MusicSon.musicMainMenu)
     {
-        AudioManager.instance.PlaySound(typeSound, indexSound, position, volume);
+        AudioManager.instance.PlaySound(typeSound, position, volume, sonSfx,sonMusic);
     }
 
     public void ChangeVolumeMixer(AudioMixerManager.ChoseCanal trypePiste, float volume)

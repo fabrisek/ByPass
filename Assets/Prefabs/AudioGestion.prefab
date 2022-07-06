@@ -352,7 +352,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb18c6953aa817e4984bd2f5eb3e8304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffects: []
+  soundEffects:
+  - {fileID: 8300000, guid: 6d29d59f4115847b790bf26aa92d0378, type: 3}
+  - {fileID: 8300000, guid: dc951f763a5aa4d93b1d18da891fed52, type: 3}
+  - {fileID: 8300000, guid: f4781d302b303408d8b02da3dd8aed5a, type: 3}
   music: []
   audioSourceSoundEffect: {fileID: 1157641157627383327}
   audioSourceSfx3D: {fileID: 1157641157627383327}
