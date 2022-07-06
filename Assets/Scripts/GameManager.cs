@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     StateGame stateOfGame;
 
+    [SerializeField] Input inputActions;
+
     public StateGame StateOfGame
     {
         get
@@ -32,6 +34,10 @@ public class GameManager : MonoBehaviour
     void InitGameManager ()
     {
         stateOfGame = StateGame.inMainMenu;
+        inputActions = new Input();
+        ChangeActionMap(stateOfGame);
+
+
     }
 
     public void PlaySound(AudioManager.TypeOfSound typeSound, int indexSound, Vector3 position, float volume = 1)
@@ -51,9 +57,14 @@ public class GameManager : MonoBehaviour
         stateOfGame = StateGame.inGame;
     }
 
-    public static void LauchCinematic(bool active)
+    public void LauchCinematic(bool active)
     {
         Cinematic.instance.PlayCinematic(active);
+    }
+
+    public void CinematicIsFinish ()
+    {
+        StartCountDown();
     }
 
     public void StartCountDown()
@@ -61,10 +72,11 @@ public class GameManager : MonoBehaviour
         CountDown.instance.StartCountDown();
     }
 
-    public void ChangeActionMap()
+    public void CountDownIsFinish()
     {
-
+        StartLevel();
     }
+
 
     public void Back()
     {
@@ -78,6 +90,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
         stateOfGame = StateGame.inMainMenu;
         Cursor.lockState = CursorLockMode.None;
+        ChangeActionMap(stateOfGame);
         Cursor.visible = true;
     }
 
@@ -87,6 +100,8 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             stateOfGame = StateGame.inPause;
+            LauchTimer(false);
+            ChangeActionMap(stateOfGame);
             HudMainMenu.Instance.OpenPausePanel();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -96,6 +111,8 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
             stateOfGame = StateGame.inGame;
+            LauchTimer(true);
+            ChangeActionMap(stateOfGame);
             HudMainMenu.Instance.OpenGamePanel();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -107,12 +124,39 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel ()
     {
-        ChangeActionMap();
-        LevelManager.instance.StartLevel();
+        stateOfGame = StateGame.inGame;
+        ChangeActionMap(stateOfGame);
+        LauchTimer(true);
+        //LevelManager.instance.StartLevel();
     }
 
     public void LauchTimer(bool setTimer)
     {
         Timer.instance.LaunchTimer(setTimer);
+    }
+
+    public void ChangeActionMap (StateGame actionMapActive)
+    {
+        switch(actionMapActive)
+        {
+            case StateGame.inGame:
+                inputActions.InGame.Enable();
+                inputActions.InMainMenu.Disable();
+                break;
+            case StateGame.inMainMenu:
+            case StateGame.inPause:
+                inputActions.InGame.Disable();
+                inputActions.InMainMenu.Enable();
+                break;
+            default:
+                Debug.Log("le state action map en parametre n est pas bon");
+                break;
+        }
+    }
+
+    public enum ActionMapEnum
+    {
+        inGame,
+        inMenu,
     }
 }

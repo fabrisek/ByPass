@@ -60,6 +60,7 @@ public class CountDown : MonoBehaviour
         else
         {
             Debug.Log("CountDownEstFinie");
+            GameManager.Instance.CountDownIsFinish();
         }
     }
 }
