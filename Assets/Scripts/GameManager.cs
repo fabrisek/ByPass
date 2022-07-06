@@ -59,12 +59,16 @@ public class GameManager : MonoBehaviour
 
     public void LauchCinematic(bool active)
     {
+        stateOfGame = StateGame.inCinematic;
         Cinematic.instance.PlayCinematic(active);
+       
     }
 
     public void CinematicIsFinish ()
     {
+        stateOfGame = StateGame.inGame;
         StartCountDown();
+       
     }
 
     public void StartCountDown()
@@ -107,7 +111,7 @@ public class GameManager : MonoBehaviour
             Cursor.visible = true;
             PlayerCam.Instance.enabled = false;
         }
-        else
+        else if(stateOfGame == StateGame.inPause)
         {
             Time.timeScale = 1;
             stateOfGame = StateGame.inGame;
@@ -120,10 +124,15 @@ public class GameManager : MonoBehaviour
             InputManager.Instance.enabled = false;
             InputManager.Instance.enabled = true;
         }
+        else if(stateOfGame == StateGame.inCinematic)
+        {
+            LauchCinematic(false);
+        }
     }
 
     public void StartLevel ()
     {
+        HudMainMenu.Instance.OpenGamePanel();
         stateOfGame = StateGame.inGame;
         ChangeActionMap(stateOfGame);
         LauchTimer(true);

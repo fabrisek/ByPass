@@ -22715,8 +22715,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2060586137}
   m_HandleRect: {fileID: 2060586136}
   m_Direction: 2
-  m_Value: 1.0000007
-  m_Size: 0.8640001
+  m_Value: 1
+  m_Size: 0.86320657
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -24344,8 +24344,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 220710003}
   m_HandleRect: {fileID: 220710002}
   m_Direction: 2
-  m_Value: 1.0000031
-  m_Size: 0.9642858
+  m_Value: 1
+  m_Size: 0.9634002
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -41781,7 +41781,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2013495597}
   m_HandleRect: {fileID: 2013495596}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -90607,7 +90607,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 478.53, y: 0}
+  m_AnchoredPosition: {x: 478.52997, y: 0}
   m_SizeDelta: {x: -1061.8, y: 260.506}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1562344778
@@ -117498,7 +117498,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4436373815006602996, guid: 311ed2df8276a724e80df15ea877815b, type: 3}
+    - {fileID: 1318024164881264026, guid: 311ed2df8276a724e80df15ea877815b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 311ed2df8276a724e80df15ea877815b, type: 3}
 --- !u!1 &1900748595
 GameObject:
