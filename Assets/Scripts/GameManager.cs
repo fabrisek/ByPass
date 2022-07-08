@@ -14,7 +14,10 @@ public class GameManager : MonoBehaviour
         HudMainMenu.Instance.OpenDeathPanel();
         Time.timeScale = 0;
         Timer.instance.LaunchTimer(false);
-        //PlayFabHighScore.Instance
+        stateOfGame = StateGame.inDead;
+        Cursor.lockState = CursorLockMode.None;
+        ChangeActionMap(stateOfGame);
+        Cursor.visible = true;
     }
 
     //  [SerializeField] Input inputActions;
@@ -214,6 +217,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log(InputManager.Input.InGame.enabled);
                 Debug.Log(InputManager.Input.InMainMenu.enabled);
                 PlayerController.Instance.enabled = true;
+                PlayerCam.Instance.enabled = true;
                 break;
             case StateGame.inMainMenu:
             case StateGame.inPause:
@@ -230,6 +234,15 @@ public class GameManager : MonoBehaviour
                 InputManager.Input.InMainMenu.Disable();
                 InputManager.Instance.ActiveActioMapInGame(true);
                 PlayerController.Instance.enabled = false;
+                PlayerCam.Instance.enabled = false;
+                break;
+
+            case StateGame.inDead:
+                InputManager.Input.InGame.Disable();
+                InputManager.Input.InMainMenu.Disable();
+                InputManager.Instance.ActiveActioMapInGame(false);
+                PlayerController.Instance.enabled = false;
+                PlayerCam.Instance.enabled = false;
                 break;
             default:
                 Debug.Log("le state action map en parametre n est pas bon");
