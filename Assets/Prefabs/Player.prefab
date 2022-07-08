@@ -1080,6 +1080,8 @@ GameObject:
   - component: {fileID: 7020169264474291030}
   - component: {fileID: 7020169264474291031}
   - component: {fileID: 801045185640107465}
+  - component: {fileID: 6649291210271761263}
+  - component: {fileID: 7463807821584728435}
   m_Layer: 6
   m_Name: PlayerController
   m_TagString: Untagged
@@ -1222,6 +1224,32 @@ MonoBehaviour:
   _timeRestant: 3
   glitch: {fileID: 0}
   competenceIsActive: 0
+--- !u!114 &6649291210271761263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020169264474291027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859cd62ccb60e6e4894ebbd8925a0bd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &7463807821584728435
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020169264474291027}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.7
+  m_Height: 2.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7020169264741175454
 GameObject:
   m_ObjectHideFlags: 0
