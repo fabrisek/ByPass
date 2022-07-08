@@ -40,12 +40,17 @@ public class GameManager : MonoBehaviour
             Cursor.visible = true;
             DataManager.Instance.SetRecord(Timer.instance.GetTimer(), LevelIndex, WorldIndex);
             HudMainMenu.Instance.Win(
-                    (int)Timer.instance.GetTimer(),
-                    (int)DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].HighScore,
+                    Timer.instance.GetTimer(),
+                    DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].HighScore,
                     DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].SceneData,
                     ShowNextButton()
                 ); ;
         }
+    }
+
+    public void NextLevel()
+    {
+
     }
 
     private bool ShowNextButton()

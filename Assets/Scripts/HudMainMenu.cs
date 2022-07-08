@@ -52,15 +52,16 @@ public class HudMainMenu : MonoBehaviour
     [SerializeField] Sprite startLock;
     [SerializeField] GameObject buttonNextLevel;
 
-    public void Win(int timer, int bestTime, SceneObject sceneObj, bool ShowNextButton)
+    public void Win(float timer, float bestTime, SceneObject sceneObj, bool ShowNextButton)
     {
         CloseAllPanel();
         _timerWin.text = Timer.FormatTime(timer);
         _winPanel.Show();
-
+        buttonNextLevel.SetActive(ShowNextButton);
         if (bestTime == 0)
         {
             _highScore.text = "BEST TIME : " + Timer.FormatTime(timer);
+            _highScore.color = Color.white;
         }
         if (timer == bestTime)
         {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: hexaltstudio@gmail.com
-  DevAccountToken: o81z3sqh1xh951k55zhguc53ijoo3cspiexuxpmjemhge946uxuo3f8kpfbahn5789ft1wm65najs8uunaa31zgizbpz7boascx7q4fs4a41kn3u9ui5tdhfuk37z1fp4ipir38ybw9ixiaj3nhfcb9ki93noh8uhizszzws6agpjiapxs6gfu35psjwi8sw9hb4cdkq
+  DevAccountToken: fk6cfb3hhcecun4455fozdfnxq7m4ttogo5qt5fuhty4tzjy94mnwnrq86c4mhncxcjjw1tbm7nao9o1o95ebm57jtm5hw69k5kbhqigxctuiicqwyn8r61omcrrfy673w8d7s66q68yk1ntek7zm58wuookikuxz3n1mwq43gm7n8h1as833mfhykjbrhp66qeogf37
   SelectedStudio: My Game Studio
   SdkPath: Assets/Plugins/PlayFabSDK
   EdExPath: 
