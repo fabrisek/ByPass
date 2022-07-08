@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour
 
     internal void Death()
     {
-        HudMainMenu.Instance.OpenDeathPanel();
         Time.timeScale = 0;
         Timer.instance.LaunchTimer(false);
+        HudMainMenu.Instance.OpenDeathPanel(Timer.FormatTime(Timer.instance.GetTimer()));
         stateOfGame = StateGame.inDead;
         Cursor.lockState = CursorLockMode.None;
         ChangeActionMap(stateOfGame);
@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void LauchCinematic(bool active)
     {
+        HudMainMenu.Instance.ResetTextTimer();
         stateOfGame = StateGame.inCinematic;
         Cinematic.instance.PlayCinematic(active);
         ChangeActionMap(stateOfGame);
@@ -193,7 +194,6 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel ()
     {
-       
         stateOfGame = StateGame.inGame;
         ChangeActionMap(stateOfGame);
         LauchTimer(true);
