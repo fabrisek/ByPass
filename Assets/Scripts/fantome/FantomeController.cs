@@ -11,8 +11,8 @@ public class FantomeController : MonoBehaviour
     [SerializeField] Transform playerRef;
     [SerializeField] GameObject objectView;
 
-    FantomeSave fantomeToSave;
-    FantomeSave fantomeSaved;
+    [SerializeField] FantomeSave fantomeToSave;
+    [SerializeField] FantomeSave fantomeSaved;
 
     SaveState saveState;
     ReproduceState reproduceState;
@@ -64,6 +64,7 @@ public class FantomeController : MonoBehaviour
 
     public FantomeSave StopSaveFantome()
     {
+       
         saveState = SaveState.saveFinish;
         SaveDataInFantomeSave();
         return fantomeToSave;
@@ -87,7 +88,7 @@ public class FantomeController : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenSave);
             
         }
-        while (saveState == SaveState.saveFinish);
+        while (saveState != SaveState.saveFinish);
     }
 
     void SaveDataInFantomeSave ()
