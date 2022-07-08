@@ -205,6 +205,11 @@ public class GameManager : MonoBehaviour
         Timer.instance.LaunchTimer(setTimer);
     }
 
+    public float ReturnTimer ()
+    {
+       return Timer.instance.GetTimer();
+    }
+
     public void ChangeActionMap (StateGame actionMapActive)
     {
         switch(actionMapActive)
