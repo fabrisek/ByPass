@@ -58,12 +58,16 @@ public class HudMainMenu : MonoBehaviour
     {
         _timerText.text = timer;
     }
-
+    public void ResetTextTimer()
+    {
+        _timerText.text = Timer.FormatTime(0);
+    }
     public void CountDown(string text, bool setActive)
     {
+        
         _countdown.gameObject.SetActive(setActive);
         _countdown.text = text;
-        _timerText.text = Timer.FormatTime(0);
+
     }
     public void CloseAllPanel()
     {
