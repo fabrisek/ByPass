@@ -12,10 +12,11 @@ public class HudMainMenu : MonoBehaviour
 {
     public static HudMainMenu Instance;
 
-    public void OpenDeathPanel()
+    public void OpenDeathPanel(string timer)
     {
         CloseAllPanel();
         _DeathPanel.Show();
+        _timerDeath.text = timer;
     }
 
     [Header("PANEL")]
@@ -37,6 +38,7 @@ public class HudMainMenu : MonoBehaviour
     [SerializeField] EventSystem eventSystem;
     [SerializeField] TextMeshProUGUI _countdown;
     [SerializeField] TextMeshProUGUI _timerText;
+    [SerializeField] TextMeshProUGUI _timerDeath;
 
     public StateMainMenu State { get; set; }
 
@@ -61,6 +63,7 @@ public class HudMainMenu : MonoBehaviour
     {
         _countdown.gameObject.SetActive(setActive);
         _countdown.text = text;
+        _timerText.text = Timer.FormatTime(0);
     }
     public void CloseAllPanel()
     {
