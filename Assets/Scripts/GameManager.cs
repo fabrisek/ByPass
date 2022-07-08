@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
         if (stateOfGame != StateGame.inWin && stateOfGame != StateGame.inDead)
         {
             Timer.instance.LaunchTimer(false);
+            FantomeController.instance.StopSaveFantome(); // recuperer ici la save du fantome
+            FantomeController.instance.StopReproduce();
             Cursor.lockState = CursorLockMode.None;
             stateOfGame = StateGame.inWin;
             ChangeActionMap(stateOfGame);
@@ -246,6 +248,8 @@ public class GameManager : MonoBehaviour
     {
         stateOfGame = StateGame.inGame;
         ChangeActionMap(stateOfGame);
+        //  FantomeController.instance.StartReproduce(/*mettreSaveSiIlYA*/);
+        FantomeController.instance.StartSaveFantome();
         LauchTimer(true);
         //LevelManager.instance.StartLevel();
     }
@@ -311,6 +315,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    
 
     public enum ActionMapEnum
     {
