@@ -88,6 +88,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        HudMainMenu.Instance.CloseAllPanel();
+        Time.timeScale = 1;
+    }
+
     public void MainMenu()
     {
         HudMainMenu.Instance.OpenMainMenuPanel();

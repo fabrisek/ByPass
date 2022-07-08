@@ -41,6 +41,7 @@ public class LevelLoader : MonoBehaviour
     }
     IEnumerator StartLoad(int index)
     {
+        canvasGroup.alpha = 1;
         loadingScreen.SetActive(true);
         yield return StartCoroutine(FadeLoadingScreen(1, 3));
         AsyncOperation operation = SceneManager.LoadSceneAsync(index);

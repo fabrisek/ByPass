@@ -702,7 +702,7 @@ MonoBehaviour:
   sensibilityGamePad: 250
   orientation: {fileID: 7020169263865361701}
   camHolder: {fileID: 7020169263381689891}
-  IsGamePad: 1
+  IsGamePad: 0
 --- !u!114 &8488409248160733313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -979,7 +979,7 @@ GameObject:
   - component: {fileID: 8839086989931302934}
   - component: {fileID: 8172731669973511402}
   m_Layer: 6
-  m_Name: player
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
