@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
             stateOfGame = StateGame.inWin;
             ChangeActionMap(stateOfGame);
             Cursor.visible = true;
-            DataManager.Instance.SetRecord(Timer.instance.GetTimer(), LevelIndex, WorldIndex);
+            DataManager.Instance.SetRecord(Timer.instance.GetTimer(), LevelIndex, WorldIndex, FantomeController.instance.StopSaveFantome());
             HudMainMenu.Instance.Win(
                     Timer.instance.GetTimer(),
                     DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].HighScore,
@@ -253,7 +253,8 @@ public class GameManager : MonoBehaviour
     {
         stateOfGame = StateGame.inGame;
         ChangeActionMap(stateOfGame);
-        //  FantomeController.instance.StartReproduce(/*mettreSaveSiIlYA*/);
+        if (DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].fantome != null)
+            FantomeController.instance.StartReproduce(DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].fantome);
         FantomeController.instance.StartSaveFantome();
         LauchTimer(true);
         //LevelManager.instance.StartLevel();

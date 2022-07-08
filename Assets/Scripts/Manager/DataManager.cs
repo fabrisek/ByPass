@@ -10,6 +10,7 @@ public class DATA
 {
     [field: SerializeField]
     public List<WorldInfo> WorldData { get; private set; }
+
 }
 
 public class DataManager : MonoBehaviour
@@ -47,18 +48,19 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public void SetRecord(float timer, int levelIndex, int worldIndex)
+    public void SetRecord(float timer, int levelIndex, int worldIndex, FantomeSave fantome)
     {
         if (Data.WorldData[worldIndex].MapData[levelIndex].HighScore == 0)
         {
             Data.WorldData[worldIndex].MapData[levelIndex].HighScore = timer ;
-
+            Data.WorldData[worldIndex].MapData[levelIndex].fantome = fantome;
             if (PlayFabHighScore.Instance)
                 PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, (int)-timer * 1000);
         }
 
         if (timer < Data.WorldData[worldIndex].MapData[levelIndex].HighScore)
         {
+            Data.WorldData[worldIndex].MapData[levelIndex].fantome = fantome;
             Data.WorldData[worldIndex].MapData[levelIndex].HighScore = timer;
             if (PlayFabHighScore.Instance)
                 PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, (int)-timer);
@@ -100,8 +102,7 @@ public class DataManager : MonoBehaviour
                         {
                             Data.WorldData[i].MapData[j].HighScore = data.WorldData[i].MapData[j].HighScore;
                             Data.WorldData[i].MapData[j].HaveUnlockLevel = data.WorldData[i].MapData[j].HaveUnlockLevel;
-//                            Data.WorldData[i]._mapData[j].SetPhantomeSave(data.WorldData[i]._mapData[j].GetPhantomSave());
-
+                            Data.WorldData[i].MapData[j].fantome = data.WorldData[i].MapData[j].fantome;
                         }
                     }
                 }
@@ -120,6 +121,7 @@ public class MapData
     [field: SerializeField] public SceneObject SceneData { get; private set; }
     public float HighScore;
     public bool HaveUnlockLevel;
+    public FantomeSave fantome;
 }
 
 [System.Serializable]
