@@ -39,10 +39,10 @@ public class Timer : MonoBehaviour
         if (_timerIsLaunch)
         {
             _timer += Time.unscaledDeltaTime;
-           /* if (_hud != null)
+           if (HudMainMenu.Instance != null)
             {
-                _hud.ChangeTimerHud(_timer);
-            }*/
+                HudMainMenu.Instance.ChangeInfoTimer(FormatTime(_timer));
+            }
         }
     }
 
