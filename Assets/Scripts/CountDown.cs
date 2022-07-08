@@ -52,7 +52,7 @@ public class CountDown : MonoBehaviour
     IEnumerator CoroutineCountDown ()
     {
         yield return new WaitForSeconds(timeOfCountDown / writeinCountDown.Length);
-        Debug.Log(writeinCountDown[count]);
+        HudMainMenu.Instance.CountDown(writeinCountDown[count], true);
         count++;
         if(count < writeinCountDown.Length)
         {
@@ -60,6 +60,7 @@ public class CountDown : MonoBehaviour
         }
         else
         {
+            HudMainMenu.Instance.CountDown("0", false);
             Debug.Log("CountDownEstFinie");
             GameManager.Instance.CountDownIsFinish();
         }

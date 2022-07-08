@@ -27,6 +27,8 @@ public class HudMainMenu : MonoBehaviour
 
     [Header("OTHERS")]
     [SerializeField] EventSystem eventSystem;
+    [SerializeField] TextMeshProUGUI _countdown;
+    [SerializeField] TextMeshProUGUI _timerText;
 
     public StateMainMenu State { get; set; }
 
@@ -40,6 +42,17 @@ public class HudMainMenu : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+    }
+
+    public void ChangeInfoTimer(string timer)
+    {
+        _timerText.text = timer;
+    }
+
+    public void CountDown(string text, bool setActive)
+    {
+        _countdown.gameObject.SetActive(setActive);
+        _countdown.text = text;
     }
     public void CloseAllPanel()
     {
