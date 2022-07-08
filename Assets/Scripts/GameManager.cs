@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     {
         stateOfGame = StateGame.inCinematic;
         Cinematic.instance.PlayCinematic(active);
-       
+        ChangeActionMap(stateOfGame);
     }
 
     public void CinematicIsFinish ()
@@ -203,16 +203,23 @@ public class GameManager : MonoBehaviour
                 InputManager.Instance.ActiveActioMapInGame(true);
                 Debug.Log(InputManager.Input.InGame.enabled);
                 Debug.Log(InputManager.Input.InMainMenu.enabled);
+                PlayerController.Instance.enabled = true;
                 break;
             case StateGame.inMainMenu:
             case StateGame.inPause:
                 Debug.Log("je Change l'actionMap en action Map Menu");
                 InputManager.Input.InGame.Disable();
-                InputManager.Input.InMainMenu.Enable();
-               
+                InputManager.Input.InMainMenu.Enable();               
                 InputManager.Instance.ActiveActioMapInGame(false);
-                Debug.Log(InputManager.Input.InGame.enabled);
-                Debug.Log(InputManager.Input.InMainMenu.enabled);
+                if (PlayerController.Instance != null)
+                    PlayerController.Instance.enabled = false;
+                break;
+
+            case StateGame.inCinematic:
+                InputManager.Input.InGame.Enable();
+                InputManager.Input.InMainMenu.Disable();
+                InputManager.Instance.ActiveActioMapInGame(true);
+                PlayerController.Instance.enabled = false;
                 break;
             default:
                 Debug.Log("le state action map en parametre n est pas bon");
