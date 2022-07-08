@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour
     //MOVEMENT////////////////////////////////////////////////////////////////
     private void MovePlayer()
     {
-        
+        Debug.Log("je lance Move Player");
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -356,7 +356,7 @@ public class PlayerController : MonoBehaviour
         if (readyToJump && (grounded || canJump) && !wallrunning)
         {
             readyToJump = false;
-
+            Debug.Log("j appel jump");
             Jump();
 
             //resets the possibility to jump to true after jumpCoolDown Time
@@ -364,6 +364,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (readyToJump && canDoubleJump && !wallrunning)
         {
+            Debug.Log("j appel double jump");
             DoubleJump();
             canDoubleJump = false;
         }
@@ -378,6 +379,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump()
     {
+        Debug.Log("je Jump");
         isJumping = true;
         _maxJumpTime = resetMaxJumpTime;
 
@@ -393,6 +395,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, Vector3.down, playerHeight * 1.2f, whatIsGround))
         {
+            Debug.Log("j appel jump dans double jump");
             Jump();
         }
         else
@@ -414,6 +417,7 @@ public class PlayerController : MonoBehaviour
     }
     public void LongJump()
     {
+        
         _maxJumpTime -= Time.deltaTime;
 
         if (isJumping && (_maxJumpTime > 0))
