@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class FantomeSave 
 {
-    List<Vector3> positionPlayer;
-    List<Quaternion> rotationPlayer;
-    List<float> time;
+    public List<Vector3> positionPlayer;
+    public List<Quaternion> rotationPlayer;
+    public List<float> time;
 
     public FantomeSave ()
     {
