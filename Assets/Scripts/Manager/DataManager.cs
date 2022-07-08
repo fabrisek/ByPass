@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Text;
 using UnityEngine.SceneManagement;
 using System.IO;
+using Newtonsoft.Json;
 [System.Serializable]
 public class DATA
 {
@@ -33,6 +34,7 @@ public class DataManager : MonoBehaviour
     }
     private void Awake()
     {
+        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);    // Suppression d'une instance précédente (sécurité...sécurité...)
@@ -41,7 +43,6 @@ public class DataManager : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
             Instance = this;
-            SaveData();
             LoadSavedGames();
         }
     }
@@ -66,6 +67,7 @@ public class DataManager : MonoBehaviour
             if (levelIndex + 1 != Data.WorldData[worldIndex].MapData.Count)
                 Data.WorldData[worldIndex].MapData[levelIndex + 1].HaveUnlockLevel = true;
         }
+
         SaveData();
     }
 
@@ -79,12 +81,13 @@ public class DataManager : MonoBehaviour
     //Charge tous les record dans toutes les maps et les charges dans les Datas;
     public void LoadSavedGames()
     {
-
         string worldsFolder = Application.persistentDataPath + "/Save.json";
         if (File.Exists(worldsFolder))
         {
             string fileContents = File.ReadAllText(worldsFolder);
             DATA data = JsonUtility.FromJson<DATA>(EncryptDecrypt(fileContents));
+
+            Debug.Log(data.ToString());
             for (int i = 0; i < Data.WorldData.Count; i++)
             {
                 if (data.WorldData[i] != null)
@@ -95,8 +98,8 @@ public class DataManager : MonoBehaviour
                     {
                         if (data.WorldData[i].MapData[j] != null)
                         {
-                            //Data.WorldData[i].MapData[j].SetHighScore(data.WorldData[i].MapData[j].GetHighScore());
-                            //Data.WorldData[i].MapData[j].SetHaveUnlockLevel(data.WorldData[i].MapData[j].GetHaveUnlockLevel());
+                            Data.WorldData[i].MapData[j].HighScore = data.WorldData[i].MapData[j].HighScore;
+                            Data.WorldData[i].MapData[j].HaveUnlockLevel = data.WorldData[i].MapData[j].HaveUnlockLevel;
 //                            Data.WorldData[i]._mapData[j].SetPhantomeSave(data.WorldData[i]._mapData[j].GetPhantomSave());
 
                         }
@@ -115,14 +118,14 @@ public class DataManager : MonoBehaviour
 public class MapData
 {
     [field: SerializeField] public SceneObject SceneData { get; private set; }
-    [field: SerializeField] public float HighScore { get; set; }
-    [field: SerializeField] public bool HaveUnlockLevel { get; set; }
+    public float HighScore;
+    public bool HaveUnlockLevel;
 }
 
 [System.Serializable]
 public class WorldInfo
 {
     [field: SerializeField] public string WorldName { get; private set; }
-    [field: SerializeField] public bool HaveUnlockWorld { get; set; }
+    public bool HaveUnlockWorld = true;
     [field: SerializeField] public List<MapData> MapData { get; private set; }
 }
