@@ -58,6 +58,7 @@ public class HudMainMenu : MonoBehaviour
         _timerWin.text = Timer.FormatTime(timer);
         _winPanel.Show();
         buttonNextLevel.SetActive(ShowNextButton);
+        _highScore.text = "BEST TIME : " + Timer.FormatTime(bestTime);
         if (bestTime == 0)
         {
             _highScore.text = "BEST TIME : " + Timer.FormatTime(timer);
