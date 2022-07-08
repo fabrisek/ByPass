@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class FantomeController : MonoBehaviour
 {
+    public static FantomeController instance;
+
 
     [SerializeField] float timeBetweenSave;
     [SerializeField] Transform playerRef;
+    [SerializeField] GameObject objectView;
 
     FantomeSave fantomeToSave;
     FantomeSave fantomeSaved;
 
     SaveState saveState;
+    ReproduceState reproduceState;
+
+    int indexOfPath;
+    float duration;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            InitFantomeController();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        //ReproducePath();
     }
 
     // Update is called once per frame
@@ -24,19 +44,29 @@ public class FantomeController : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        if(reproduceState == ReproduceState.finishReproduce)
+        {
+            ReproducePath();
+        }
+    }
+
     //==============================================================Save=======================================================================================================
 
     public void StartSaveFantome ()
     {
         saveState = SaveState.inSave;
+        reproduceState = ReproduceState.nothing;
         SaveDataInFantomeSave();
         StartCoroutine(CoroutineSaveTransformeTime());
     }
 
-    public void StopSaveFantome()
+    public FantomeSave StopSaveFantome()
     {
         saveState = SaveState.saveFinish;
         SaveDataInFantomeSave();
+        return fantomeToSave;
     }
 
     void InitFantomeController ()
@@ -68,34 +98,92 @@ public class FantomeController : MonoBehaviour
 
 
     //========================================================Reproduce================================================================================================================
+    public void StartReproduce (FantomeSave fantomeToReproduce)
+    {
+        fantomeSaved = fantomeToReproduce;
+        reproduceState = ReproduceState.inreproduce;
+    }
+
+    public void StopReproduce()
+    {
+        reproduceState = ReproduceState.finishReproduce;
+    }
 
     void ReproducePath ()
     {
 
 
+        if (indexOfPath < fantomeSaved.positionPlayer.Count && indexOfPath + 1 < fantomeSaved.positionPlayer.Count)
+        { 
+
+
+            if (fantomeSaved.time[indexOfPath + 1] <= GameManager.Instance.ReturnTimer())
+            {
+
+                    indexOfPath++;
+                    
+                    if (indexOfPath + 1 < fantomeSaved.positionPlayer.Count)
+                    {
+                    duration = fantomeSaved.time[indexOfPath + 1] - fantomeSaved.time[indexOfPath];
+                    }
+                    else
+                    {
+                        if (indexOfPath + 1 >= fantomeSaved.positionPlayer.Count)
+                        {
+                        // Debug.Log("Je suis arriver a :" + Timer.Instance.GetTimer());
+
+                              StopReproduce();
+
+
+                        }
+                    }
+            }
+            if (indexOfPath + 1 < fantomeSaved.positionPlayer.Count)
+            {
+                    
+                    float timePass = GameManager.Instance.ReturnTimer() - fantomeSaved.time[indexOfPath];
+                    if (timePass < 0)
+                    {
+                        timePass = 0;
+                    }
+                   
+                    float lerpPercent = timePass / duration;
+
+
+                //objectView.transform.position = Vector3.MoveTowards(fantomeToSave.positionPlayer[indexOfPath], fantomeToSave.positionPlayer[indexOfPath + 1], duration * Time.deltaTime); 
+                  objectView.transform.position = Vector3.Lerp(fantomeSaved.positionPlayer[indexOfPath], fantomeSaved.positionPlayer[indexOfPath + 1], lerpPercent);
+            }
+            
+        }
 
 
 
-
-     /*   distance = Vector3.Distance(path.pathObjList[currentWayPointID].position, transform.position);
-        transform.position = Vector3.MoveTowards(transform.position, path.pathObjList[currentWayPointID].position, speed * Time.deltaTime);*/
+        /*   distance = Vector3.Distance(path.pathObjList[currentWayPointID].position, transform.position);
+           transform.position = Vector3.MoveTowards(transform.position, path.pathObjList[currentWayPointID].position, speed * Time.deltaTime);*/
 
         //ROTATION OF ENEMY
-      /*  var direction = path.pathObjList[currentWayPointID].position - transform.position;
+        /*  var direction = path.pathObjList[currentWayPointID].position - transform.position;
 
-        if (direction != Vector3.zero)
-        {
-            direction.y = 0;
-            direction = direction.normalized;
-            var rotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
-        }*/
+          if (direction != Vector3.zero)
+          {
+              direction.y = 0;
+              direction = direction.normalized;
+              var rotation = Quaternion.LookRotation(direction);
+              transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+          }*/
     }
 
     public enum SaveState
     {
         inSave,
         saveFinish,
+        nothing,
+    }
+
+    public enum ReproduceState
+    {
+        inreproduce,
+        finishReproduce,
         nothing,
     }
 
