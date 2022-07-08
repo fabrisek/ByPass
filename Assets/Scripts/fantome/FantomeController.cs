@@ -24,6 +24,8 @@ public class FantomeController : MonoBehaviour
         
     }
 
+    //==============================================================Save=======================================================================================================
+
     public void StartSaveFantome ()
     {
         saveState = SaveState.inSave;
@@ -49,20 +51,23 @@ public class FantomeController : MonoBehaviour
 
     IEnumerator CoroutineSaveTransformeTime()
     {
-        
         do
         {
-            yield return new WaitForSeconds(timeBetweenSave);
             SaveDataInFantomeSave();
+            yield return new WaitForSeconds(timeBetweenSave);
+            
         }
         while (saveState == SaveState.saveFinish);
     }
 
     void SaveDataInFantomeSave ()
     {
-        fantomeToSave.SaveData(playerRef.position, playerRef.rotation, 0);
+        fantomeToSave.SaveData(playerRef.position, playerRef.rotation, GameManager.Instance.ReturnTimer());
         // ajouter les valeur temps transforme etc;
     }
+
+
+    //========================================================Reproduce================================================================================================================
 
     void ReproducePath ()
     {
@@ -72,11 +77,11 @@ public class FantomeController : MonoBehaviour
 
 
 
-        distance = Vector3.Distance(path.pathObjList[currentWayPointID].position, transform.position);
-        transform.position = Vector3.MoveTowards(transform.position, path.pathObjList[currentWayPointID].position, speed * Time.deltaTime);
+     /*   distance = Vector3.Distance(path.pathObjList[currentWayPointID].position, transform.position);
+        transform.position = Vector3.MoveTowards(transform.position, path.pathObjList[currentWayPointID].position, speed * Time.deltaTime);*/
 
         //ROTATION OF ENEMY
-        var direction = path.pathObjList[currentWayPointID].position - transform.position;
+      /*  var direction = path.pathObjList[currentWayPointID].position - transform.position;
 
         if (direction != Vector3.zero)
         {
@@ -84,7 +89,7 @@ public class FantomeController : MonoBehaviour
             direction = direction.normalized;
             var rotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
-        }
+        }*/
     }
 
     public enum SaveState
