@@ -6,10 +6,17 @@ using UnityEngine.EventSystems;
 using TMPro;
 using Doozy.Runtime.UIManager.Containers;
 using Doozy.Runtime.UIManager.Components;
+using System;
 
 public class HudMainMenu : MonoBehaviour
 {
     public static HudMainMenu Instance;
+
+    public void OpenDeathPanel()
+    {
+        CloseAllPanel();
+        _DeathPanel.Show();
+    }
 
     [Header("PANEL")]
     [SerializeField] UIContainer _mainMenu;
@@ -18,6 +25,7 @@ public class HudMainMenu : MonoBehaviour
     [SerializeField] UIContainer _worldSelectionPanel;
     [SerializeField] UIContainer _pausePanel;
     [SerializeField] UIContainer _InGamePanel;
+    [SerializeField] UIContainer _DeathPanel;
 
     [Header("LEVEL SELECTOR")]
     [SerializeField] Transform parentSelector;
@@ -62,6 +70,7 @@ public class HudMainMenu : MonoBehaviour
         _worldSelectionPanel.Hide();
         _pausePanel.Hide();
         _InGamePanel.Hide();
+        _DeathPanel.Hide();
     }
 
     public void OpenPausePanel()

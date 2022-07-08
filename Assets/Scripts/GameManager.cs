@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     StateGame stateOfGame;
 
-  //  [SerializeField] Input inputActions;
+    internal void Death()
+    {
+        HudMainMenu.Instance.OpenDeathPanel();
+        Time.timeScale = 0;
+        Timer.instance.LaunchTimer(false);
+        //PlayFabHighScore.Instance
+    }
+
+    //  [SerializeField] Input inputActions;
 
     public StateGame StateOfGame
     {
