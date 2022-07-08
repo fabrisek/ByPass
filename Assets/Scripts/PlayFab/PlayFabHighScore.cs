@@ -33,19 +33,19 @@ public class PlayFabHighScore : MonoBehaviour
         prefabScoreTitle = prefabScoreTiles;
         scoreboardParent = parent;
     }
-    void UpdateHighScoreCloud()
+    public void UpdateHighScoreCloud(string levelName, int timer)
     {
         PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
         {
             FunctionName = "sendLeaderBoard",
-            FunctionParameter = new { nameLevel = "Test", timerValue = 12 },
+            FunctionParameter = new { nameLevel = levelName, timerValue = timer },
             GeneratePlayStreamEvent = true,
         }, OnCloudResult, OnError);
     }
 
     void OnCloudResult(ExecuteCloudScriptResult result)
     {
-        Debug.Log(result.FunctionResult);
+        HudMainMenu.Instance.ChangePosPlayerText(int.Parse(result.FunctionResult.ToString()));
     }
 
     public void GetTopLeaderBord(string mapName)

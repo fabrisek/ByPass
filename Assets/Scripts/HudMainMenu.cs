@@ -7,6 +7,7 @@ using TMPro;
 using Doozy.Runtime.UIManager.Containers;
 using Doozy.Runtime.UIManager.Components;
 using System;
+using UnityEngine.UI;
 
 public class HudMainMenu : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class HudMainMenu : MonoBehaviour
     [SerializeField] UIContainer _pausePanel;
     [SerializeField] UIContainer _InGamePanel;
     [SerializeField] UIContainer _DeathPanel;
+    [SerializeField] UIContainer _winPanel;
 
     [Header("LEVEL SELECTOR")]
     [SerializeField] Transform parentSelector;
@@ -38,8 +40,56 @@ public class HudMainMenu : MonoBehaviour
     [SerializeField] EventSystem eventSystem;
     [SerializeField] TextMeshProUGUI _countdown;
     [SerializeField] TextMeshProUGUI _timerText;
+
     [SerializeField] TextMeshProUGUI _timerDeath;
 
+    [Header("WinPanel")]
+    [SerializeField] TextMeshProUGUI _posPlayer;
+    [SerializeField] TextMeshProUGUI _timerWin;
+    [SerializeField] TextMeshProUGUI _highScore;
+    [SerializeField] Image[] allStar;
+    [SerializeField] Sprite starUnlock;
+    [SerializeField] Sprite startLock;
+    [SerializeField] GameObject buttonNextLevel;
+
+    public void Win(int timer, int bestTime, SceneObject sceneObj, bool ShowNextButton)
+    {
+        CloseAllPanel();
+        _timerWin.text = Timer.FormatTime(timer);
+        _winPanel.Show();
+
+        if (bestTime == 0)
+        {
+            _highScore.text = "BEST TIME : " + Timer.FormatTime(timer);
+        }
+        if (timer == bestTime)
+        {
+            _highScore.text = "NEW RECORD : " + Timer.FormatTime(bestTime);
+            _highScore.color = Color.red;
+        }
+
+        if (DataManager.Instance != null)
+        {
+            DATA data = DataManager.Instance.Data;
+
+            for (int i = 0; i < sceneObj.TimeStar.Length; i++)
+            {
+                if (bestTime <= sceneObj.TimeStar[i])
+                {
+                    allStar[i].sprite = starUnlock;
+                }
+                else
+                {
+                    allStar[i].sprite = startLock;
+                }
+            }
+        }
+    }
+
+    public void ChangePosPlayerText(int pos)
+    {
+        _posPlayer.text = "TOP #" + (pos + 1).ToString();
+    }
     public StateMainMenu State { get; set; }
 
     private void Awake()
@@ -78,6 +128,7 @@ public class HudMainMenu : MonoBehaviour
         _pausePanel.Hide();
         _InGamePanel.Hide();
         _DeathPanel.Hide();
+        _winPanel.Hide();
     }
 
     public void OpenPausePanel()
@@ -130,7 +181,7 @@ public class HudMainMenu : MonoBehaviour
                 eventSystem.SetSelectedGameObject(cardObj.GetComponent<UIButton>().gameObject);
             }
 
-            cardObj.GetComponent<CardWorld>().ChangeInformation(mapData.SceneData, mapData.HighScore, totalStar, mapData.HaveUnlockLevel);
+            cardObj.GetComponent<CardWorld>().ChangeInformation(mapData.SceneData, mapData.HighScore, totalStar, mapData.HaveUnlockLevel, i);
         }
 
         starText.text = "STAR : " + starUnlock.ToString() + " / " + totalStar.ToString();

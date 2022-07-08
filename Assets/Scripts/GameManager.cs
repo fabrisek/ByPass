@@ -8,16 +8,66 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     StateGame stateOfGame;
+    public int WorldIndex { get; set; }
+    public int LevelIndex { get; set; }
 
+    public void ChangeWorldIndex(int index) { WorldIndex = index; }
+    public void ChangeLevelIndex(int index) { LevelIndex = index; }
     internal void Death()
     {
-        Time.timeScale = 0;
-        Timer.instance.LaunchTimer(false);
-        HudMainMenu.Instance.OpenDeathPanel(Timer.FormatTime(Timer.instance.GetTimer()));
-        stateOfGame = StateGame.inDead;
-        Cursor.lockState = CursorLockMode.None;
-        ChangeActionMap(stateOfGame);
-        Cursor.visible = true;
+        if (stateOfGame != StateGame.inWin && stateOfGame != StateGame.inDead)
+        {
+            Time.timeScale = 0;
+            Timer.instance.LaunchTimer(false);
+            HudMainMenu.Instance.OpenDeathPanel(Timer.FormatTime(Timer.instance.GetTimer()));
+            stateOfGame = StateGame.inDead;
+            Cursor.lockState = CursorLockMode.None;
+            ChangeActionMap(stateOfGame);
+            Cursor.visible = true;
+        }
+    }
+
+    internal void Win()
+    {
+        if (stateOfGame != StateGame.inWin && stateOfGame != StateGame.inDead)
+        {
+            Timer.instance.LaunchTimer(false);
+            Cursor.lockState = CursorLockMode.None;
+            stateOfGame = StateGame.inWin;
+            ChangeActionMap(stateOfGame);
+            Cursor.visible = true;
+            DataManager.Instance.SetRecord(Timer.instance.GetTimer(), LevelIndex, WorldIndex);
+            HudMainMenu.Instance.Win(
+                    (int)Timer.instance.GetTimer(),
+                    (int)DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].HighScore,
+                    DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].SceneData,
+                    ShowNextButton()
+                ); ;
+        }
+    }
+
+    private bool ShowNextButton()
+    {
+        DATA data = DataManager.Instance.Data;
+
+        if (data.WorldData[WorldIndex].MapData.Count - 1 == LevelIndex)
+        {
+            if (WorldIndex + 1 < data.WorldData.Count)
+            {
+                if (data.WorldData[WorldIndex + 1].MapData[0] != null)
+                {
+                    return true;
+                }
+            }
+            else
+                return false;
+        }
+
+        else
+        {
+            return true;
+        }
+        return false;
     }
 
     //  [SerializeField] Input inputActions;
@@ -243,9 +293,16 @@ public class GameManager : MonoBehaviour
                 break;
 
             case StateGame.inDead:
-                InputManager.Input.InGame.Disable();
+                InputManager.Input.InGame.Enable();
                 InputManager.Input.InMainMenu.Disable();
-                InputManager.Instance.ActiveActioMapInGame(false);
+                InputManager.Instance.ActiveActioMapInGame(true);
+                PlayerController.Instance.enabled = false;
+                PlayerCam.Instance.enabled = false;
+                break;
+            case StateGame.inWin:
+                InputManager.Input.InGame.Enable();
+                InputManager.Input.InMainMenu.Disable();
+                InputManager.Instance.ActiveActioMapInGame(true);
                 PlayerController.Instance.enabled = false;
                 PlayerCam.Instance.enabled = false;
                 break;

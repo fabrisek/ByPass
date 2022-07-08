@@ -14,10 +14,13 @@ public class CardWorld : MonoBehaviour
     [SerializeField] TextMeshProUGUI starPlayer;
     bool unlock;
     SceneObject objRef;
+    int _levelIndex;
+
     // Start is called before the first frame update
 
-    public void ChangeInformation(SceneObject obj, float timerSave, int star, bool isUnlock)
+    public void ChangeInformation(SceneObject obj, float timerSave, int star, bool isUnlock, int levelIndex)
     {
+        _levelIndex = levelIndex;
         objRef = obj;
         levelName.text = obj.MapName;
 
@@ -43,6 +46,7 @@ public class CardWorld : MonoBehaviour
         if (unlock)
         {
             GameManager.Instance.LoadLevel(objRef);
+            GameManager.Instance.ChangeLevelIndex(_levelIndex);
         }
         else
         {

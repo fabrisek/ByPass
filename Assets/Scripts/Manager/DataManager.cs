@@ -48,35 +48,25 @@ public class DataManager : MonoBehaviour
 
     public void SetRecord(float timer, int levelIndex, int worldIndex)
     {
-        /*if (Data.WorldData[worldIndex].MapData[levelIndex].GetHighScore() == 0)
+        if (Data.WorldData[worldIndex].MapData[levelIndex].HighScore == 0)
         {
-            Data.WorldData[worldIndex].MapData[levelIndex].SetHighScore(timer);
-            print(timer);
-            /*if (PlayFabHighScore.Instance)
-                PlayFabHighScore.Instance.SendLeaderBord(timer, Data_Manager.Instance.GetData()._worldData[worldIndex]._mapData[levelIndex].GetSceneData().MapName);
+            Data.WorldData[worldIndex].MapData[levelIndex].HighScore = timer ;
 
-            if (PhantomeControler.Instance != null)
-            {
-                Data.WorldData[worldIndex]._mapData[levelIndex].SetPhantomeSave(PhantomeControler.Instance.phantomeSave);
-            }
+            if (PlayFabHighScore.Instance)
+                PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, (int)-timer * 1000);
         }
 
-        if (timer < Data.WorldData[worldIndex].MapData[levelIndex].GetHighScore())
+        if (timer < Data.WorldData[worldIndex].MapData[levelIndex].HighScore)
         {
-            //Data.WorldData[worldIndex].MapData[levelIndex].SetHighScore(timer);
-            //if (PlayFabHighScore.Instance)
-                //PlayFabHighScore.Instance.SendLeaderBord(timer, Data_Manager.Instance.GetData()._worldData[worldIndex]._mapData[levelIndex].GetSceneData().MapName);
+            Data.WorldData[worldIndex].MapData[levelIndex].HighScore = timer;
+            if (PlayFabHighScore.Instance)
+                PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, (int)-timer);
 
-            /*if (PhantomeControler.Instance != null)
-            {
-                Data.WorldData[worldIndex]._mapData[levelIndex].SetPhantomeSave(PhantomeControler.Instance.phantomeSave);
-            }*/
-        
 
-        //if (levelIndex + 1 != Data.WorldData[worldIndex].MapData.Count)
-            //Data.WorldData[worldIndex].MapData[levelIndex + 1].SetHaveUnlockLevel(true);
-
-        //SaveData();*/
+            if (levelIndex + 1 != Data.WorldData[worldIndex].MapData.Count)
+                Data.WorldData[worldIndex].MapData[levelIndex + 1].HaveUnlockLevel = true;
+        }
+        SaveData();
     }
 
     public void SaveData()
