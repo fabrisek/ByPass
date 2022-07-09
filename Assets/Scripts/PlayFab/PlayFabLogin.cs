@@ -47,7 +47,8 @@ public class PlayFabLogin : MonoBehaviour
             _friends = result.Friends;
             foreach (var item in _friends)
             {
-                AddFriend(FriendIdType.PlayFabId, item.FriendPlayFabId);
+                Debug.Log(item.FriendPlayFabId);
+                //AddFriend(FriendIdType.PlayFabId, item.FriendPlayFabId);
             }
         }, OnError);
     }
@@ -110,6 +111,7 @@ public class PlayFabLogin : MonoBehaviour
 
         UpdatePlayerName();
         UpdateProfilePicture();
+        GetFriends();
     }
 
     /// <summary>
