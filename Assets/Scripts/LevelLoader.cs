@@ -36,10 +36,10 @@ public class LevelLoader : MonoBehaviour
 
     public void StartLoadScene(SceneObject obj)
     {
-        StartCoroutine(StartLoad(obj.IndexScene));
+        StartCoroutine(StartLoad(obj.IndexScene, obj));
         ChangeCanvas(obj);
     }
-    IEnumerator StartLoad(int index)
+    IEnumerator StartLoad(int index, SceneObject obj)
     {
         canvasGroup.alpha = 1;
         loadingScreen.SetActive(true);
@@ -49,7 +49,9 @@ public class LevelLoader : MonoBehaviour
         {
             yield return null;
         }
+        GameManager.Instance.FinishLoadLevel(obj);
         yield return StartCoroutine(FadeLoadingScreen(0, 1));
+        
         loadingScreen.SetActive(false);
     }
     IEnumerator FadeLoadingScreen(float targetValue, float duration)

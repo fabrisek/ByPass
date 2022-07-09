@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public void ChangeWorldIndex(int index) { WorldIndex = index; }
     public void ChangeLevelIndex(int index) { LevelIndex = index; }
+
+    SceneObject lastSceneObj;
     internal void Death()
     {
         if (stateOfGame != StateGame.inWin && stateOfGame != StateGame.inDead)
@@ -141,6 +143,22 @@ public class GameManager : MonoBehaviour
         stateOfGame = StateGame.inGame;
     }
 
+    public void FinishLoadLevel (SceneObject obj)
+    {
+        if (obj.IndexScene != 0)
+        {
+            if (lastSceneObj != null && obj == lastSceneObj)
+            {
+                StartCountDown();
+            }
+            else
+            {
+                lastSceneObj = obj;
+                LauchCinematic(true);
+            }
+        }
+    }
+
     public void LauchCinematic(bool active)
     {
         HudMainMenu.Instance.ResetTextTimer();
@@ -158,13 +176,16 @@ public class GameManager : MonoBehaviour
 
     public void StartCountDown()
     {
+        Debug.Log("yo");
         stateOfGame = StateGame.inCountDown;
         HudMainMenu.Instance.OpenGamePanel();
         CountDown.instance.StartCountDown();
+       // ChangeActionMap(stateOfGame);
     }
 
     public void CountDownIsFinish()
     {
+        Debug.Log("j ai finie ");
         StartLevel();
     }
 
@@ -187,9 +208,15 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        //stateOfGame = StateGame.inCountDown;
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         HudMainMenu.Instance.CloseAllPanel();
         Time.timeScale = 1;
+        StartCoroutine(CoroutineCountDown());
+        
+
+
     }
 
     public void MainMenu()
@@ -241,7 +268,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("ce State n est pas pris en compte");
+                Debug.Log("ce State n est pas pris en compte" + stateOfGame);
                 break;
 
         }
@@ -348,7 +375,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    IEnumerator CoroutineCountDown()
+    {
+       
+        yield return new WaitForSeconds(0.2f);
+        FinishLoadLevel(lastSceneObj);
+    }
+
+
+
 
     public enum ActionMapEnum
     {

@@ -8,6 +8,8 @@ public class Cinematic : MonoBehaviour
     public static Cinematic instance;
     [SerializeField] GameObject cutSceneToPlay;
     [SerializeField] GameObject cameras;
+    [SerializeField] GameObject timeLine;
+    [SerializeField] GameObject cameraPlayer;
 
     bool active;
     private void Awake()
@@ -46,6 +48,8 @@ public class Cinematic : MonoBehaviour
     public void PlayCinematic (bool active)
     {
         this.active = active;
+        cameraPlayer.SetActive(!active);
+        timeLine.SetActive(active);
         cameras.SetActive(active);
        
         cutSceneToPlay.SetActive(active);

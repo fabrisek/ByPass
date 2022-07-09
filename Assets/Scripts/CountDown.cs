@@ -37,12 +37,13 @@ public class CountDown : MonoBehaviour
 
     void InitCountDoawn()
     {
-        count = 0;
+        
     }
 
     public void StartCountDown ()
     {
-        Debug.Log(writeinCountDown[count]);
+        count = 0;
+       // Debug.Log(writeinCountDown[count]);
         count++;
         StartCoroutine(CoroutineCountDown());
 
@@ -51,6 +52,7 @@ public class CountDown : MonoBehaviour
 
     IEnumerator CoroutineCountDown ()
     {
+        Debug.Log(writeinCountDown[count]);
         yield return new WaitForSeconds(timeOfCountDown / writeinCountDown.Length);
         HudMainMenu.Instance.CountDown(writeinCountDown[count], true);
         count++;
