@@ -54,7 +54,15 @@ public class PlayfabGhost : MonoBehaviour
     {
         GlobalFileLock += 1; // Start Each SimpleGetCall
         PlayFabHttp.SimpleGetCall(fileData.DownloadUrl,
-            result => { _entityFileJson[fileData.FileName] = Encoding.UTF8.GetString(result); GlobalFileLock -= 1; }, // Finish Each SimpleGetCall
+            result => {
+                GhostSave save = JsonUtility.FromJson<GhostSave>(DataManager.EncryptDecrypt(Encoding.UTF8.GetString(result)));
+                for (int i = 0; i < save.FantomeData.Count; i++)
+                {
+                    DataManager.Instance.Data.WorldData[int.Parse(fileData.FileName)].MapData[i].fantome = save.FantomeData[i];
+                }
+                GlobalFileLock -= 1; 
+            
+            }, // Finish Each SimpleGetCall
             error => { Debug.Log(error); }
         );
     }

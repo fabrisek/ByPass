@@ -111,7 +111,6 @@ public class PlayFabLogin : MonoBehaviour
 
         UpdatePlayerName();
         UpdateProfilePicture();
-        GetFriends();
         GetComponent<PlayfabGhost>().LoadAllFiles();
     }
 
