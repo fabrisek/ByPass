@@ -171,7 +171,18 @@ public class GameManager : MonoBehaviour
 
     public void Back()
     {
+        switch (stateOfGame)
+        {
+            case StateGame.inGame:
+                Pause();
+                break;
+            case StateGame.inMainMenu:
 
+                break;
+            case StateGame.inPause:
+
+                break;
+        }
     }
 
     public void Restart()
