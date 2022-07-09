@@ -13,6 +13,16 @@ public class DATA
 
 }
 
+public class GhostSave
+{
+    public List<FantomeSave> FantomeData;
+
+    public GhostSave()
+    {
+        FantomeData = new List<FantomeSave>();
+    }
+}
+
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
@@ -53,14 +63,14 @@ public class DataManager : MonoBehaviour
         if (Data.WorldData[worldIndex].MapData[levelIndex].HighScore == 0)
         {
             Data.WorldData[worldIndex].MapData[levelIndex].HighScore = timer ;
-            Data.WorldData[worldIndex].MapData[levelIndex].fantome = fantome;
+            SaveGhost(levelIndex, worldIndex, fantome);
             if (PlayFabHighScore.Instance)
                 PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, -timer * 1000);
         }
 
         if (timer < Data.WorldData[worldIndex].MapData[levelIndex].HighScore)
         {
-            Data.WorldData[worldIndex].MapData[levelIndex].fantome = fantome;
+            SaveGhost(levelIndex,worldIndex,fantome);
             Data.WorldData[worldIndex].MapData[levelIndex].HighScore = timer;
             if (PlayFabHighScore.Instance)
                 PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, -timer * 1000);
@@ -71,6 +81,23 @@ public class DataManager : MonoBehaviour
         }
 
         SaveData();
+    }
+
+    public void SaveGhost(int levelIndex, int worldIndex, FantomeSave fantome)
+    {
+        Data.WorldData[worldIndex].MapData[levelIndex].fantome = fantome;
+        GhostSave save = new GhostSave();
+
+        for (int i = 0; i < Data.WorldData[worldIndex].MapData.Count; i++)
+        {
+            save.FantomeData.Add(Data.WorldData[worldIndex].MapData[i].fantome);
+        }
+
+        string data = JsonUtility.ToJson(save);
+        string filepath = Application.persistentDataPath + "/" + worldIndex.ToString();
+        File.WriteAllText(filepath, EncryptDecrypt(data));
+
+        PlayfabGhost.Instance.UploadFile(worldIndex.ToString());
     }
 
     public void SaveData()
@@ -100,7 +127,7 @@ public class DataManager : MonoBehaviour
                         {
                             Data.WorldData[i].MapData[j].HighScore = data.WorldData[i].MapData[j].HighScore;
                             Data.WorldData[i].MapData[j].HaveUnlockLevel = data.WorldData[i].MapData[j].HaveUnlockLevel;
-                            Data.WorldData[i].MapData[j].fantome = data.WorldData[i].MapData[j].fantome;
+                            //Data.WorldData[i].MapData[j].fantome = data.WorldData[i].MapData[j].fantome;
                         }
                     }
                 }
