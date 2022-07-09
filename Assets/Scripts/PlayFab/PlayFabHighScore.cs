@@ -106,9 +106,11 @@ public class PlayFabHighScore : MonoBehaviour
 
     void OnLeaderboardTopGet(GetLeaderboardResult result)
     {
+        
         HudMainMenu.Instance.ResetLeaderBoard();
         foreach (var item in result.Leaderboard)
         {
+            
             HudMainMenu.Instance.NewItemLeaderBoard(item.Position, item.Profile.DisplayName, item.StatValue, item.Profile.AvatarUrl, item.PlayFabId);
         }
     }

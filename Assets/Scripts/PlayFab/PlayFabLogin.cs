@@ -114,6 +114,7 @@ public class PlayFabLogin : MonoBehaviour
         GetComponent<PlayfabGhost>().LoadAllFiles();
     }
 
+
     /// <summary>
     /// Change le pseudo sur Playfab grace au Pseudo Steam
     /// </summary>

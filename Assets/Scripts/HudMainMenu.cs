@@ -109,7 +109,7 @@ public class HudMainMenu : MonoBehaviour
         text[0].text = "#" + (pos + 1).ToString();
         text[1].text = "User : " + displayName;
         text[2].text = "Score : " + Timer.FormatTime(MathF.Abs((float)score / 1000));
-        newGo.GetComponent<HighScorePanel>().ChangeProfilePicture(profile);
+        newGo.GetComponent<HighScorePanel>().ChangeProfilePicture(profile, playfabId);
 
         if (playfabId == PlayFabLogin.Instance.PlayfabId)
         {

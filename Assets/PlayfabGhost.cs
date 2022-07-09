@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using System.IO;
+using PlayFab.ClientModels;
+
 public class PlayfabGhost : MonoBehaviour
 {
     public static PlayfabGhost Instance;
@@ -16,6 +18,8 @@ public class PlayfabGhost : MonoBehaviour
     public string NewFileName;
     // GlobalFileLock provides is a simplistic way to avoid file collisions, specifically designed for this example.
     public int GlobalFileLock = 0;
+
+    public int worldIndex;
 
     private void Awake()
     {
@@ -50,6 +54,46 @@ public class PlayfabGhost : MonoBehaviour
         GlobalFileLock -= 1; // Finish GetFiles
     }
 
+    public void GetGhostPlayer(string entityID)
+    {
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "GetEntityId",
+            FunctionParameter = new { playfabId = entityID },
+            GeneratePlayStreamEvent = true,
+        }, OnCloudResult, OnSharedFailure);
+    }
+
+    void OnCloudResult(ExecuteCloudScriptResult result)
+    {
+        GlobalFileLock += 1; // Start GetFiles
+        var request = new PlayFab.DataModels.GetFilesRequest { Entity = new PlayFab.DataModels.EntityKey { Id = result.FunctionResult.ToString(), Type = PlayFabLogin.Instance.EntityType } };
+        PlayFabDataAPI.GetFiles(request, OnGetFileMetaGhost, OnSharedFailure);       
+    }
+
+    void OnGetFileMetaGhost(PlayFab.DataModels.GetFilesResponse result)
+    {
+        _entityFileJson.Clear();
+        foreach (var eachFilePair in result.Metadata)
+        {
+            if (eachFilePair.Key == worldIndex.ToString())
+                GetActualFileGhost(eachFilePair.Value);
+        }
+        GlobalFileLock -= 1; // Finish GetFiles
+    }
+
+    void GetActualFileGhost(PlayFab.DataModels.GetFileMetadata fileData)
+    {
+        GlobalFileLock += 1; // Start Each SimpleGetCall
+        PlayFabHttp.SimpleGetCall(fileData.DownloadUrl,
+            result => {
+                DataManager.Instance.save = JsonUtility.FromJson<GhostSave>(DataManager.EncryptDecrypt(Encoding.UTF8.GetString(result)));
+                GlobalFileLock -= 1;
+
+            }, // Finish Each SimpleGetCall
+            error => { Debug.Log(error); }
+        );
+    }
     void GetActualFile(PlayFab.DataModels.GetFileMetadata fileData)
     {
         GlobalFileLock += 1; // Start Each SimpleGetCall

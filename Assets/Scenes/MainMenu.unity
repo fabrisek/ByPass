@@ -85366,8 +85366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1638a6c4d8b65ee4ca4e36b9ec2271d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: 
-  entityType: 
   ActiveUploadFileName: 
   NewFileName: 
   GlobalFileLock: 0

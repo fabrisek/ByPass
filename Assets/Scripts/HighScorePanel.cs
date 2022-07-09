@@ -7,9 +7,15 @@ using UnityEngine.UI;
 public class HighScorePanel : MonoBehaviour
 {
     [SerializeField] Image picture;
-
-    public void ChangeProfilePicture(string url)
+    [SerializeField] string entityId;
+    public void ChangeProfilePicture(string url, string entity)
     {
+        entityId = entity;
         Davinci.get().load(url).into(picture).start();
+    }
+
+    public void GetGhost()
+    {
+        PlayfabGhost.Instance.GetGhostPlayer(entityId);
     }
 }

@@ -26,6 +26,7 @@ public class GhostSave
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
+    public GhostSave save = new GhostSave();
     [field: SerializeField] public DATA Data { get; private set; }
 
     public static int key = 129;
