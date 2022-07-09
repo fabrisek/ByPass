@@ -23,18 +23,19 @@ public class PlayFabHighScore : MonoBehaviour
         }
     }
 
-    public void UpdateHighScoreCloud(string levelName, int timer)
+    public void UpdateHighScoreCloud(string levelName, float timer)
     {
         PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
         {
             FunctionName = "sendLeaderBoard",
-            FunctionParameter = new { nameLevel = levelName, timerValue = timer },
+            FunctionParameter = new { nameLevel = levelName, timerValue = (int)timer },
             GeneratePlayStreamEvent = true,
         }, OnCloudResult, OnError);
     }
 
     void OnCloudResult(ExecuteCloudScriptResult result)
     {
+        Debug.Log(result);
         HudMainMenu.Instance.ChangePosPlayerText(int.Parse(result.FunctionResult.ToString()));
     }
 
@@ -75,6 +76,7 @@ public class PlayFabHighScore : MonoBehaviour
         {
             StatisticName = mapName,
             MaxResultsCount = 100,
+            IncludeSteamFriends = true,
             ProfileConstraints = new PlayerProfileViewConstraints
             {
                 ShowAvatarUrl = true,

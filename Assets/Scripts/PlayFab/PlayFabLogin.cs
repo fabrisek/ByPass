@@ -34,9 +34,7 @@ public class PlayFabLogin : MonoBehaviour
     private void Start()
     {
         Login();        
-    }
-        
-
+    }        
 
     void GetFriends()
     {
@@ -112,7 +110,6 @@ public class PlayFabLogin : MonoBehaviour
 
         UpdatePlayerName();
         UpdateProfilePicture();
-        GetFriends();
     }
 
     /// <summary>

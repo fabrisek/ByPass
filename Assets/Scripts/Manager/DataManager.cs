@@ -55,7 +55,7 @@ public class DataManager : MonoBehaviour
             Data.WorldData[worldIndex].MapData[levelIndex].HighScore = timer ;
             Data.WorldData[worldIndex].MapData[levelIndex].fantome = fantome;
             if (PlayFabHighScore.Instance)
-                PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, (int)-timer * 1000);
+                PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, -timer * 1000);
         }
 
         if (timer < Data.WorldData[worldIndex].MapData[levelIndex].HighScore)
@@ -63,7 +63,7 @@ public class DataManager : MonoBehaviour
             Data.WorldData[worldIndex].MapData[levelIndex].fantome = fantome;
             Data.WorldData[worldIndex].MapData[levelIndex].HighScore = timer;
             if (PlayFabHighScore.Instance)
-                PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, (int)-timer);
+                PlayFabHighScore.Instance.UpdateHighScoreCloud(Data.WorldData[worldIndex].MapData[levelIndex].SceneData.MapName, -timer * 1000);
 
 
             if (levelIndex + 1 != Data.WorldData[worldIndex].MapData.Count)
@@ -88,8 +88,6 @@ public class DataManager : MonoBehaviour
         {
             string fileContents = File.ReadAllText(worldsFolder);
             DATA data = JsonUtility.FromJson<DATA>(EncryptDecrypt(fileContents));
-
-            Debug.Log(data.ToString());
             for (int i = 0; i < Data.WorldData.Count; i++)
             {
                 if (data.WorldData[i] != null)
