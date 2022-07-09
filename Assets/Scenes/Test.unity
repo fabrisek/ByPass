@@ -1489,6 +1489,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutSceneToPlay: {fileID: 1174784633}
   cameras: {fileID: 81335935}
+  timeLine: {fileID: 1174784633}
+  cameraPlayer: {fileID: 2052748883}
 --- !u!4 &910917191
 Transform:
   m_ObjectHideFlags: 0
@@ -1965,7 +1967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1174784634
 Transform:
   m_ObjectHideFlags: 0
@@ -3068,6 +3070,12 @@ PrefabInstance:
 --- !u!4 &2052748882 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7020169264474291026, guid: 4d90e0cce6af82e479e2c8c6687454d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 2052748881}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2052748883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7020169264464826810, guid: 4d90e0cce6af82e479e2c8c6687454d9,
     type: 3}
   m_PrefabInstance: {fileID: 2052748881}
   m_PrefabAsset: {fileID: 0}
