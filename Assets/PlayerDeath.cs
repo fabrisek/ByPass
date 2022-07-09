@@ -6,7 +6,6 @@ public class PlayerDeath : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.layer);
         if (other.gameObject.layer != 3 && other.gameObject.layer != 7 && other.gameObject.layer != 6)
             GameManager.Instance.Death();
     }
