@@ -5,14 +5,18 @@ using PlayFab.ClientModels;
 using Steamworks;
 using UnityEngine;
 using System.Net;
-//using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 public class PlayFabLogin : MonoBehaviour
 {
     public static PlayFabLogin Instance;
     [field: SerializeField] public string EntityId { get; private set; }
     [field: SerializeField] public string EntityType { get; private set; }
     [field: SerializeField] public string PlayfabId { get; private set; }
-    
+    enum FriendIdType { PlayFabId, Username, Email, DisplayName };
+
+    List<FriendInfo> _friends = null;
+
     const string _apiKey = "8DC8E3A4CC23EF187598E72A1A800DBC";
 
     private void Awake()
@@ -29,7 +33,51 @@ public class PlayFabLogin : MonoBehaviour
 
     private void Start()
     {
-        Login();
+        Login();        
+    }
+        
+
+
+    void GetFriends()
+    {
+        PlayFabClientAPI.GetFriendsList(new GetFriendsListRequest
+        {
+            IncludeSteamFriends = true,
+            IncludeFacebookFriends = false,
+            XboxToken = null
+        }, result => {
+            _friends = result.Friends;
+            foreach (var item in _friends)
+            {
+                AddFriend(FriendIdType.PlayFabId, item.FriendPlayFabId);
+            }
+        }, OnError);
+    }
+
+    
+
+    void AddFriend(FriendIdType idType, string friendId)
+    {
+        var request = new AddFriendRequest();
+        switch (idType)
+        {
+            case FriendIdType.PlayFabId:
+                request.FriendPlayFabId = friendId;
+                break;
+            case FriendIdType.Username:
+                request.FriendUsername = friendId;
+                break;
+            case FriendIdType.Email:
+                request.FriendEmail = friendId;
+                break;
+            case FriendIdType.DisplayName:
+                request.FriendTitleDisplayName = friendId;
+                break;
+        }
+        // Execute request and update friends when we are done
+        PlayFabClientAPI.AddFriend(request, result => {
+            Debug.Log("Friend added successfully!");
+        }, OnError);
     }
 
     /// <summary>
@@ -64,6 +112,7 @@ public class PlayFabLogin : MonoBehaviour
 
         UpdatePlayerName();
         UpdateProfilePicture();
+        GetFriends();
     }
 
     /// <summary>
@@ -83,7 +132,7 @@ public class PlayFabLogin : MonoBehaviour
     void UpdateProfilePicture()
     {
         
-        /*//Recupere Le lien JSON via l'API de Steam
+        //Recupere Le lien JSON via l'API de Steam
         var _steamUserID = SteamUser.GetSteamID();
         string url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + _apiKey + "&steamids=" + _steamUserID;
 
@@ -98,7 +147,7 @@ public class PlayFabLogin : MonoBehaviour
         }, result =>
         {
 
-        }, error => Debug.LogError(error.GenerateErrorReport()));*/
+        }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
     void OnError(PlayFabError error)

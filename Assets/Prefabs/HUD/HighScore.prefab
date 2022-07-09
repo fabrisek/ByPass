@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 1943374653098808579}
   - component: {fileID: 1943374653098808589}
   - component: {fileID: 1943374653098808578}
+  - component: {fileID: 6985209500928777815}
   m_Layer: 5
   m_Name: HighScore
   m_TagString: Untagged
@@ -429,6 +430,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6985209500928777815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943374653098808576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792afbdf4a032c342b6b0f40c4621f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  picture: {fileID: 1943374652696869284}
 --- !u!1 &1943374653353192672
 GameObject:
   m_ObjectHideFlags: 0

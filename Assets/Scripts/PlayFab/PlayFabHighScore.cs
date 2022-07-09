@@ -44,7 +44,12 @@ public class PlayFabHighScore : MonoBehaviour
         {
             StatisticName = mapName,
             StartPosition = 0,
-            MaxResultsCount = 50
+            MaxResultsCount = 50,
+            ProfileConstraints = new PlayerProfileViewConstraints
+            {
+                ShowAvatarUrl = true,
+                ShowDisplayName = true
+            }
         };
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardTopGet, OnError);
     }
@@ -54,9 +59,38 @@ public class PlayFabHighScore : MonoBehaviour
         var request = new GetLeaderboardAroundPlayerRequest
         {
             StatisticName = mapName,
-            MaxResultsCount = 50
+            MaxResultsCount = 50,
+            ProfileConstraints = new PlayerProfileViewConstraints
+            {
+                ShowAvatarUrl = true,
+                ShowDisplayName = true
+            }
         };
         PlayFabClientAPI.GetLeaderboardAroundPlayer(request, OnLeaderboardAroundPlayerGet, OnError);
+    }
+
+    public void GetFriendLeaderBoard(string mapName)
+    {
+        var request = new GetFriendLeaderboardRequest
+        {
+            StatisticName = mapName,
+            MaxResultsCount = 100,
+            ProfileConstraints = new PlayerProfileViewConstraints
+            {
+                ShowAvatarUrl = true,
+                ShowDisplayName = true
+            }
+        };
+        PlayFabClientAPI.GetFriendLeaderboard(request, OnLeaderboardFriend, OnError);
+    }
+
+    void OnLeaderboardFriend(GetLeaderboardResult result)
+    {
+        HudMainMenu.Instance.ResetLeaderBoard();
+        foreach (var item in result.Leaderboard)
+        {
+            HudMainMenu.Instance.NewItemLeaderBoard(item.Position, item.Profile.DisplayName, item.StatValue, item.Profile.AvatarUrl, item.PlayFabId);
+        }
     }
 
     void OnLeaderboardAroundPlayerGet(GetLeaderboardAroundPlayerResult result)
@@ -64,7 +98,7 @@ public class PlayFabHighScore : MonoBehaviour
         HudMainMenu.Instance.ResetLeaderBoard();
         foreach (var item in result.Leaderboard)
         {
-            HudMainMenu.Instance.NewItemLeaderBoard(item.Position, item.Profile.DisplayName, item.StatValue, item.PlayFabId);
+            HudMainMenu.Instance.NewItemLeaderBoard(item.Position, item.Profile.DisplayName, item.StatValue, item.Profile.AvatarUrl, item.PlayFabId);
         }
     }
 
@@ -73,7 +107,7 @@ public class PlayFabHighScore : MonoBehaviour
         HudMainMenu.Instance.ResetLeaderBoard();
         foreach (var item in result.Leaderboard)
         {
-            HudMainMenu.Instance.NewItemLeaderBoard(item.Position, item.Profile.DisplayName, item.StatValue, item.PlayFabId);
+            HudMainMenu.Instance.NewItemLeaderBoard(item.Position, item.Profile.DisplayName, item.StatValue, item.Profile.AvatarUrl, item.PlayFabId);
         }
     }
 

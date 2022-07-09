@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
     {
         PlayFabHighScore.Instance.GetTopLeaderBord(DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].SceneData.MapName);
     }
+    public void GetFriendLeaderBoard()
+    {
+        PlayFabHighScore.Instance.GetFriendLeaderBoard(DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].SceneData.MapName);
+    }
 
     internal void Win()
     {
@@ -103,6 +107,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             InitGameManager();
+            UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
         }
         else
         {

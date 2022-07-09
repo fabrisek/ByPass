@@ -54901,7 +54901,7 @@ MonoBehaviour:
       - <SceneData>k__BackingField: {fileID: 11400000, guid: 1390bef8fc1ac3248af93b203ee24cb4,
           type: 2}
         HighScore: 0
-        HaveUnlockLevel: 0
+        HaveUnlockLevel: 1
         fantome:
           positionPlayer: []
           rotationPlayer: []
@@ -54912,7 +54912,7 @@ MonoBehaviour:
       - <SceneData>k__BackingField: {fileID: 11400000, guid: 1390bef8fc1ac3248af93b203ee24cb4,
           type: 2}
         HighScore: 0
-        HaveUnlockLevel: 0
+        HaveUnlockLevel: 1
         fantome:
           positionPlayer: []
           rotationPlayer: []
@@ -54923,7 +54923,7 @@ MonoBehaviour:
       - <SceneData>k__BackingField: {fileID: 11400000, guid: 1390bef8fc1ac3248af93b203ee24cb4,
           type: 2}
         HighScore: 0
-        HaveUnlockLevel: 0
+        HaveUnlockLevel: 1
         fantome:
           positionPlayer: []
           rotationPlayer: []
@@ -79535,7 +79535,7 @@ MonoBehaviour:
           m_Calls:
           - m_Target: {fileID: 784575603}
             m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-            m_MethodName: Restart
+            m_MethodName: GetFriendLeaderBoard
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
@@ -91291,16 +91291,16 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 0}
   MultiplayerInfo: {fileID: 0}
   IsOn: 0
-  CurrentUISelectionState: 4
+  CurrentUISelectionState: 0
   DeselectAfterPress: 0
   OnSelectionStateChangedCallback:
     m_PersistentCalls:
       m_Calls: []
-  CurrentStateName: Disabled
+  CurrentStateName: Normal
   NormalState:
     StateType: 0
     StateName: Normal

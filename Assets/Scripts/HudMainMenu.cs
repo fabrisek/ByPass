@@ -8,6 +8,7 @@ using Doozy.Runtime.UIManager.Containers;
 using Doozy.Runtime.UIManager.Components;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class HudMainMenu : MonoBehaviour
 {
@@ -101,14 +102,14 @@ public class HudMainMenu : MonoBehaviour
         }
     }
 
-    public void NewItemLeaderBoard(int pos, string displayName, int score, string playfabId)
+    public void NewItemLeaderBoard(int pos, string displayName, int score, string profile, string playfabId)
     {
         GameObject newGo = Instantiate(prefabScoreTitle, scoreboardParent);
         TextMeshProUGUI[] text = newGo.GetComponentsInChildren<TextMeshProUGUI>();
         text[0].text = "#" + (pos + 1).ToString();
         text[1].text = "User : " + displayName;
         text[2].text = "Score : " + Timer.FormatTime(MathF.Abs((float)score / 1000));
-
+        newGo.GetComponent<HighScorePanel>().ChangeProfilePicture(profile);
 
         if (playfabId == PlayFabLogin.Instance.PlayfabId)
         {

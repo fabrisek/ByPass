@@ -120,7 +120,7 @@ public class MapData
 {
     [field: SerializeField] public SceneObject SceneData { get; private set; }
     public float HighScore;
-    public bool HaveUnlockLevel;
+    public bool HaveUnlockLevel = true;
     public FantomeSave fantome;
 }
 
