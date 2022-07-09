@@ -8,8 +8,7 @@ using TMPro;
 public class PlayFabHighScore : MonoBehaviour
 {
     public static PlayFabHighScore Instance;
-    GameObject prefabScoreTitle;
-    Transform scoreboardParent;
+
 
 
     private void Awake()
@@ -23,16 +22,7 @@ public class PlayFabHighScore : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
     }
-    /// <summary>
-    /// Initialise le parent Transform du HighScore
-    /// </summary>
-    /// <param name="prefabScoreTiles"></param>
-    /// <param name="parent"></param>
-    public void InitializeHighScore(GameObject prefabScoreTiles, Transform parent)
-    {
-        prefabScoreTitle = prefabScoreTiles;
-        scoreboardParent = parent;
-    }
+
     public void UpdateHighScoreCloud(string levelName, int timer)
     {
         PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
@@ -71,50 +61,20 @@ public class PlayFabHighScore : MonoBehaviour
 
     void OnLeaderboardAroundPlayerGet(GetLeaderboardAroundPlayerResult result)
     {
-        /*foreach (Transform item in scoreboardParent)
-        {
-            Destroy(item.gameObject);
-        }
+        HudMainMenu.Instance.ResetLeaderBoard();
         foreach (var item in result.Leaderboard)
         {
-            GameObject newGo = Instantiate(prefabScoreTitle, scoreboardParent);
-            TextMeshProUGUI[] text = newGo.GetComponentsInChildren<TextMeshProUGUI>();
-            text[0].text = "#" + (item.Position+1).ToString();
-            text[1].text = "User : " + item.Profile.DisplayName;
-            text[2].text = "Score : ";//+ Timer.FormatTime(MathF.Abs((float)item.StatValue / 1000));
-
-            
-            if (item.PlayFabId == PlayFabLogin.Instance.GetPlayFabId())
-            {
-                text[0].color = Color.red;
-                text[1].color = Color.red;
-                text[2].color = Color.red;
-            }
-        }*/
+            HudMainMenu.Instance.NewItemLeaderBoard(item.Position, item.Profile.DisplayName, item.StatValue, item.PlayFabId);
+        }
     }
-
 
     void OnLeaderboardTopGet(GetLeaderboardResult result)
     {
-       /* foreach (Transform item in scoreboardParent)
-        {
-            Destroy(item.gameObject);
-        }
+        HudMainMenu.Instance.ResetLeaderBoard();
         foreach (var item in result.Leaderboard)
         {
-            GameObject newGo = Instantiate(prefabScoreTitle, scoreboardParent);
-            TextMeshProUGUI[] text = newGo.GetComponentsInChildren<TextMeshProUGUI>();
-            text[0].text = "#" + (item.Position + 1).ToString();
-            text[1].text = "User : " + item.Profile.PlayerId;
-            text[2].text = "Score : ";// + Timer.FormatTime(MathF.Abs((float)item.StatValue / 1000));
-            //newGo.GetComponentInChildren<HighScoreButton>().SetPlayerTitleId(item.PlayFabId);
-            if (item.PlayFabId == PlayFabLogin.Instance.GetPlayFabId())
-            {
-                text[0].color = Color.red;
-                text[1].color = Color.red;
-                text[2].color = Color.red;
-            }    
-        }*/
+            HudMainMenu.Instance.NewItemLeaderBoard(item.Position, item.Profile.DisplayName, item.StatValue, item.PlayFabId);
+        }
     }
 
     void OnError(PlayFabError error)

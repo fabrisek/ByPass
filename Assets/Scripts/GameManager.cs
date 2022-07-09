@@ -27,6 +27,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GetLeaderBoardAroundPlayer()
+    {
+        PlayFabHighScore.Instance.GetLeaderBoardAroundPlayer(DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].SceneData.MapName);
+    }
+
+    public void GetTopLeaderBoard()
+    {
+        PlayFabHighScore.Instance.GetTopLeaderBord(DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].SceneData.MapName);
+    }
+
     internal void Win()
     {
         if (stateOfGame != StateGame.inWin && stateOfGame != StateGame.inDead)

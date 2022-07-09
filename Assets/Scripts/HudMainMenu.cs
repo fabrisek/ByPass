@@ -29,6 +29,7 @@ public class HudMainMenu : MonoBehaviour
     [SerializeField] UIContainer _InGamePanel;
     [SerializeField] UIContainer _DeathPanel;
     [SerializeField] UIContainer _winPanel;
+    [SerializeField] UIContainer _HighScorePanel;
 
     [Header("LEVEL SELECTOR")]
     [SerializeField] Transform parentSelector;
@@ -51,6 +52,10 @@ public class HudMainMenu : MonoBehaviour
     [SerializeField] Sprite starUnlock;
     [SerializeField] Sprite startLock;
     [SerializeField] GameObject buttonNextLevel;
+
+    [Header("Leaderboard")]
+    [SerializeField] GameObject prefabScoreTitle;
+    [SerializeField] Transform scoreboardParent;
 
     public void Win(float timer, float bestTime, SceneObject sceneObj, bool ShowNextButton)
     {
@@ -85,6 +90,31 @@ public class HudMainMenu : MonoBehaviour
                     allStar[i].sprite = startLock;
                 }
             }
+        }
+    }
+
+    public void ResetLeaderBoard()
+    {
+        foreach (Transform item in scoreboardParent)
+        {
+            Destroy(item.gameObject);
+        }
+    }
+
+    public void NewItemLeaderBoard(int pos, string displayName, int score, string playfabId)
+    {
+        GameObject newGo = Instantiate(prefabScoreTitle, scoreboardParent);
+        TextMeshProUGUI[] text = newGo.GetComponentsInChildren<TextMeshProUGUI>();
+        text[0].text = "#" + (pos + 1).ToString();
+        text[1].text = "User : " + displayName;
+        text[2].text = "Score : " + Timer.FormatTime(MathF.Abs((float)score / 1000));
+
+
+        if (playfabId == PlayFabLogin.Instance.PlayfabId)
+        {
+            text[0].color = Color.red;
+            text[1].color = Color.red;
+            text[2].color = Color.red;
         }
     }
 
@@ -131,6 +161,7 @@ public class HudMainMenu : MonoBehaviour
         _InGamePanel.Hide();
         _DeathPanel.Hide();
         _winPanel.Hide();
+        _HighScorePanel.Hide();
     }
 
     public void OpenPausePanel()
