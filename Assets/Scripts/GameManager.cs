@@ -149,6 +149,7 @@ public class GameManager : MonoBehaviour
         {
             if (lastSceneObj != null && obj == lastSceneObj)
             {
+                HudMainMenu.Instance.ResetTextTimer();
                 StartCountDown();
             }
             else
