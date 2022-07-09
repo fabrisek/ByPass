@@ -46,7 +46,7 @@ public class FantomeController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(reproduceState == ReproduceState.finishReproduce)
+        if(reproduceState != ReproduceState.finishReproduce)
         {
             ReproducePath();
         }
@@ -57,7 +57,7 @@ public class FantomeController : MonoBehaviour
     public void StartSaveFantome ()
     {
         saveState = SaveState.inSave;
-        reproduceState = ReproduceState.nothing;
+       
         SaveDataInFantomeSave();
         StartCoroutine(CoroutineSaveTransformeTime());
     }
@@ -74,7 +74,8 @@ public class FantomeController : MonoBehaviour
     {
         fantomeToSave = new FantomeSave();
         saveState = SaveState.nothing;
-        if(timeBetweenSave == 0)
+        reproduceState = ReproduceState.nothing;
+        if (timeBetweenSave == 0)
         {
             timeBetweenSave = 0.2f;
         }
