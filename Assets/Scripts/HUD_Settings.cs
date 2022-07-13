@@ -23,9 +23,6 @@ public class HUD_Settings : MonoBehaviour
         gamepadPanel.Hide();
         graphicsPanel.Hide();
         buttonPanel.Show();
-
-        /*if (HudControllerInGame.Instance != null)
-            HudControllerInGame.Instance.StateMenu = ActualMenu.SettingsMenu;*/
     }
     public static HUD_Settings Instance;
     [SerializeField] EventSystem eventSystem;
@@ -37,10 +34,8 @@ public class HUD_Settings : MonoBehaviour
 
     void ChangeStateMenu()
     {
-        /*if (HudControllerInGame.Instance != null)
-            HudControllerInGame.Instance.StateMenu = ActualMenu.InSettings;*/
-
-
+        if (HudMainMenu.Instance != null)
+            HudMainMenu.Instance.State = StateMenu.Settings;
     }
 
 

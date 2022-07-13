@@ -47,6 +47,7 @@ public class CardWorld : MonoBehaviour
         {
             GameManager.Instance.LoadLevel(objRef);
             GameManager.Instance.ChangeLevelIndex(_levelIndex);
+            InputManager.Instance.ActiveActioMapInGame(false);
         }
         else
         {

@@ -11,7 +11,7 @@ public enum ControlDeviceType
 }
 public class InputManager : MonoBehaviour
 {
-    
+
     public static Input Input { private set; get; }
     public static InputManager Instance;
 
@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     public static ControlDeviceType currentControlDevice;
 
     public static float SensibilityMouseY;
-    public static float SensibilityMouseX;   
+    public static float SensibilityMouseX;
     public static float SensibilityGamePadY;
     public static float SensibilityGamePadX;
 
@@ -34,9 +34,9 @@ public class InputManager : MonoBehaviour
     {
         Input = new Input();
         Instance = this;
-        SensibilityMouseX = PlayerPrefs.GetFloat("SensibilityMouseX", 100f); 
-        SensibilityMouseY = PlayerPrefs.GetFloat("SensibilityMouseY", 100f); 
-        SensibilityGamePadX = PlayerPrefs.GetFloat("SensibilityGamePadX", 100f); 
+        SensibilityMouseX = PlayerPrefs.GetFloat("SensibilityMouseX", 100f);
+        SensibilityMouseY = PlayerPrefs.GetFloat("SensibilityMouseY", 100f);
+        SensibilityGamePadX = PlayerPrefs.GetFloat("SensibilityGamePadX", 100f);
         SensibilityGamePadY = PlayerPrefs.GetFloat("SensibilityGamePadY", 100f);
 
 
@@ -52,9 +52,9 @@ public class InputManager : MonoBehaviour
             _input.InGame.RestartAndBack.performed += context => HUD_MainMenu.Instance.Back();*/
     }
 
-    public void ActiveActioMapInGame (bool active)
+    public void ActiveActioMapInGame(bool active)
     {
-        if(active)
+        if (active)
         {
             EnableinputAction();
         }
@@ -64,7 +64,12 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    void EnableinputAction ()
+    private void OnDisable()
+    {
+        ActiveActioMapInGame(false);
+    }
+
+    void EnableinputAction()
     {
         Input.Enable();
         for (int i = 0; i < allBinding.Count; i++)
@@ -82,7 +87,7 @@ public class InputManager : MonoBehaviour
         {
             Input.InGame.SlowTime.performed += context => CompetenceRalentie.Instance.ActiveSlowTime(true);
             Input.InGame.SlowTime.canceled += context => CompetenceRalentie.Instance.ActiveSlowTime(false);
-            Input.InGame.Pause.performed += context => GameManager.Instance.Pause();
+            //Input.InGame.Pause.performed += context => GameManager.Instance.Pause();
             Input.InGame.Jump.started += context => PlayerController.Instance.GetPlayerJump();
             Input.InGame.Jump.canceled += context => PlayerController.Instance.PlayerJumpDown(false);
         }
@@ -96,9 +101,14 @@ public class InputManager : MonoBehaviour
             Input.InGame.Grappling.canceled += context => GrapplingGun.Instance.StopGrapple();
         }
 
+        if (GameManager.Instance != null)
+        {
+            Input.InGame.Pause.performed += context => GameManager.Instance.Back();
+        }
+
     }
 
-    void DisableInputActionMap ()
+    void DisableInputActionMap()
     {
         if (PlayerController.Instance != null)
         {
@@ -118,71 +128,15 @@ public class InputManager : MonoBehaviour
             Input.InGame.Grappling.canceled -= context => GrapplingGun.Instance.StopGrapple();
         }
 
+        if (GameManager.Instance != null)
+        {
+            Input.InGame.Pause.performed -= context => GameManager.Instance.Back();
+        }
+
         Input.Disable();
     }
 
-    /*  public void OnEnable()
-      {
-          Input.Enable();
-          for (int i = 0; i < allBinding.Count; i++)
-          {
-              string _actionName = allBinding[i].action.name;
-              if (allBinding[i] != null)
-              {
-                  LoadBindingOverride(_actionName);
-              }
-          }
-          if (playerInput != null)
-              playerInput.onControlsChanged += OnControlsChanged;
-
-          if (PlayerController.Instance != null)
-          {
-              Input.InGame.SlowTime.performed += context => CompetenceRalentie.Instance.ActiveSlowTime(true);
-              Input.InGame.SlowTime.canceled += context => CompetenceRalentie.Instance.ActiveSlowTime(false);
-              Input.InGame.Pause.performed += context => GameManager.Instance.Pause();
-              Input.InGame.Jump.started += context => PlayerController.Instance.GetPlayerJump();
-              Input.InGame.Jump.canceled += context => PlayerController.Instance.PlayerJumpDown(true);
-          }
-
-          if (WallRunController.Instance != null)
-              Input.InGame.Jump.started += context => WallRunController.Instance.WallJump();
-
-          if (GrapplingGun.Instance != null)
-          {
-              Input.InGame.Grappling.performed += context => GrapplingGun.Instance.StartGrapple();
-              Input.InGame.Grappling.canceled += context => GrapplingGun.Instance.StopGrapple();
-          }
-
-      }*/
-
-
-   /* private void OnDisable()
-    {
-
-        if (PlayerController.Instance != null)
-        {
-            Input.InGame.SlowTime.performed -= context => CompetenceRalentie.Instance.ActiveSlowTime(true);
-            Input.InGame.SlowTime.canceled -= context => CompetenceRalentie.Instance.ActiveSlowTime(false);
-            Input.InGame.Pause.performed -= context => GameManager.Instance.Pause();
-            Input.InGame.Jump.started -= context => PlayerController.Instance.GetPlayerJump();
-            Input.InGame.Jump.canceled -= context => PlayerController.Instance.PlayerJumpDown(true);
-        }
-
-        if (WallRunController.Instance != null)
-            Input.InGame.Jump.started -= context => WallRunController.Instance.WallJump();
-
-        if (GrapplingGun.Instance != null)
-        {
-            Input.InGame.Grappling.performed -= context => GrapplingGun.Instance.StartGrapple();
-            Input.InGame.Grappling.canceled -= context => GrapplingGun.Instance.StopGrapple();
-        }
-
-        Input.Disable();
-
-
-    }*/
-
-        public Vector2 GetPlayerMovement()
+    public Vector2 GetPlayerMovement()
     {
         return Input.InGame.Move.ReadValue<Vector2>();
     }
@@ -254,12 +208,12 @@ public class InputManager : MonoBehaviour
             var firstPartIndex = bindingIndex + 1;
             if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isComposite)
             {
-                DoRebind(action, bindingIndex, statusText, true,excludeMouse);
+                DoRebind(action, bindingIndex, statusText, true, excludeMouse);
             }
         }
 
         else
-            DoRebind(action, bindingIndex, statusText, false,excludeMouse);
+            DoRebind(action, bindingIndex, statusText, false, excludeMouse);
     }
 
     private static void DoRebind(InputAction actionToRebind, int bindingIndex, TextMeshProUGUI statusText, bool allCompositeParts, bool excludeMouse)
@@ -304,7 +258,7 @@ public class InputManager : MonoBehaviour
     }
 
 
-    public static string GetBindingName( string actionName, int bindingIndex)
+    public static string GetBindingName(string actionName, int bindingIndex)
     {
         if (Input == null)
         {

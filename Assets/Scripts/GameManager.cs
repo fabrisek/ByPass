@@ -120,10 +120,8 @@ public class GameManager : MonoBehaviour
     void InitGameManager ()
     {
         stateOfGame = StateGame.inMainMenu;
-      //  inputActions = new Input();
         ChangeActionMap(stateOfGame);
-
-
+        InputManager.Instance.ActiveActioMapInGame(true);
     }
 
     public void PlaySound(TypeOfSound typeSound, Vector3 position, SfxSon sonSfx = SfxSon.onButton, float volume = 1, MusicSon sonMusic = MusicSon.musicMainMenu)
@@ -177,7 +175,6 @@ public class GameManager : MonoBehaviour
 
     public void StartCountDown()
     {
-        Debug.Log("yo");
         stateOfGame = StateGame.inCountDown;
         HudMainMenu.Instance.OpenGamePanel();
         CountDown.instance.StartCountDown();
@@ -186,13 +183,14 @@ public class GameManager : MonoBehaviour
 
     public void CountDownIsFinish()
     {
-        Debug.Log("j ai finie ");
         StartLevel();
     }
 
 
     public void Back()
     {
+        Debug.Log("Back");
+        HudMainMenu hud = HudMainMenu.Instance;
         switch (stateOfGame)
         {
             case StateGame.inGame:
@@ -200,9 +198,32 @@ public class GameManager : MonoBehaviour
                 break;
             case StateGame.inMainMenu:
 
+                switch (hud.State)
+                {
+                    case StateMenu.WorldSelector:
+                        hud.OpenMainMenuPanel();
+                        break;
+
+                    case StateMenu.LevelSelector:
+                        hud.OpenWorldSelector();
+                        break;
+
+                    case StateMenu.MenuSettings:
+                        hud.OpenMainMenuPanel();
+                        break;
+
+                    case StateMenu.Settings:
+                        hud.OpenSettingMenu();
+                        break;
+                }
+
                 break;
             case StateGame.inPause:
+                Pause();
+                break;
 
+            case StateGame.inCinematic:
+                LauchCinematic(false);
                 break;
         }
     }
@@ -261,9 +282,6 @@ public class GameManager : MonoBehaviour
                 InputManager.Instance.enabled = true;
                 break;
 
-            case StateGame.inCinematic:
-                LauchCinematic(false);
-                break;
             case StateGame.inCountDown:
                 Debug.Log("Tu ne peux pas mettrepause ou passer le countDown c est pour ca que j ai cree ce state");
                 break;

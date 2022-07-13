@@ -20,6 +20,11 @@ public class HudMainMenu : MonoBehaviour
         _DeathPanel.Show();
         _timerDeath.text = timer;
     }
+    [Header("PANEL")]
+    [SerializeField] string urlDiscord;
+    [SerializeField] string urlInsta;
+    [SerializeField] string urlTwitter;
+    [SerializeField] string urlFacebook;
 
     [Header("PANEL")]
     [SerializeField] UIContainer _mainMenu;
@@ -57,6 +62,39 @@ public class HudMainMenu : MonoBehaviour
     [Header("Leaderboard")]
     [SerializeField] GameObject prefabScoreTitle;
     [SerializeField] Transform scoreboardParent;
+    public StateMenu State { get; set; }
+
+    public void OpenDiscord()
+    {
+        Application.OpenURL(urlDiscord);
+    }
+
+    public void OpenFacebook()
+    {
+        Application.OpenURL(urlFacebook);
+    }
+    public void OpenInstangram()
+    {
+        Application.OpenURL(urlInsta);
+    }
+    public void OpenTwitter()
+    {
+        Application.OpenURL(urlTwitter);
+    }
+
+    public void OpenWorldSelector()
+    {
+        CloseAllPanel();
+        _worldSelectionPanel.Show();
+        State = StateMenu.WorldSelector;
+    }
+
+    public void OpenSettingMenu()
+    {
+        CloseAllPanel();
+        _settings.Show();
+        State = StateMenu.MenuSettings;
+    }
 
     public void Win(float timer, float bestTime, SceneObject sceneObj, bool ShowNextButton)
     {
@@ -119,11 +157,15 @@ public class HudMainMenu : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        State = StateMenu.MainMenu;
+    }
+
     public void ChangePosPlayerText(int pos)
     {
         _posPlayer.text = "TOP #" + (pos + 1).ToString();
     }
-    public StateMainMenu State { get; set; }
 
     private void Awake()
     {
@@ -181,9 +223,12 @@ public class HudMainMenu : MonoBehaviour
     {
         CloseAllPanel();
         _mainMenu.Show();
+
+        State = StateMenu.MainMenu;
     }
     public void OpenPanelSelectionLevel(int worldIndex)
     {
+        State = StateMenu.LevelSelector;
         worldName.text = DataManager.Instance.Data.WorldData[worldIndex].WorldName;
 
         int totalStar = 0;
@@ -221,31 +266,6 @@ public class HudMainMenu : MonoBehaviour
         starText.text = "STAR : " + starUnlock.ToString() + " / " + totalStar.ToString();
     }
 
-
-    public void Back()
-    {
-        switch (State)
-        {
-            case StateMainMenu.WorldSelector:
-                _worldSelectionPanel.Hide();
-                _mainMenu.Show();
-                break;
-
-            case StateMainMenu.LevelSelector:
-                _levelSelectionPanel.Hide();
-                _worldSelectionPanel.Show();
-                break;
-
-            case StateMainMenu.MenuSettings:
-
-                break;
-
-            case StateMainMenu.Settings:
-
-                break;
-        }
-    }
-
     public void QuitGame()
     {
         Application.Quit();
@@ -257,11 +277,12 @@ public class HudMainMenu : MonoBehaviour
     }
 }
 
-public enum StateMainMenu
+public enum StateMenu
 {
     MainMenu,
     WorldSelector,
     MenuSettings,
     LevelSelector,
-    Settings
+    Settings,
+    Leaderboard
 }
