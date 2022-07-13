@@ -88,6 +88,7 @@ public class PlayFabHighScore : MonoBehaviour
 
     void OnLeaderboardFriend(GetLeaderboardResult result)
     {
+        HudMainMenu.Instance.State = StateMenu.Leaderboard;
         HudMainMenu.Instance.ResetLeaderBoard();
         foreach (var item in result.Leaderboard)
         {
@@ -97,6 +98,7 @@ public class PlayFabHighScore : MonoBehaviour
 
     void OnLeaderboardAroundPlayerGet(GetLeaderboardAroundPlayerResult result)
     {
+        HudMainMenu.Instance.State = StateMenu.Leaderboard;
         HudMainMenu.Instance.ResetLeaderBoard();
         foreach (var item in result.Leaderboard)
         {
@@ -106,7 +108,7 @@ public class PlayFabHighScore : MonoBehaviour
 
     void OnLeaderboardTopGet(GetLeaderboardResult result)
     {
-        
+        HudMainMenu.Instance.State = StateMenu.Leaderboard;
         HudMainMenu.Instance.ResetLeaderBoard();
         foreach (var item in result.Leaderboard)
         {

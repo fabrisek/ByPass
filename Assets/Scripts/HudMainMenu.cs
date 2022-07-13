@@ -211,6 +211,7 @@ public class HudMainMenu : MonoBehaviour
     {
         CloseAllPanel();
         _pausePanel.Show();
+        State = StateMenu.Pause;
     }
 
     public void OpenGamePanel()
@@ -284,5 +285,7 @@ public enum StateMenu
     MenuSettings,
     LevelSelector,
     Settings,
-    Leaderboard
+    Leaderboard,
+    Pause,
+    InGame
 }

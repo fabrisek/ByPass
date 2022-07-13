@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            InputManager.Instance.ActiveActioMapInGame(true);
             Destroy(gameObject);
         }
     }
@@ -219,7 +220,25 @@ public class GameManager : MonoBehaviour
 
                 break;
             case StateGame.inPause:
-                Pause();
+
+                switch (hud.State)
+                {
+                    case StateMenu.Pause:
+                        Pause();
+                        break;
+
+                    case StateMenu.MenuSettings:
+                        hud.OpenPausePanel();
+                        break;
+
+                    case StateMenu.Settings:
+                        hud.OpenSettingMenu();
+                        break;
+
+                    case StateMenu.Leaderboard:
+                        hud.OpenPausePanel();
+                        break;
+                }
                 break;
 
             case StateGame.inCinematic:
@@ -243,6 +262,7 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
+        HudMainMenu.Instance.State = StateMenu.MainMenu;
         HudMainMenu.Instance.OpenMainMenuPanel();
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
@@ -257,7 +277,7 @@ public class GameManager : MonoBehaviour
         switch(stateOfGame)
         {
             case StateGame.inGame:
-
+                HudMainMenu.Instance.State = StateMenu.InGame;
                 Time.timeScale = 0;
                 stateOfGame = StateGame.inPause;
                 LauchTimer(false);
@@ -265,11 +285,10 @@ public class GameManager : MonoBehaviour
                 HudMainMenu.Instance.OpenPausePanel();
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                PlayerCam.Instance.enabled = false;
 
                 break;
             case StateGame.inPause:
-
+                HudMainMenu.Instance.State = StateMenu.Pause;
                 Time.timeScale = 1;
                 stateOfGame = StateGame.inGame;
                 LauchTimer(true);
@@ -277,9 +296,7 @@ public class GameManager : MonoBehaviour
                 HudMainMenu.Instance.OpenGamePanel();
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                PlayerCam.Instance.enabled = true;
-                InputManager.Instance.enabled = false;
-                InputManager.Instance.enabled = true;
+
                 break;
 
             case StateGame.inCountDown:
@@ -360,10 +377,14 @@ public class GameManager : MonoBehaviour
             case StateGame.inPause:
                 Debug.Log("je Change l'actionMap en action Map Menu");
                 InputManager.Input.InGame.Disable();
-                InputManager.Input.InMainMenu.Enable();               
-                InputManager.Instance.ActiveActioMapInGame(false);
+                InputManager.Input.InMainMenu.Enable();                
+                InputManager.Instance.ActiveActioMapInGame(true);
+
                 if (PlayerController.Instance != null)
                     PlayerController.Instance.enabled = false;
+
+                if (PlayerCam.Instance !=null)
+                    PlayerCam.Instance.enabled = false;
                 break;
 
             case StateGame.inCinematic:

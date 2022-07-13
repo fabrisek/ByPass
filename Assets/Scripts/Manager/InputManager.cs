@@ -39,8 +39,6 @@ public class InputManager : MonoBehaviour
         SensibilityGamePadX = PlayerPrefs.GetFloat("SensibilityGamePadX", 100f);
         SensibilityGamePadY = PlayerPrefs.GetFloat("SensibilityGamePadY", 100f);
 
-
-
         /*
         if (LevelManager.Instance != null)
         {
