@@ -343,7 +343,7 @@ public class GameManager : MonoBehaviour
         stateOfGame = StateGame.inGame;
         ChangeActionMap(stateOfGame);
         if (DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].fantome != null)
-            FantomeController.instance.StartReproduce(DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].fantome);
+            FantomeController.instance.StartReproduce(DataManager.Instance.Data.WorldData[WorldIndex].MapData[LevelIndex].fantome, "Place Mon Psuedo Ici");
         FantomeController.instance.StartSaveFantome();
         LauchTimer(true);
         //LevelManager.instance.StartLevel();

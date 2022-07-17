@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FantomeController : MonoBehaviour
 {
     public static FantomeController instance;
+
 
 
     [SerializeField] float timeBetweenSave;
@@ -13,6 +16,7 @@ public class FantomeController : MonoBehaviour
 
     [SerializeField] FantomeSave fantomeToSave;
     [SerializeField] FantomeSave fantomeSaved;
+    [SerializeField] TextMeshProUGUI psuedo;
 
     SaveState saveState;
     ReproduceState reproduceState;
@@ -100,10 +104,12 @@ public class FantomeController : MonoBehaviour
 
 
     //========================================================Reproduce================================================================================================================
-    public void StartReproduce (FantomeSave fantomeToReproduce)
+    public void StartReproduce (FantomeSave fantomeToReproduce, string psuedo)
     {
         fantomeSaved = fantomeToReproduce;
         reproduceState = ReproduceState.inreproduce;
+        this.psuedo.text = psuedo;
+
     }
 
     public void StopReproduce()
