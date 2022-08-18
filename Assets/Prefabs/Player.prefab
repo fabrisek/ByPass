@@ -1118,20 +1118,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cbfb41c456184c4ea0266c3d665e04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMax: 16
+  speedMax: 20
   walkSpeed: 8
   grapplinAcceleration: 3
-  acceleration: 8
+  acceleration: 11
   accelerationTimer: 0.1
-  wallrunSpeed: 20
+  wallrunSpeed: 25
   speedIncreaseMultiplier: 1
   groundDrag: 2.5
   _jumpVelocityChange: 10
-  _jumpAcceleration: 22
+  _jumpAcceleration: 25
   _maxJumpTime: 0.45
   earlyPressTime: 0.25
   behindGroundJumpingForce: 20
-  airMultiplier: 1
+  airMultiplier: 1.2
   jumpCoolDown: 0.25
   jumpForceHoldInput: 150
   isJumping: 0
@@ -1186,7 +1186,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7020169264474291027}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 1.6
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
