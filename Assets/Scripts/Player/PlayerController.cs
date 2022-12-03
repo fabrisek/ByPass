@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isJumping;
     bool readyToJump;
     bool canDoubleJump;
+    bool hasDoubleJumped;
 
     public bool CanDoubleJump()
     {
@@ -78,7 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         return rb;
     }
-   
+
     [SerializeField] PlayerCam playerCam;
 
     [SerializeField] MovementState state;
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
         sprinting,
         wallrunning,
         air,
-        grappling
+        grappling,
     }
 
     public bool wallrunning;
@@ -112,7 +113,22 @@ public class PlayerController : MonoBehaviour
     {
         Instance = this;
         stateGroundOld = true;
-        input = InputManager.Input;        
+        input = new Input();
+
+
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+        input.InGame.Jump.performed += context => GetPlayerJump();
+        input.InGame.Jump.canceled += context => PlayerJumpDown(false);
+    }
+    private void OnDisable()
+    {
+        input.Disable();
+        input.InGame.Jump.performed += context => GetPlayerJump();
+        input.InGame.Jump.canceled += context => PlayerJumpDown(false);
     }
 
     private void Start()
@@ -121,14 +137,13 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = true;
         readyToJump = true;
         wallRunController = GetComponent<WallRunController>();
-        //canJump = false;
+
         //initializing resets
         resetTimeToJump = timeToJump;
         resetWalkSpeed = walkSpeed;
         accelerationTimeReset = accelerationTimer;
         earlyPressTimeReset = earlyPressTime;
         resetMaxJumpTime = _maxJumpTime;
-        earlyPressTime = 0;
     }
 
     private void Update()
@@ -182,15 +197,15 @@ public class PlayerController : MonoBehaviour
         else
             rb.drag = 0;
 
-       
+
 
     }
 
     //Input////////////////////////////////////////////////////////////////
     private void MyInput()
     {
-        horizontalInput = InputManager.Instance.GetPlayerMovement().x;
-        verticalInput = InputManager.Instance.GetPlayerMovement().y;
+        horizontalInput = input.InGame.Move.ReadValue<Vector2>().x;
+        verticalInput = input.InGame.Move.ReadValue<Vector2>().y;
     }
 
     //STATEMACHINE////////////////////////////////////////////////////////////
@@ -211,7 +226,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //mode -grappling
-        else if(isGrappling)
+        else if (isGrappling)
         {
             state = MovementState.grappling;
             desiredMoveSpeed = walkSpeed;//////////////////////////////////////
@@ -240,7 +255,7 @@ public class PlayerController : MonoBehaviour
     //MOVEMENT////////////////////////////////////////////////////////////////
     private void MovePlayer()
     {
-        
+
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -255,16 +270,16 @@ public class PlayerController : MonoBehaviour
             }
         }
         // in grappin
-        else if (isGrappling )
+        else if (isGrappling)
         {
-            if (rb.velocity.y<-1)
+            if (rb.velocity.y < -1)
             {
 
                 rb.AddForce(moveDirection * (moveSpeed + Mathf.Abs(rb.velocity.y)));
             }
             else
             {
-                rb.AddForce(moveDirection * (moveSpeed + acceleration)*10f, ForceMode.Acceleration);
+                rb.AddForce(moveDirection * (moveSpeed + acceleration) * 10f, ForceMode.Acceleration);
             }
 
             rb.AddForce(moveDirection * moveSpeed * 10f, ForceMode.Force);
@@ -276,7 +291,7 @@ public class PlayerController : MonoBehaviour
 
         }
         // in air
-        else if(!wallrunning)
+        else
         {
             //slow down player if no inputs
             if (moveDirection.magnitude == 0f)
@@ -290,7 +305,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //limit velocity
-        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > speedMax && !wallrunning)
+        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > speedMax)
         {
             rb.velocity = (new Vector3(rb.velocity.x, 0, rb.velocity.z).normalized * speedMax) + (Vector3.up * rb.velocity.y);
         }
@@ -317,14 +332,14 @@ public class PlayerController : MonoBehaviour
 
         // limit velocity if needed
 
-        if (flatVel.magnitude > moveSpeed &&!isGrappling &&!wallrunning)
+        if (flatVel.magnitude > moveSpeed && !isGrappling)
         {
-             Vector3 limitedVel = flatVel.normalized * moveSpeed;
-             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
-        if(flatVel.magnitude > moveSpeed && isGrappling)
+        if (flatVel.magnitude > moveSpeed && isGrappling)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed *1.5f;
+            Vector3 limitedVel = flatVel.normalized * moveSpeed * 1.5f;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
 
@@ -342,9 +357,9 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if ((new Vector2(verticalInput, horizontalInput).magnitude <= 0.2f|| rb.velocity.magnitude<resetWalkSpeed) && walkSpeed > resetWalkSpeed)
+        if ((new Vector2(verticalInput, horizontalInput).magnitude <= 0.2f || rb.velocity.magnitude < resetWalkSpeed) && walkSpeed > resetWalkSpeed)
         {
-            walkSpeed -= resetWalkSpeed/2 * Time.deltaTime;
+            walkSpeed -= resetWalkSpeed / 2 * Time.deltaTime;
             accelerationTimer = accelerationTimeReset;
         }
     }
@@ -357,7 +372,7 @@ public class PlayerController : MonoBehaviour
         if (readyToJump && (grounded || canJump) && !wallrunning)
         {
             readyToJump = false;
-            
+
             Jump();
 
             //resets the possibility to jump to true after jumpCoolDown Time
@@ -365,13 +380,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (readyToJump && canDoubleJump && !wallrunning)
         {
-            
             DoubleJump();
             canDoubleJump = false;
         }
         else
         {
-            
             earlyPressTime = earlyPressTimeReset;
         }
     }
@@ -381,7 +394,6 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump()
     {
-        
         isJumping = true;
         _maxJumpTime = resetMaxJumpTime;
 
@@ -389,7 +401,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         //JumpForce
-        rb.AddForce(this.transform.up * _jumpVelocityChange, ForceMode.VelocityChange);
+        rb.AddForce(Vector3.up * _jumpVelocityChange, ForceMode.VelocityChange);
         canJump = false;
         canDoubleJump = true;
     }
@@ -397,7 +409,6 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, Vector3.down, playerHeight * 1.2f, whatIsGround))
         {
-           
             Jump();
         }
         else
@@ -405,6 +416,7 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
             _maxJumpTime = resetMaxJumpTime;
 
+            hasDoubleJumped = true;
             // reset y velocity
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             //JumpForce
@@ -419,7 +431,6 @@ public class PlayerController : MonoBehaviour
     }
     public void LongJump()
     {
-        
         _maxJumpTime -= Time.deltaTime;
 
         if (isJumping && (_maxJumpTime > 0))
@@ -430,12 +441,11 @@ public class PlayerController : MonoBehaviour
     }
     public void EarlyPressJump()
     {
-        if(earlyPressTime > 0)
+        if (earlyPressTime > 0)
         {
             earlyPressTime -= Time.deltaTime;
-            if(grounded && canJump)
+            if (grounded && canJump)
             {
-              
                 GetPlayerJump();
                 earlyPressTime = earlyPressTimeReset;
             }

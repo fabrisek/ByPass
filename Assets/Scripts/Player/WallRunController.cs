@@ -8,7 +8,7 @@ public class WallRunController : MonoBehaviour
     [Header("Wallrunning")]
     public LayerMask whatIsWall;
     public LayerMask whatIsGround;
-    public float wallRunSpeed;
+    public float wallRunForce;
     public float wallJumpUpForce;
     public float wallJumpSideForce;
     public float wallClimbSpeed;
@@ -65,9 +65,20 @@ public class WallRunController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        input = InputManager.Input;
+        input = new Input();
 
 
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+        input.InGame.Jump.performed += context => WallJump();
+    }
+    private void OnDisable()
+    {
+        input.Disable();
+        input.InGame.Jump.performed += context => WallJump();
     }
 
 
@@ -163,6 +174,8 @@ public class WallRunController : MonoBehaviour
 
     private void StartWallRun()
     {
+        Debug.Log("wallRunStart");
+        //Rumbler.instance.RumblePulse(0.5f, 1.5f, 0.1f, 1f);
         playerController.wallrunning = true;
         wallRunTimer = maxWallRunTime;
 
@@ -186,8 +199,13 @@ public class WallRunController : MonoBehaviour
             wallForward = -wallForward;
 
         // forward force
-        rb.velocity = wallForward.normalized * wallRunSpeed;
+        rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
 
+        // upwards/downwards force
+        if (upwardsRunning)
+            rb.velocity = new Vector3(rb.velocity.x, wallClimbSpeed, rb.velocity.z);
+        if (downwardsRunning)
+            rb.velocity = new Vector3(rb.velocity.x, -wallClimbSpeed, rb.velocity.z);
 
         // push to wall force
         if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))
@@ -215,6 +233,7 @@ public class WallRunController : MonoBehaviour
         {
             if (playerController.wallrunning)
             {
+                Debug.Log("wallRunJump");
                 playerController.PlayerJumpDown(false);
                 playerController.SetCanDoubleJump(false);
                 // enter exiting wall state
@@ -227,7 +246,7 @@ public class WallRunController : MonoBehaviour
 
                 // reset y velocity and add force
                 rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-                rb.AddForce(forceToApply, ForceMode.VelocityChange);
+                rb.AddForce(forceToApply, ForceMode.Impulse);
 
             }
         }

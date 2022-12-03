@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Text;
 using UnityEngine.SceneManagement;
 using System.IO;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 [System.Serializable]
 public class DATA
 {

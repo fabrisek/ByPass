@@ -15,7 +15,7 @@ public class GrapplingGun : MonoBehaviour
     [SerializeField] float massScale;
 
     [SerializeField] int positionCount;
-    
+
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
     public Transform gunTip, camera, player;
@@ -23,14 +23,13 @@ public class GrapplingGun : MonoBehaviour
     Input input;
     public bool isGrappling;
     public PlayerController playerController;
-    
+
     void Awake()
     {
         Instance = this;
-        input = InputManager.Input ;
     }
 
-   
+
 
 
     // LOOPS AND FUNCTIONS///////////////////////////////////////////////////////////////////
@@ -63,7 +62,7 @@ public class GrapplingGun : MonoBehaviour
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
 
             //The distance grapple will try to keep from grapple point. 
-            joint.maxDistance = distanceFromPoint * minDistance;                ;
+            joint.maxDistance = distanceFromPoint * minDistance; ;
             joint.minDistance = distanceFromPoint * maxDistance;
 
             //Adjust these values to fit your game.
@@ -74,8 +73,6 @@ public class GrapplingGun : MonoBehaviour
             currentGrapplePosition = gunTip.position;
 
             isGrappling = true;
-
-            
         }
     }
 

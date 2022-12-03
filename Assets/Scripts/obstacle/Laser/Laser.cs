@@ -21,7 +21,6 @@ public class Laser : MonoBehaviour
     void Update()
     {
         maxScaleLaser = CheckMaxScaleLaser();
-        Debug.Log(maxScaleLaser);
         AddToMax(2);
         CheckScaleLaser();
         SetViewScale();

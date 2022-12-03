@@ -6,7 +6,7 @@ using Steamworks;
 using UnityEngine;
 using System.Net;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json.Linq;
 public class PlayFabLogin : MonoBehaviour
 {
     public static PlayFabLogin Instance;
@@ -137,8 +137,8 @@ public class PlayFabLogin : MonoBehaviour
         string url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + _apiKey + "&steamids=" + _steamUserID;
 
         //Telecharge puis convertie le fichier en JSON et recherche le lien de l'image
-        var ObjectPlayer = JObject.Parse(new WebClient().DownloadString(url));
-        url = ObjectPlayer["response"]["players"][0]["avatarfull"].ToString();
+        //var ObjectPlayer = JObject.Parse(new WebClient().DownloadString(url));
+        //url = ObjectPlayer["response"]["players"][0]["avatarfull"].ToString();
 
         //Update Image via Playfab
         PlayFabClientAPI.UpdateAvatarUrl(new UpdateAvatarUrlRequest

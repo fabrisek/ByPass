@@ -6483,8 +6483,8 @@ MonoBehaviour:
   DefaultVolumeGeneral: 0.5
   DefaultVolumeMusic: 0.416
   DefaultVolumeSFX: 0.485
-  DefaultSensibilityMouse: 34
-  _defaultSensibilityGamePad: 200
+  DefaultSensibilityMouse: 80
+  _defaultSensibilityGamePad: 350
   _defaultUseRumbler: 1
   _defaultUseCameraShake: 1
   _defaultUseCameraClamp: 0
@@ -25812,8 +25812,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2060586137}
   m_HandleRect: {fileID: 2060586136}
   m_Direction: 2
-  m_Value: 1.0000007
-  m_Size: 0.8640001
+  m_Value: 1
+  m_Size: 0.864
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -28281,8 +28281,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 220710003}
   m_HandleRect: {fileID: 220710002}
   m_Direction: 2
-  m_Value: 1.0000031
-  m_Size: 0.9642858
+  m_Value: 1
+  m_Size: 0.96428573
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -44471,8 +44471,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 607016687}
   m_HandleRect: {fileID: 607016686}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -49265,7 +49265,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2013495597}
   m_HandleRect: {fileID: 2013495596}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
