@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
-  DevAccountEmail: hexaltstudio@gmail.com
-  DevAccountToken: 
+  DevAccountEmail: fabrisek@gmail.com
+  DevAccountToken: ftyn1un1hsprm8c9m7xrqbjnjuphgx7yfibu7ydy3zej8h4u5rxcbhwzmaemppb6waug96e6p6h59ttsyhwporcs7xkef41yukf3n5hkr45eyfumknsfxan6ftk4gyk1a1r1gfpsap3apzzwb8i4kdma3i8mbtzhgyeb37sj48itgg7pj9fzpz1gppexuwx9dgehf4px
   SelectedStudio: HexaltStudio
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
