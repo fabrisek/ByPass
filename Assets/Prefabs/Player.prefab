@@ -1126,14 +1126,14 @@ MonoBehaviour:
   wallrunSpeed: 30
   speedIncreaseMultiplier: 1
   groundDrag: 2.5
-  _jumpVelocityChange: 10
-  _jumpAcceleration: 10
-  _maxJumpTime: 0.6
+  _jumpVelocityChange: 12
+  _jumpAcceleration: 12
+  _maxJumpTime: 0.7
   earlyPressTime: 0.25
   behindGroundJumpingForce: 15
   airMultiplier: 1
   jumpCoolDown: 0.25
-  jumpForceHoldInput: 150
+  jumpForceHoldInput: 180
   isJumping: 0
   playerHeight: 1.5
   whatIsGround:
