@@ -143,6 +143,7 @@ public class PlayerController : MonoBehaviour
         resetWalkSpeed = walkSpeed;
         accelerationTimeReset = accelerationTimer;
         earlyPressTimeReset = earlyPressTime;
+        earlyPressTime = 0; ;
         resetMaxJumpTime = _maxJumpTime;
     }
 
@@ -260,7 +261,7 @@ public class PlayerController : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         // on ground
-        if (grounded)
+        if (grounded||isGrappling)
         {
             rb.AddForce(moveDirection * moveSpeed * 10f, ForceMode.Force);
             //slow down player if no inputs
@@ -270,7 +271,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         // in grappin
-        else if (isGrappling)
+        /*else if (isGrappling)
         {
             if (rb.velocity.y < -1)
             {
@@ -289,7 +290,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector3(rb.velocity.x / 1.05f, rb.velocity.y, rb.velocity.z / 1.05f);
             }
 
-        }
+        }*/
         // in air
         else
         {
