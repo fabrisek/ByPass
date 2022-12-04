@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: hexaltstudio@gmail.com
-  DevAccountToken: enr6u3a5qng9ja56cxfsnqb45wszh3b7pei4qe8io5kognojkieszkwk9em3bdpabmny73dpada6f93b7q3jw3x4f6auq9t3a6tbczxwp3gny65pcpif554c7qqwpiwbu6hqkttced8xko8o573rwyzbcawppo5isuxkunyzk6fp6esd69jj4e1u4k6unqx3g5p5mynu
+  DevAccountToken: 
   SelectedStudio: HexaltStudio
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
-  PanelIsShown: 0
+  PanelIsShown: 1
   curMainMenuIdx: 0
   curSubMenuIdx: 0
