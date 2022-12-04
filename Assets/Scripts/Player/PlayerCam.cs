@@ -48,7 +48,7 @@ public class PlayerCam : MonoBehaviour
         //getMouse Inputs
         float lookX;
         float lookY;
-        Vector2 looking = input.InGame.Look.ReadValue<Vector2>();
+        Vector2 looking = InputManager.Instance.GetPlayerLook();
 
         if (IsGamePad == false)
         {
